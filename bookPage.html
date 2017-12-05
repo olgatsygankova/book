@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <a class="header__office" href="#">Войти</a>
+            <a class="header__office" href="#login">Войти</a>
             <div class="header__nav">
                 <input id="toggle" type="checkbox">
                 <label class="toggle-container" for="toggle">
@@ -53,6 +53,10 @@
                                 <div class="book__caption-wrapper">
                                     <span class="book__header">Жанр:</span>
                                     <span class="book__text">Фантастика</span>
+                                </div>
+                                <div class="book__caption-wrapper">
+                                    <span class="book__header">ISBN:</span>
+                                    <span class="book__text">9785699360956</span>
                                 </div>
                                 <div class="book__caption-wrapper">
                                     <a href="#" class="book__download book__download-description">Скачать</a>
@@ -100,6 +104,38 @@
             <span class="footer__span">2017 &copy; BookAddict</span>
             <span class="footer__span">Все права защищены</span>
         </footer>
+        <div id="login" class="login">
+            <a href="#close" title="Закрыть" class="login__close">X</a>
+            <div class="login__header">Вход</div>
+            <div class="account">
+                <input class="account__email" name="email" placeholder="Email">
+                <input class="account__password" type="password" name="password" placeholder="Password">
+                <button class="account__button">Войти</button>
+                <a href="#password-recovery" class="account__forget-password">Забыли пароль?</a>
+                <a href="#singup" class="account__create-account">Создать аккаунт</a>
+            </div>
+        </div>
+        <div id="singup" class="singup">
+            <a href="#close" title="Закрыть" class="singup__close">X</a>
+            <div class="singup__header">Регистрация</div>
+            <div class="account">
+                <input class="account__email" name="email" placeholder="Email">
+                <input class="account__password" type="password" name="password" placeholder="Password">
+                <button class="account__button">Создать аккаунт</button>
+                <a href="#login" class="account__login-with-singup">Войти</a>
+                <span class="account__text">если у вас уже есть аккаунт</span>
+            </div>
+        </div>
+        <div id="password-recovery" class="password-recovery">
+            <a href="#close" title="Закрыть" class="password-recovery__close">X</a>
+            <div class="password-recovery__header">Восстановление пароля</div>
+            <div class="account">
+                <span class="account__text-recovery-password">Введите Ваш e-mail адрес и на него Вам будет выслан новый пароль </span>
+                <input class="account__email" name="email" placeholder="Email">
+                <button class="account__button">Создать аккаунт</button>
+                <a href="#login" class="account__login-with-recover-password">Войти</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

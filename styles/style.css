@@ -9,13 +9,13 @@ body {
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    background-color: #dcdcdc;
     text-size-adjust: 100%;
-    background-color: #DCDCDC;
 }
 
 .container {
-    max-width: 460px;
     min-width: 320px;
+    max-width: 460px;
     height: 100%;
     margin: 0 auto;
 }
@@ -55,7 +55,7 @@ body {
 }
 
 #toggle:checked:focus ~ .toggle-container .button-toggle {
-    box-shadow: 0 0 0 100px rgba(0, 0, 0, .5), inset 0 0 0 100px rgba(0, 0, 0, .5), 0 0 0 100px rgba(0, 0, 0, .5), inset 0 0 0 100px rgba(0, 0, 0, .5);
+    box-shadow: 0 0 0 120px rgba(0, 0, 0, .5), inset 0 0 0 120px rgba(0, 0, 0, .5), 0 0 0 120px rgba(0, 0, 0, .5), inset 0 0 0 120px rgba(0, 0, 0, .5);
 }
 
 #toggle:checked ~ .header__menu {
@@ -65,8 +65,8 @@ body {
 
 *#toggle:checked ~ .header__menu .header__menu-item {
     font-size: 16px;
-    line-height: 20px;
     font-weight: 800;
+    line-height: 20px;
     height: 10px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -89,7 +89,7 @@ body {
     height: 60px;
     margin: 10px;
     cursor: pointer;
-    transition: 0.6s;
+    transition: .6s;
     border: none;
     border-radius: 100%;
     background-color: transparent;
@@ -102,7 +102,7 @@ body {
     width: 40%;
     height: 5px;
     content: '';
-    transition: 0.5s;
+    transition: .5s;
     border-radius: 5px;
     background-color: #ec7263;
 }
@@ -129,13 +129,13 @@ body {
     display: inline-block;
     float: left;
     clear: both;
+    width: 30px;
     height: 10px;
     transition: .5s, opacity 1s;
     transform: scaleY(.4);
     white-space: nowrap;
     letter-spacing: -6.2px;
     color: transparent;
-    width: 30px;
 }
 
 .header__menu-item:before {
@@ -155,13 +155,13 @@ body {
 }
 
 .logo {
+    display: inline-block;
     clear: both;
     width: 200px;
     height: 40px;
+    margin-top: 25px;
     background-image: url('../img/logo.png');
     background-size: 100%;
-    display: inline-block;
-    margin-top: 25px;
 }
 
 .search {
@@ -170,17 +170,17 @@ body {
 
 .search__input {
     font-size: 16px;
+    display: block;
     width: 250px;
     height: 30px;
     padding-left: 30px;
     border: 2px solid #ec7263;
     border-radius: 10px;
-    display: block;
-    background-image: url("../img/search.png");
-    background-repeat: no-repeat;
-    background-size: 10%;
-    background-position: 4px;
     outline: none;
+    background-image: url('../img/search.png');
+    background-repeat: no-repeat;
+    background-position: 4px;
+    background-size: 10%;
 }
 
 .search__input::-webkit-search-cancel-button {
@@ -194,12 +194,12 @@ body {
 }
 
 .section_book__header {
-    margin-top: 5px;
     font-size: 14px;
     position: relative;
     display: inline-block;
     overflow: hidden;
     width: 100%;
+    margin-top: 5px;
     padding-left: 20px;
 }
 
@@ -238,19 +238,19 @@ body {
     bottom: 0;
     width: 100%;
     content: '';
-    opacity: 0.3;
+    opacity: .3;
     border-radius: 20px;
     background-color: #ec7263;
 }
 
 .book__description {
     display: flex;
- }
+}
 
 .book__img {
-    padding: 5px 0 5px 5px;
     width: 30%;
     height: 30%;
+    padding: 5px 0 5px 5px;
 }
 
 .book__caption {
@@ -260,31 +260,32 @@ body {
 }
 
 .stars {
-    padding-top: 5px;
     display: flex;
+    padding-top: 5px;
 }
 
 .starts__star_fat {
     width: 20px;
     height: 20px;
-    background: url("../img/star.png") no-repeat;
+    background: url('../img/star.png') no-repeat;
     background-size: 80%;
 }
 
 .starts__star_light {
     width: 20px;
     height: 20px;
-    background: url("../img/star_light.png") no-repeat;
+    background: url('../img/star_light.png') no-repeat;
     background-size: 80%;
 }
 
 .book__caption-wrapper {
     width: 100%;
 }
+
 .book__header, .estimate__header, .add-comment__header {
     font-weight: 600;
-    padding: 0 10px 5px 10px;
     display: inline-block;
+    padding: 0 10px 5px 10px;
 }
 
 .book__text {
@@ -296,27 +297,30 @@ body {
     text-align: left;
     text-indent: 20px;
 }
+
 .book__header-annotation {
     padding-left: 30px;
 }
 
 .book__download {
     float: left;
-    text-decoration: none;
-    margin-left: 10%;
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 10%;
+    text-decoration: none;
 }
+
 .book__download-description {
+    margin-top: 0;
     margin-left: 10px;
 }
 
 .book__info {
     float: right;
-    text-decoration: none;
-    margin-right: 10%;
     margin-top: 5px;
+    margin-right: 10%;
     margin-bottom: 5px;
+    text-decoration: none;
 }
 
 .book__load-more {
@@ -347,57 +351,354 @@ body {
     padding-top: 5px;
 }
 
-
-/*.add-comment__header {
-    margin: 30px 50px;
-    display: block;
-}*/
-
 .comment__text {
-    margin: 0 auto;
-    text-indent: 50px;
-    padding-left: 0;
     display: block;
+    margin: 0 auto;
+    padding-left: 0;
     text-align: justify;
+    text-indent: 50px;
 }
 
 .estimate, .add-comment {
     display: flex;
+    padding-top: 10px;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 10px;
 }
 
-.add-comment__text, .add-comment__button_send {
-    border-radius: 20px;
+.add-comment__text, .add-comment__button-send {
+    border-radius: 10px;
 }
 
 .add-comment__text {
-    width: 80%;
+    width: 95%;
     height: 120px;
-    /*cols: 80;
-    rows: 15;*/
 }
 
-.add-comment__button_send {
-   width: 60%;
-    margin-top: 30px;
-    margin-bottom: 30px;
+.add-comment__button-send {
+    font-weight: 600;
+    width: 60%;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #ec7263;
+    border: 1px solid #ec7263;
+    outline: none;
 }
 
 .comment__header {
     display: flex;
-    background-color: #ec7263;
-    height: 120px;
     width: 96%;
-    margin: 0 auto;
-    border-radius: 20px;
+    height: 30px;
+    margin: 10px auto;
+    border-radius: 10px;
+    background-color: #ec7263;
     justify-content: space-around;
     align-items: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
 }
 
 .comments {
-    margin-bottom: 30px;
+    width: 95%;
+    margin: 0 auto 20px;
+}
+
+.login, .singup, .password-recovery {
+    position: fixed;
+    z-index: 99997;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    width: 95%;
+    height: 90%;
+    margin: 0 auto;
+    pointer-events: none;
+    border-radius: 10px;
+    background: rgba(0,0,0,.8);
+}
+
+.singup {
+    z-index: 99999;
+}
+
+.password-recovery {
+    z-index: 99998;
+}
+
+.login:target, .singup:target, .password-recovery:target {
+    display: block;
+    overflow: auto;
+    pointer-events: auto;
+}
+
+.login > div, .singup > div, .password-recovery > div {
+    width: 290px;
+}
+
+.login__header, .singup__header, .password-recovery__header {
+    font-size: 18px;
+    width: 290px;
+    height: 45px;
+    margin: 20px auto 0;
+    padding-top: 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    background-color: #428bca;
+}
+
+.account {
+    position: relative;
+    width: 290px;
+    height: 255px;
+    margin: 0 auto;
+    padding-top: 20px;
+    border-radius: 0 0 10px 10px;
+    background-color: #dcdcdc;
+}
+
+.account__email, .account__password {
+    font-size: 16px;
+    display: block;
+    width: 240px;
+    height: 40px;
+    margin: 0 auto 20px;
+    padding-left: 45px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    outline: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 8px;
+    background-size: 12%;
+}
+
+.account__email {
+    background-image: url('../img/email.png');
+}
+
+.account__password {
+    background-image: url('../img/password.png');
+}
+
+.account__button {
+    font-size: 18px;
+    display: block;
+    width: 250px;
+    height: 40px;
+    margin: 0 auto 20px;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #f0ad4e;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f0ad4e;
+}
+
+.account__forget-password, .account__create-account, .account__login-with-recover-password {
+    font-size: 14px;
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    padding: 0 0 10px 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.login__close, .singup__close, .password-recovery__close {
+    font-weight: bold;
+    line-height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background: #606061;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    -moz-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+
+.account__login-with-singup {
+    font-size: 14px;
+    padding-left: 35px;
+    text-decoration: none;
+}
+
+.account__text {
+    font-size: 14px;
+}
+
+.account__text-recovery-password {
+    font-size: 14px;
+    display: block;
+    width: 240px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.office {
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.office__header {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 0;
+    text-align: center;
+    color: #ec7263;
+}
+
+.name-user, .email-user, .password-user {
+    padding-bottom: 5px;
+}
+
+.name-user__header, .email-user__header, .password-user__header {
+    font-weight: 600;
+    display: inline-block;
+    height: 25px;
+}
+
+.name-user__header {
+    padding-left: 24px;
+}
+
+.email-user__header {
+    padding-left: 14px;
+}
+
+.name-user__input, .email-user__input, .password-user__input {
+    display: inline-block;
+    width: 200px;
+    height: 25px;
+    vertical-align: middle;
+    border: 1px solid #999;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+}
+
+.name-user__edit-icon, .email-user__edit-icon, .password-user__edit-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: url('../img/edit.png') no-repeat;
+    background-size: 100%;
+}
+
+.office__load-book {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    width: 250px;
+    height: 30px;
+    margin: 10px auto;
+    padding-top: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #ec7263;
+    border: 2px solid #ec7263;
+    border-radius: 10px;
+    outline: none;
+}
+
+
+.load-book {
+    position: fixed;
+    z-index: 99997;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    width: 95%;
+    height: 90%;
+    margin: 0 auto;
+    pointer-events: none;
+    border-radius: 10px;
+    background: rgba(0,0,0,.8);
+}
+
+.load-book:target {
+    display: block;
+    overflow: auto;
+    pointer-events: auto;
+}
+
+.book-characteristic {
+    width: 280px;
+    margin: 20px auto 0;
+    padding-top: 20px;
+    border-radius: 10px;
+    background-color: #dcdcdc;
+}
+
+.load-book__close {
+    font-weight: bold;
+    line-height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background: #606061;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    -moz-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+
+.book-characteristic__text {
+    display: block;
+    width: 250px;
+    height: 25px;
+    margin: 10px auto 0;
+    padding-left: 5px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+}
+
+.book-characteristic__annotation {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    height: 100px;
+}
+
+.book-characteristic__cancel, .book-characteristic__load {
+    width: 100px;
+    height: 25px;
+    margin: 10px 0 10px 25px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    outline: none;
+}
+
+.book-characteristic__picture, .book-characteristic__file {
+    display: inline-block;
+    width: 210px;
+    margin-right: 5px;
+    margin-left: 15px;
+}
+
+.book-characteristic__load-picture {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    background: url('../img/load.png') no-repeat;
+    background-size: 100%;
 }
