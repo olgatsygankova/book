@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <meta name="viewport" content="width=device-width", initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
@@ -11,6 +11,7 @@
 <body>
     <div class="container">
         <header class="header">
+            <div class="logo"></div>
             <a class="header__office" href="#login">Войти</a>
             <div class="header__nav">
                 <input id="toggle" type="checkbox">
@@ -18,12 +19,11 @@
                     <span class="button button-toggle"></span>
                 </label>
                 <nav class="header__menu">
-                    <a class="header__menu-item" href="index.html">Главная</a>
-                    <a class="header__menu-item" href="index2.html">Мои книги</a>
-                    <a class="header__menu-item" href="">Загрузить книгу</a>
+                    <a class="header__menu-item home" href="index.html">Главная</a>
+                    <a class="header__menu-item my-books" href="office.html#my-book">Мои книги</a>
+                    <a class="header__menu-item download-book" href="office.html#load-book">Загрузить книгу</a>
                 </nav>
             </div>
-            <div class="logo"></div>
             <div class="search">
                 <input class="search__input" type="search" name="search" placeholder="Поиск...">
             </div>
@@ -31,7 +31,7 @@
         <main>
             <section class="main__content">
                 <section class="section_book">
-                    <article class="book">
+                    <article class="book-page">
                         <figure class="book__description">
                             <img class="book__img" src="img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса">
                             <figcaption class="book__caption">
@@ -101,8 +101,8 @@
             </section>
         </main>
         <footer class="footer">
-            <span class="footer__span">2017 &copy; BookAddict</span>
-            <span class="footer__span">Все права защищены</span>
+            <div class="footer__copyright">2017 &copy; BookAddict</div>
+            <div class="footer__copyright-description">Все права защищены</div>
         </footer>
         <div id="login" class="login">
             <a href="#close" title="Закрыть" class="login__close">X</a>
