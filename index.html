@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BookAddict</title>
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
 </head>
@@ -19,10 +18,18 @@
                     <span class="button button-toggle"></span>
                 </label>
                 <nav class="header__menu">
-                    <a class="header__menu-item home" href="index.html">Главная</a>
-                    <a class="header__menu-item my-books" href="office.html#my-book">Мои книги</a>
-                    <a class="header__menu-item download-book" href="office.html#load-book">Загрузить книгу</a>
+                    <a class="header__menu-item header__menu-item--home--active header__menu-item--home" href="index.html">Главная</a>
+                    <a class="header__menu-item header__menu-item--my-books" href="office.html#my-book">Мои книги</a>
+                    <a class="header__menu-item header__menu-item--download-book" href="office.html#load-book">Загрузить книгу</a>
                 </nav>
+            </div>
+            <div class="animation">
+                <div class="animation--gray"></div>
+                <div class="animation--orange-back"></div>
+                <div class="animation--white"></div>
+                <div class="animation--gray-back"></div>
+                <div class="animation--orange"></div>
+                <div class="animation--white-back"></div>
             </div>
             <div class="search">
                <input class="search__input" type="search" name="search" placeholder="Поиск...">

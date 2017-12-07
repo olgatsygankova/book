@@ -31,16 +31,24 @@ body {
     background-size: cover;
 }
 
+.animation {
+    display: none;
+}
+
 .header__office {
     font-size: 14px;
     font-weight: 600;
     float: right;
     clear: both;
-    margin: 5px 5px 0 0;
+    margin: 10px 5px 0 0;
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     color: #ec7263;
+    border: 1px solid #ec7263;
+    border-radius: 10px;
     background-color: black;
+    box-shadow: 1px 1px 0 1px #ec7263;
 }
 
 #toggle {
@@ -177,13 +185,14 @@ body {
     width: 250px;
     height: 30px;
     padding-left: 30px;
-    border: 2px solid #ec7263;
+    border: 1px solid #ec7263;
     border-radius: 10px;
     outline: none;
     background-image: url('../img/search.png');
     background-repeat: no-repeat;
     background-position: 4px;
     background-size: 10%;
+    box-shadow: 2px 2px 0 2px #ec7263;
 }
 
 .search__input::-webkit-search-cancel-button {
@@ -234,6 +243,7 @@ body {
 .book, .book-page {
     font-size: 14px;
     position: relative;
+    z-index: 1;
     min-width: 310px;
     max-width: 360px;
     margin: 5px auto 10px;
@@ -345,6 +355,7 @@ body {
     color: #ec7263;
     border: 2px solid #ec7263;
     border-radius: 10px;
+    box-shadow: 1px 1px 0 1px #ec7263;
 }
 
 .footer {
@@ -397,6 +408,8 @@ body {
     color: #ec7263;
     border: 1px solid #ec7263;
     outline: none;
+    background-color: #fff;
+    box-shadow: 2px 0 2px 2px #ec7263;
 }
 
 .comment__header {
@@ -424,7 +437,7 @@ body {
     left: 0;
     display: none;
     width: 95%;
-    height: 90%;
+    height: 98%;
     margin: 0 auto;
     pointer-events: none;
     border-radius: 10px;
@@ -474,7 +487,7 @@ body {
 .account__email, .account__password {
     font-size: 16px;
     display: block;
-    width: 240px;
+    width: 80%;
     height: 40px;
     margin: 0 auto 20px;
     padding-left: 45px;
@@ -498,7 +511,7 @@ body {
 .account__button {
     font-size: 18px;
     display: block;
-    width: 250px;
+    width: 80%;
     height: 40px;
     margin: 0 auto 20px;
     text-align: center;
@@ -558,7 +571,6 @@ body {
 
 .office {
     font-size: 14px;
-    margin-left: 20px;
 }
 
 .office__header {
@@ -577,14 +589,15 @@ body {
     font-weight: 600;
     display: inline-block;
     height: 25px;
-}
-
-.name-user__header {
     padding-left: 20px;
 }
 
+.name-user__header {
+    padding-left: 40px;
+}
+
 .email-user__header {
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .name-user__input, .email-user__input, .password-user__input {
@@ -608,19 +621,20 @@ body {
 }
 
 .office__load-book {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     display: block;
-    width: 250px;
+    width: 310px;
     height: 30px;
     margin: 10px auto;
-    padding-top: 5px;
+    padding-top: 3px;
     text-align: center;
     text-decoration: none;
     color: #ec7263;
     border: 2px solid #ec7263;
     border-radius: 10px;
     outline: none;
+    box-shadow: 1px 0 1px 1px #ec7263;
 }
 
 
@@ -633,7 +647,7 @@ body {
     left: 0;
     display: none;
     width: 95%;
-    height: 90%;
+    height: 98%;
     margin: 0 auto;
     pointer-events: none;
     border-radius: 10px;
@@ -694,10 +708,15 @@ body {
 .book-characteristic__cancel, .book-characteristic__load {
     width: 100px;
     height: 25px;
-    margin: 10px 0 10px 25px;
+    margin: 20px 0 20px 25px;
     border: 1px solid #999;
     border-radius: 10px;
     outline: none;
+}
+
+.book-characteristic__load {
+    color: #ec7263;
+    border-color: #ec7263;
 }
 
 .book-characteristic__picture, .book-characteristic__file {
@@ -724,7 +743,7 @@ body {
 
     .header {
         height: 270px;
-        background: url('../img/header768.jpg') no-repeat;
+        background: url('../img/header768.jpg') no-repeat bottom;
         background-size: cover;
     }
 
@@ -772,19 +791,40 @@ body {
         color: #ec7263;
         border: 1px solid #ec7263;
         border-radius: 10px;
+        box-shadow: 2px 2px 0 2px #ec7263;
+    }
+    .header__menu-item:hover, .header__menu-item--home--active {
+        color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 2px 2px 0 2px #fff;
     }
 
-    .home {
+    .header__menu-item--home {
         padding-top: 10px;
         background: url('../img/home-icon.png') no-repeat center bottom;
     }
 
-    .my-books {
+    .header__menu-item--my-books {
         background: url('../img/books-icon.png') no-repeat center bottom;
     }
 
-    .download-book {
+    .header__menu-item--download-book {
         background: url('../img/download-book-icon.png') no-repeat center bottom;
+    }
+
+    .header__menu-item--home:hover, .header__menu-item--home--active {
+        opacity: .9;
+        background: url('../img/home-icon-white.png') no-repeat center bottom #ec7263;
+    }
+
+    .header__menu-item--my-books:hover {
+        opacity: .9;
+        background: url('../img/books-icon-white.png') no-repeat center bottom #ec7263;
+    }
+
+    .header__menu-item--download-book:hover {
+        opacity: .9;
+        background: url('../img/download-book-icon-white.png') no-repeat center bottom #ec7263;
     }
 
     .header__menu-item:before {
@@ -801,7 +841,18 @@ body {
 
     .header__office {
         clear: none;
-        padding: 10px 10px 0 0;
+    }
+
+    .animation {
+        display: none;
+    }
+
+    .header__office:hover {
+        opacity: .9;
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: #ec7263;
+        box-shadow: 1px 1px 0 1px #fff;
     }
 
     .search {
@@ -815,6 +866,35 @@ body {
         height: 40px;
         padding-left: 35px;
         background-size: 8%;
+    }
+
+    .book__load-more:hover {
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: #ec7263;
+        box-shadow: 1px 1px 0 1px #fff;
+    }
+
+    .office__load-book:hover {
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: #ec7263;
+        box-shadow: 1px 1px 0 1px #fff;
+    }
+
+    .add-comment__button-send:hover {
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: #ec7263;
+        box-shadow: 1px 1px 0 1px #fff;
+    }
+
+    .login > div, .singup > div, .password-recovery > div {
+        width: 350px;
+    }
+
+    .account {
+        height: 280px;
     }
 
     .book-page {
@@ -838,5 +918,99 @@ body {
         opacity: .3;
         border-radius: 20px;
         background-color: #ec7263;
+    }
+
+    .book-characteristic {
+        width: 450px;
+        height: 450px;
+    }
+
+    .book-characteristic__text {
+        width: 300px;
+    }
+
+    .book-characteristic__picture, .book-characteristic__file {
+        margin-left: 75px;
+    }
+
+    .book-characteristic__cancel, .book-characteristic__load {
+        width: 130px;
+        margin: 40px 0 10px 60px;
+    }
+
+    .book-characteristic__load {
+        color: #ec7263;
+        border-color: #ec7263;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .animation {
+        display: flex;
+        width: 420px;
+        height: 190px;
+        margin-left: 520px;
+    }
+
+    .animation--orange {
+        width: 70px;
+        height: 50px;
+        margin-top: 20px;
+        animation: falling180 3s 2s infinite;
+        background: url('../img/open-book-orange.png') no-repeat center;
+    }
+
+    .animation--gray {
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
+        animation: falling90 4s 1s infinite;
+        background: url('../img/open-book-gray.png') no-repeat center;
+    }
+
+    .animation--white {
+        width: 50px;
+        height: 50px;
+        margin-top: 20px;
+        animation: falling90 3s 1s infinite;
+        background: url('../img/open-book-white.png') no-repeat center;
+    }
+
+    .animation--orange-back {
+        width: 50px;
+        height: 50px;
+        animation: falling180 4s 2s infinite;
+        background: url('../img/open-book-orange.png') no-repeat center;
+    }
+
+    .animation--gray-back {
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
+        animation: falling180 5s 0s infinite;
+        background: url('../img/open-book-gray.png') no-repeat center;
+    }
+
+    .animation--white-back {
+        width: 50px;
+        height: 50px;
+        animation: falling90 5s 0s infinite;
+        background: url('../img/open-book-white.png')no-repeat center;
+    }
+}
+
+
+
+@-webkit-keyframes falling90 {
+    100% {
+        transform: translate3d(20px, 180px, 0) rotate(90deg);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes falling180 {
+    100% {
+        transform: translate3d(20px, 180px, 0) rotate(180deg);
+        opacity: 0;
     }
 }
