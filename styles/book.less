@@ -1,0 +1,106 @@
+@import "styles";
+
+
+
+
+
+.size-book (){
+  min-width: 310px;
+  max-width: 360px;
+}
+
+.book-template(){
+  font-size: @font-size;
+  position: relative;
+  z-index: 1;
+  .size-book;
+  margin: 5px auto 10px;
+  border: 2px solid @color-orange;
+  border-radius: @border-radius-standard;
+  box-shadow: @box-shadow @color-orange;
+}
+
+.book-before-template {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  content: '';
+  opacity: .3;
+  border-radius: @border-radius-standard;
+  background-color: @color-orange;
+}
+
+.book {
+  .book-template;
+  &-page{
+    .book-template;
+  }
+  &:before{
+    .book-before-template;
+  }
+  &-page:before{
+    .book-before-template;
+  }
+  &__description {
+    display: flex;
+  }
+  &__img {
+    width: 30%;
+    height: 30%;
+    padding: 5px 0 5px 5px;
+  }
+  &__caption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  &__caption-wrapper {
+    width: 100%;
+  }
+  &__header {
+    .header-template;
+  }
+  &__text {
+    text-align: left;
+  }
+  &__annotation {
+    padding-left: 10px;
+    text-align: left;
+    text-indent: 20px;
+  }
+  &__header-annotation {
+    padding-left: 30px;
+  }
+  &__download {
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10%;
+    text-decoration: none;
+  }
+  &__download-description {
+    margin-top: 0;
+    margin-left: 10px;
+  }
+  &__info {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10%;
+    margin-bottom: 5px;
+    text-decoration: none;
+  }
+  &__load-more {
+    font-size: @font-size-big;
+    font-weight: 600;
+    display: block;
+    .size-book;
+    height: 30px;
+    margin: 10px auto;
+    color: @color-orange;
+    border: 2px solid @color-orange;
+    border-radius: @border-radius-standard;
+    box-shadow: 1px 1px 0 1px @color-orange;
+  }
+}

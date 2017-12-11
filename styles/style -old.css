@@ -10,7 +10,6 @@ body {
     height: 100%;
     margin: 0 auto;
     background-color: #dcdcdc;
-    text-size-adjust: 100%;
 }
 
 .container {
@@ -165,7 +164,7 @@ body {
     float: left;
 }
 
-.logo {
+.header__logo {
     display: inline-block;
     clear: both;
     width: 200px;
@@ -832,7 +831,7 @@ body {
         height: 0;
     }
 
-    .logo {
+    .header__logo {
         float: left;
         width: 370px;
         height: 70px;
