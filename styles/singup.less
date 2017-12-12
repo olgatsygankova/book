@@ -1,0 +1,21 @@
+@import "styles";
+@import "login";
+
+.singup{
+  .modal-template(99999);
+  &:target {
+    .modal-target-template ();
+  }
+  & > div {
+    width: @width-modal;
+    @media screen and (min-width: @min-width) {
+      width: @width-desktop-modal;
+    }
+  }
+  &__header {
+    .modal-header-template ();
+  }
+  &__close {
+    .modal-close-template();
+  }
+}

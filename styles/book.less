@@ -1,25 +1,22 @@
 @import "styles";
-
-
-
-
-
+@book-float: left;
 .size-book (){
   min-width: 310px;
   max-width: 360px;
 }
-
+.book-border (){
+  border: @border-heavy @color-orange;
+  border-radius: @border-radius-standard;
+  box-shadow: @box-shadow @color-orange;
+}
 .book-template(){
   font-size: @font-size;
   position: relative;
   z-index: 1;
   .size-book;
   margin: 5px auto 10px;
-  border: 2px solid @color-orange;
-  border-radius: @border-radius-standard;
-  box-shadow: @box-shadow @color-orange;
+  .book-border;
 }
-
 .book-before-template {
   position: absolute;
   z-index: -1;
@@ -31,16 +28,40 @@
   border-radius: @border-radius-standard;
   background-color: @color-orange;
 }
-
+.book-button (@book-float){
+  float: @book-float;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-decoration: none;
+}
 .book {
   .book-template;
   &-page{
     .book-template;
+    @media screen and (min-width:@min-width) {
+      font-size: @font-size;
+      position: relative;
+      width: 700px;
+      max-width: 900px;
+      margin: 5px auto 10px;
+      .book-border;
+    }
+    &:before{
+      .book-before-template;
+      @media screen and (min-width:@min-width) {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        content: '';
+        opacity: .3;
+        border-radius: @border-radius-standard;
+        background-color: @color-orange;
+      }
+    }
   }
   &:before{
-    .book-before-template;
-  }
-  &-page:before{
     .book-before-template;
   }
   &__description {
@@ -60,7 +81,7 @@
     width: 100%;
   }
   &__header {
-    .header-template;
+    .header-template(@pad-top);
   }
   &__text {
     text-align: left;
@@ -74,22 +95,16 @@
     padding-left: 30px;
   }
   &__download {
-    float: left;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    .book-button(@book-float);
     margin-left: 10%;
-    text-decoration: none;
   }
   &__download-description {
     margin-top: 0;
     margin-left: 10px;
   }
   &__info {
-    float: right;
-    margin-top: 5px;
+    .book-button(right);
     margin-right: 10%;
-    margin-bottom: 5px;
-    text-decoration: none;
   }
   &__load-more {
     font-size: @font-size-big;
@@ -99,8 +114,14 @@
     height: 30px;
     margin: 10px auto;
     color: @color-orange;
-    border: 2px solid @color-orange;
-    border-radius: @border-radius-standard;
-    box-shadow: 1px 1px 0 1px @color-orange;
+    .book-border;
+    &:hover {
+      @media screen and (min-width: @min-width) {
+        color: @color-white;
+        border: @border-standard @color-white;
+        background-color: @color-orange;
+        box-shadow: @box-shadow-light @color-white;
+      }
+    }
   }
 }
