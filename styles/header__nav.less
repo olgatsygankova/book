@@ -57,11 +57,15 @@
   }
   &:checked {
     & ~ .toggle-container .button-toggle {
+      box-shadow: @box-shadow-mobile, inset @box-shadow-mobile, @box-shadow-mobile, inset @box-shadow-mobile;
       &:before {
         .transform-menu (@rotate-menu, 1);
       }
       &:after {
         .transform-menu (-@rotate-menu, 1);
+      }
+      &:hover {
+        box-shadow: @box-shadow-mobile, inset @box-shadow-mobile, @box-shadow-mobile, inset @box-shadow-mobile;
       }
     }
     &:focus ~ .toggle-container .button-toggle {
