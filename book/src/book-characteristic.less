@@ -1,0 +1,70 @@
+@import "styles";
+@height-book-characteristic: 25px;
+
+.book-characteristic {
+  width: 280px;
+  margin: 20px auto 0;
+  padding-top: 20px;
+  border-radius: 10px;
+  background-color: @color-gray;
+  @media screen and (min-width: @min-width) {
+    width: 450px;
+    height: 450px;
+  }
+  &__text {
+    display: block;
+    width: 250px;
+    height: @height-book-characteristic;
+    margin: 10px auto 0;
+    padding-left: 5px;
+    border: @border-standard @color-black;
+    border-radius: @border-radius-standard - 15px;
+    outline: none;
+    background-color: transparent;
+    @media screen and (min-width: @min-width) {
+      width: 300px;
+    }
+  }
+  &__annotation {
+    font-family: 'Roboto', sans-serif;
+    font-size: @font-size;
+    height: 100px;
+  }
+  &__cancel, &__load {
+    width: 100px;
+    height: @height-book-characteristic;
+    margin: 20px 0 20px 25px;
+    border: @border-standard @color-black;
+    border-radius: 10px;
+    outline: none;
+    @media screen and (min-width: @min-width) {
+      width: 130px;
+      margin: 40px 0 10px 60px;
+    }
+  }
+  &__load {
+    color: @color-orange;
+    border-color: @color-orange;
+    @media screen and (min-width: @min-width) {
+      color: @color-orange;
+      border-color: @color-orange;
+    }
+  }
+  &__picture, &__file {
+    display: inline-block;
+    width: 210px;
+    margin-right: 5px;
+    margin-left: 15px;
+    @media screen and (min-width: @min-width) {
+      margin-left: 75px;
+    }
+  }
+  &__load-picture {
+    display: inline-block;
+    width: 25px;
+    height: @height-book-characteristic;
+    vertical-align: middle;
+    background: url('./img/load.png') no-repeat;
+    background-size: 100%;
+  }
+}

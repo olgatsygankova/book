@@ -1,0 +1,80 @@
+@min-width-desktop: 1024px;
+@margin-top-animation: 10px;
+@name-animation: falling180;
+@sec: 3s;
+@background-url-animation: './img/open-book-orange.png';
+@rotate: 90deg;
+
+
+.animation-total(@margin-top-animation, @name-animation, @sec, @sec2, @background-url-animation) {
+  width: 50px;
+  height: 50px;
+  margin-top: @margin-top-animation;
+  animation: @name-animation @sec @sec2 infinite;
+  background: url(@background-url-animation) no-repeat center;
+}
+
+.rules-animation(@rotate) {
+  100% {
+    transform: translate3d(20px, 180px, 0) rotate(@rotate);
+    opacity: 0;
+  }
+}
+
+.animation {
+  display: none;
+  @media screen and (min-width: @min-width-desktop) {
+    & {
+      display: flex;
+      width: 420px;
+      height: 190px;
+      margin-left: 520px;
+      &--orange {
+        .animation-total(@margin-top-animation + 10px, @name-animation, @sec, @sec - 1s, @background-url-animation);
+      }
+      &--gray {
+        .animation-total(@margin-top-animation, falling90, @sec + 1s, @sec - 2s, './img/open-book-gray.png');
+      }
+
+      &--white {
+        .animation-total(@margin-top-animation + 10px, falling90, @sec, @sec - 2s, './img/open-book-white.png');
+      }
+
+      &--orange-back {
+        .animation-total(0px, @name-animation, @sec + 1s, @sec - 1s, './img/open-book-orange.png');
+      }
+
+      &--gray-back {
+        .animation-total(@margin-top-animation, @name-animation, @sec + 2s, @sec - 3s, './img/open-book-gray.png');
+      }
+
+      &--white-back {
+        .animation-total(0px, falling90, @sec + 2s, @sec - 3s, './img/open-book-white.png');
+      }
+    }
+  }
+}
+
+@-webkit-keyframes falling90 {
+  .rules-animation(@rotate)
+}
+
+@-webkit-keyframes falling180 {
+  .rules-animation(@rotate + 90deg)
+}
+
+@-moz-keyframes falling90 {
+  .rules-animation(@rotate)
+}
+
+@-moz-keyframes falling180 {
+  .rules-animation(@rotate + 90deg)
+}
+
+@-ms-keyframes falling90 {
+  .rules-animation(@rotate)
+}
+
+@-ms-keyframes falling180 {
+  .rules-animation(@rotate + 90deg)
+}

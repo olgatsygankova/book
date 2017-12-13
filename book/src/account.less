@@ -1,0 +1,72 @@
+@import "styles";
+
+.account {
+  position: relative;
+  width: 290px;
+  height: 255px;
+  margin: 0 auto;
+  padding-top: 20px;
+  border-radius: 0 0 10px 10px;
+  background-color: @color-gray;
+  @media screen and (min-width: @min-width) {
+    height: 280px;
+  }
+  &__email, &__password {
+    font-size: @font-size-big;
+    display: block;
+    width: 80%;
+    height: 40px;
+    margin: @margin-auto 20px;
+    padding-left: 45px;
+    border: @border-standard @color-black;
+    border-radius: @border-radius-standard - 10px;
+    outline: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 8px;
+    background-size: 12%;
+  }
+  &__email {
+    background-image: url('./img/email.png');
+  }
+  &__password {
+    background-image: url('./img/password.png');
+  }
+  &__button {
+    font-size: @font-size-big + 2px;
+    display: block;
+    width: 80%;
+    height: 40px;
+    margin: @margin-auto 20px;
+    text-align: center;
+    color: @color-white;
+    border: @border-standard #f0ad4e;
+    border-radius: @border-radius-standard - 10px;
+    outline: none;
+    background-color: #f0ad4e;
+  }
+  &__forget-password, &__create-account, &__login-with-recover-password {
+    font-size: @font-size;
+    display: block;
+    width: 200px;
+    margin: @margin-auto;
+    padding: 0 0 10px 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+  &__login-with-singup {
+    font-size: @font-size;
+    padding-left: 35px;
+    text-decoration: none;
+  }
+  &__text {
+    font-size: @font-size;
+  }
+  &__text-recovery-password {
+    font-size: @font-size;
+    display: block;
+    width: 240px;
+    margin: @margin-auto;
+    padding-bottom: 20px;
+  }
+}

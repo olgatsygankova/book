@@ -1,0 +1,34 @@
+@import "styles";
+
+.search {
+  margin-left: 50px;
+  @media screen and (min-width:@min-width) {
+    clear: both;
+    margin-left: 90px;
+    padding-top: 20px;
+  }
+  &__input {
+    font-size: @font-size-big;
+    display: block;
+    width: 250px;
+    height: 30px;
+    padding-left: 30px;
+    border: @border-standard @color-orange;
+    border-radius: @border-radius-standard - 10px;
+    outline: none;
+    background-image: url('./img/search.png');
+    background-repeat: no-repeat;
+    background-position: 4px;
+    background-size: 10%;
+    box-shadow: @box-shadow @color-orange;
+    @media screen and (min-width:@min-width) {
+      width: 370px;
+      height: 40px;
+      padding-left: 35px;
+      background-size: 8%;
+    }
+    &::-webkit-search-cancel-button {
+      padding-right: 10px;
+    }
+  }
+}
