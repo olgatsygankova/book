@@ -11,6 +11,13 @@
     height: 270px;
     background: url('../img/header768.jpg') no-repeat bottom;
   }
+  &__nav {
+    float: left;
+    @media screen and (min-width:@min-width) {
+      clear: both;
+      margin-left: 120px;
+    }
+  }
   &__office {
     font-size: @font-size;
     font-weight: 600;
@@ -51,6 +58,18 @@
       width: 370px;
       height: 70px;
       margin: 30px 0 0 90px;
+    }
+  }
+  &__animation {
+    @media screen and (min-width: @min-width-desktop) {
+      margin-left: 520px;
+    }
+  }
+  &__search {
+    margin-left: 50px;
+    @media screen and (min-width:@min-width) {
+      clear: both;
+      margin-left: 90px;
     }
   }
 }

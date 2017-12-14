@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-/*import './App.css';*/
-import './header.less';
-import './styles.less';
 import './header__nav.less';
 
 class Header__nav extends Component {
@@ -10,7 +6,7 @@ class Header__nav extends Component {
         return (
             <div className="header__nav">
                 <input id="toggle" type="checkbox" />
-                    <label className="toggle-container" for="toggle">
+                    <label className="toggle-container" htmlFor="toggle">
                         <span className="button button-toggle"></span>
                     </label>
                     <nav className="header__menu">
@@ -20,7 +16,7 @@ class Header__nav extends Component {
                     </nav>
             </div>
         );
-    }
+    };
 }
 
 export default Header__nav;

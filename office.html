@@ -12,18 +12,18 @@
         <header class="header">
             <div class="header__logo"></div>
             <a class="header__office" href="#login">Войти</a>
-            <div class="header__nav">
+            <div class="header__nav nav">
                 <input id="toggle" type="checkbox">
                 <label class="toggle-container" for="toggle">
                     <span class="button button-toggle"></span>
                 </label>
-                <nav class="header__menu">
-                    <a class="header__menu-item header__menu-item--home" href="index.html">Главная</a>
-                    <a class="header__menu-item header__menu-item--my-books" href="office.html#my-book">Мои книги</a>
-                    <a class="header__menu-item header__menu-item--download-book" href="office.html#load-book">Загрузить книгу</a>
+                <nav class="nav__menu">
+                    <a class="nav__menu-item nav__menu-item--home" href="index.html">Главная</a>
+                    <a class="nav__menu-item nav__menu-item--my-books" href="office.html#my-book">Мои книги</a>
+                    <a class="nav__menu-item nav__menu-item--download-book" href="office.html#load-book">Загрузить книгу</a>
                 </nav>
             </div>
-            <div class="animation">
+            <div class="header__animation animation">
                 <div class="animation--gray"></div>
                 <div class="animation--orange-back"></div>
                 <div class="animation--white"></div>
@@ -31,35 +31,35 @@
                 <div class="animation--orange"></div>
                 <div class="animation--white-back"></div>
             </div>
-            <div class="search">
+            <div class="header__search search">
                 <input class="search__input" type="search" name="search" placeholder="Поиск...">
             </div>
         </header>
         <main>
-              <section class="main__content">
-                  <section class="office">
-                      <div class="office__header">Личный кабинет</div>
-                      <div class="name-user">
-                          <span class="name-user__header">Имя</span>
-                          <input class="name-user__input" name="name-user" placeholder="Alexander">
-                          <div class="name-user__edit-icon"></div>
-                      </div>
-                      <div class="email-user">
-                          <span class="email-user__header">E-mail</span>
-                          <input class="email-user__input" name="email-user" placeholder="alexander@io.com">
-                          <div class="email-user__edit-icon"></div>
-                      </div>
-                      <div class="password-user">
-                          <span class="password-user__header">Пароль</span>
-                          <input class="password-user__input" name="password-user" placeholder="*******">
-                          <div class="password-user__edit-icon"></div>
-                      </div>
-                      <a class="office__load-book" href="#load-book">Загрузить книгу</a>
-                  </section>
-                  <section class="section_book" id="my-book">
-                      <span class="section_book__header">Мои книги</span>
-                      <div class="book__wrapper">
-                          <article class="book">
+            <section class="main__content">
+                <section class="office">
+                    <div class="office__header">Личный кабинет</div>
+                    <div class="name-user">
+                        <span class="name-user__header">Имя</span>
+                         <input class="name-user__input" name="name-user" placeholder="Alexander">
+                         <div class="name-user__edit-icon"></div>
+                    </div>
+                    <div class="email-user">
+                        <span class="email-user__header">E-mail</span>
+                        <input class="email-user__input" name="email-user" placeholder="alexander@io.com">
+                        <div class="email-user__edit-icon"></div>
+                    </div>
+                    <div class="password-user">
+                        <span class="password-user__header">Пароль</span>
+                        <input class="password-user__input" name="password-user" placeholder="*******">
+                        <div class="password-user__edit-icon"></div>
+                    </div>
+                    <a class="office__load-book" href="#load-book">Загрузить книгу</a>
+                </section>
+                <section class="section_book" id="my-book">
+                    <span class="section-book__header">Ton-100</span>
+                    <div class="section-book__books">
+                        <article class="book">
                               <figure class="book__description">
                                   <img class="book__img" src="img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса">
                                   <figcaption class="book__caption">
@@ -89,7 +89,7 @@
                                   </figcaption>
                               </figure>
                           </article>
-                          <article class="book">
+                        <article class="book">
                               <figure class="book__description">
                                   <img class="book__img" src="img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса">
                                   <figcaption class="book__caption">
@@ -119,7 +119,7 @@
                                   </figcaption>
                               </figure>
                           </article>
-                          <article class="book">
+                        <article class="book">
                               <figure class="book__description">
                                   <img class="book__img" src="img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса">
                                   <figcaption class="book__caption">
@@ -149,99 +149,8 @@
                                   </figcaption>
                               </figure>
                           </article>
-                          <article class="book">
-                              <figure class="book__description">
-                                  <img class="book__img" src="img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса">
-                                  <figcaption class="book__caption">
-                                      <div class="stars">
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--light"></div>
-                                          <div class="stars__star--light"></div>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Название:</span>
-                                          <span class="book__text">Алые паруса</span>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Автор:</span>
-                                          <span class="book__text">Александр Грин</span>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Аннотация:</span>
-                                          <p class="book__annotation">Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...</p>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <a href="#" class="book__download">Скачать</a>
-                                          <a href="bookPage.html" class="book__info">Подробнее</a>
-                                      </div>
-                                  </figcaption>
-                              </figure>
-                          </article>
-                          <article class="book">
-                              <figure class="book__description">
-                                  <img class="book__img" src="img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса">
-                                  <figcaption class="book__caption">
-                                      <div class="stars">
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--light"></div>
-                                          <div class="stars__star--light"></div>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Название:</span>
-                                          <span class="book__text">Алые паруса</span>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Автор:</span>
-                                          <span class="book__text">Александр Грин</span>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Аннотация:</span>
-                                          <p class="book__annotation">Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...</p>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <a href="#" class="book__download">Скачать</a>
-                                          <a href="bookPage.html" class="book__info">Подробнее</a>
-                                      </div>
-                                  </figcaption>
-                              </figure>
-                          </article>
-                          <article class="book">
-                              <figure class="book__description">
-                                  <img class="book__img" src="img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса">
-                                  <figcaption class="book__caption">
-                                      <div class="stars">
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--fat"></div>
-                                          <div class="stars__star--light"></div>
-                                          <div class="stars__star--light"></div>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Название:</span>
-                                          <span class="book__text">Алые паруса</span>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Автор:</span>
-                                          <span class="book__text">Александр Грин</span>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <span class="book__header">Аннотация:</span>
-                                          <p class="book__annotation">Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...</p>
-                                      </div>
-                                      <div class="book__caption-wrapper">
-                                          <a href="#" class="book__download">Скачать</a>
-                                          <a href="bookPage.html" class="book__info">Подробнее</a>
-                                      </div>
-                                  </figcaption>
-                              </figure>
-                          </article>
-                      </div>
-                      <button class="book__load-more">Загрузить ещё</button>
-                  </section>
+                    </div>
+                </section>
               </section>
         </main>
         <footer class="footer">

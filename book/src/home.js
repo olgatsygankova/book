@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-/*import './App.css';*/
-import './header.less';
-import './styles.less';
-import Naw from './Header__nav';
-import './header__nav.less';
+import Header from './Header';
+import Book from './Book';
 
 class Home extends Component {
     render() {
         return (
             <div className="container">
-                <header className="header">
-                    <div className="header__logo"></div>
-                    <a className="header__office" href="#login">Войти</a>
-                    <Naw />
-                </header>
-            </div>
+                <Header />
+                <main>
+                    <section className="main__content">
+                        <span className="section_book__header">Ton-100</span>
+                        <div className="book__wrapper">
+                            <Book />
+                        </div>
+                    </section>
+                </main>
+           </div>
         );
     }
 }

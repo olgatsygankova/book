@@ -40,13 +40,7 @@
   }
 }
 
-.header__nav {
-  float: left;
-  @media screen and (min-width:@min-width) {
-    clear: both;
-    margin-left: 120px;
-  }
-}
+
 
 #toggle {
   position: absolute;
@@ -71,10 +65,10 @@
     &:focus ~ .toggle-container .button-toggle {
       box-shadow: @box-shadow-mobile, inset @box-shadow-mobile, @box-shadow-mobile, inset @box-shadow-mobile;
     }
-    & ~ .header__menu {
+    & ~ .nav__menu {
       transform: translate(20px, 20px);
       pointer-events: auto;
-      & .header__menu-item {
+      & .nav__menu-item {
         font-size: @font-size-big;
         font-weight: 800;
         line-height: 20px;
@@ -125,7 +119,7 @@
   }
 }
 
-.header__menu {
+.nav__menu {
   display: inline-block;
   margin: 10px 10px 5px;
   transition: .5s;
