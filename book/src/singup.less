@@ -2,13 +2,14 @@
 @import "login";
 
 .singup{
-  .modal-template(99999);
+  .modal-template();
+  z-index: 99999;
   &:target {
     .modal-target-template ();
   }
   & > div {
     width: @width-modal;
-    @media screen and (min-width: @min-width) {
+    @media @tablet {
       width: @width-desktop-modal;
     }
   }

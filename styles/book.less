@@ -28,7 +28,7 @@
   border-radius: @border-radius-standard;
   background-color: @color-orange;
 }
-.book-button (@book-float){
+.book-button (){
   float: @book-float;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -39,7 +39,7 @@
   height: 186px;
   &-page{
     .book-template;
-    @media screen and (min-width:@min-width) {
+    @media @tablet {
       font-size: @font-size;
       position: relative;
       width: 700px;
@@ -49,7 +49,7 @@
     }
     &:before{
       .book-before-template;
-      @media screen and (min-width:@min-width) {
+      @media @tablet {
         position: absolute;
         z-index: -1;
         top: 0;
@@ -69,20 +69,24 @@
     display: flex;
   }
   &__img {
-    width: 30%;
-    height: 30%;
+    width: 107px;
+    height: 145px;
     padding: 5px 0 5px 5px;
+    &--big {
+      @media @tablet {
+        width: 180px;
+        height: 250px;
+      }
+    }
   }
   &__caption {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-  }
-  &__caption-wrapper {
-    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
   }
   &__header {
-    .header-template(@pad-top);
+    .header-template();
   }
   &__text {
     text-align: left;
@@ -96,33 +100,16 @@
     padding-left: 30px;
   }
   &__download {
-    .book-button(@book-float);
-    margin-left: 10%;
+    .book-button();
+    margin-left: 20px;
   }
   &__download-description {
     margin-top: 0;
     margin-left: 10px;
   }
   &__info {
-    .book-button(right);
-    margin-right: 10%;
-  }
-  &__load-more {
-    font-size: @font-size-big;
-    font-weight: 600;
-    display: block;
-    .size-book;
-    height: 30px;
-    margin: 10px auto;
-    color: @color-orange;
-    .book-border;
-    &:hover {
-      @media screen and (min-width: @min-width) {
-        color: @color-white;
-        border: @border-standard @color-white;
-        background-color: @color-orange;
-        box-shadow: @box-shadow-light @color-white;
-      }
-    }
+    .book-button();
+    float: right;
+    margin-right: 20px;
   }
 }

@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 import Stars from './Stars';
 
 class Book extends Component {
+
     render() {
+        const {book} = this.props;
+
+
         return (
             <article className="book">
                 <figure className="book__description">
@@ -12,7 +16,8 @@ class Book extends Component {
                             <Stars />
                             <div className="book__caption-wrapper">
                                 <span className="book__header">Название:</span>
-                                <span className="book__text">Алые паруса</span>
+
+                                <span className="book__text">{this.props.bookName}</span>
                             </div>
                             <div className="book__caption-wrapper">
                                 <span className="book__header">Автор:</span>
@@ -32,6 +37,6 @@ class Book extends Component {
         );
     }
 }
-
+/*<span className="book__text">{book.bookName}</span>*/
 export default Book;
 

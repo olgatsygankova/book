@@ -1,7 +1,7 @@
 @import "styles";
 @pad-left: 20px;
 
-.user-template(@pad-left){
+.user-template(){
   padding-bottom: 5px;
   padding-left: @pad-left;
 }
@@ -18,7 +18,7 @@
   width: 200px;
   height: 25px;
   vertical-align: middle;
-  border: @border-standard @color-black;
+  border: @border-standard @color-gray;
   border-radius: 5px;
   outline: none;
   background-color: transparent;
@@ -30,11 +30,13 @@
   height: 24px;
   vertical-align: middle;
   background: url('./img/edit.png') no-repeat;
-  background-size: 100%;
+  background-size: 24px;
 }
 
 .name-user{
-  .user-template(40px);
+  .user-template();
+  padding-left: 40px;
+
   &__header {
     .user-header-template();
   }

@@ -3,19 +3,19 @@
 .add-comment {
   .estimate-add-comment-template;
   &__header{
-    .header-template(@pad-top);
+    .header-template();
   }
   &__text {
-    width: 95%;
+    width: 600px;
     height: 120px;
     border-radius: @border-radius-standard - 10px;
+    margin: 0 10px;
   }
   &__button-send {
     font-weight: 600;
-    width: 60%;
+    width: 400px;
     height: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px;
     color: @color-orange;
     border: @border-standard @color-orange;
     outline: none;
@@ -23,7 +23,7 @@
     box-shadow: @box-shadow @color-orange;
     border-radius: @border-radius-standard - 10px;
     &:hover{
-      @media screen and (min-width:@min-width) {
+      @media @tablet {
         color: @color-white;
         border: @border-standard @color-white;
         background-color: @color-orange;

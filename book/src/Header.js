@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Naw from './Header__nav';
+import Nav from './Nav';
 import Animation from './Animation';
 import Search from './Search';
 
@@ -10,7 +10,7 @@ class Header extends Component {
             <header className="header">
                     <div className="header__logo"></div>
                     <a className="header__office" href="#login">Войти</a>
-                    <Naw />
+                    <Nav />
                     <Animation />
                     <Search />
             </header>

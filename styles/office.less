@@ -1,6 +1,6 @@
 @import "styles";
 .office-template(){
-  font-weight: 600;
+  font-weight: @bold;
   text-align: center;
   color: @color-orange;
 }
@@ -26,7 +26,7 @@
     box-shadow: @box-shadow-light @color-orange;
     .office-template();
     &:hover {
-      @media screen and (min-width: @min-width) {
+      @media @tablet {
         color: @color-white;
         border: @border-standard @color-white;
         background-color: @color-orange;

@@ -23,7 +23,12 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractLess = new ExtractTextPlugin({
+    filename: "styles.css"
+   /* disable: process.env.NODE_ENV === "development"*/
+});
 
 
 // This is the development configuration.
@@ -158,7 +163,7 @@ module.exports = {
             },
           },
 
-            {
+         /*   {
                 test: /\.less$/,
                 use: [{
                     loader: "style-loader" // creates style nodes from JS strings
@@ -167,7 +172,21 @@ module.exports = {
                 }, {
                     loader: "less-loader" // compiles Less to CSS
                 }]
+            },*/
+
+            {
+                test: /\.less$/,
+                use: extractLess.extract({
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "less-loader"
+                    }],
+                    // use style-loader in development
+                    fallback: "style-loader"
+                })
             },
+
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -229,7 +248,7 @@ module.exports = {
     ],
   },
   plugins: [
-
+      extractLess,
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

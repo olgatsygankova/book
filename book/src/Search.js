@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class Search extends Component {
     render() {
         return (
-            <div className="search">
+            <div className="header__search search">
                 <input className="search__input" type="search" name="search" placeholder="Поиск..." />
             </div>
         );

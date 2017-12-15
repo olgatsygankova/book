@@ -40,19 +40,11 @@
   }
 }
 
-.header__nav {
-  float: left;
-  @media screen and (min-width:@min-width) {
-    clear: both;
-    margin-left: 120px;
-  }
-}
-
 #toggle {
   position: absolute;
   top: -100%;
   left: -100%;
-  @media screen and (min-width: @min-width) {
+  @media @tablet {
     display: none;
   }
   &:checked {
@@ -71,10 +63,10 @@
     &:focus ~ .toggle-container .button-toggle {
       box-shadow: @box-shadow-mobile, inset @box-shadow-mobile, @box-shadow-mobile, inset @box-shadow-mobile;
     }
-    & ~ .header__menu {
+    & ~ .nav__menu {
       transform: translate(20px, 20px);
       pointer-events: auto;
-      & .header__menu-item {
+      & .nav__menu-item {
         font-size: @font-size-big;
         font-weight: 800;
         line-height: 20px;
@@ -96,7 +88,7 @@
 }
 
 .toggle-container{
-  @media screen and (min-width:@min-width) {
+  @media @tablet {
     display: none;
   }
 }
@@ -120,17 +112,17 @@
     .button-toggle-class;
     .transform-menu (-@rotate-menu);
   }
-  @media screen and (min-width:@min-width) {
+  @media @tablet {
     display: none;
   }
 }
 
-.header__menu {
+.nav__menu {
   display: inline-block;
   margin: 10px 10px 5px;
   transition: .5s;
   pointer-events: none;
-  @media screen and (min-width:@min-width) {
+  @media @tablet {
     display: flex;
     transition: none;
     pointer-events: auto;
@@ -148,7 +140,7 @@
     white-space: nowrap;
     letter-spacing: -6.2px;
     color: transparent;
-    @media screen and (min-width:@min-width) {
+    @media @tablet {
       font-size: 16px;
       line-height: 20px;
       display: block;
@@ -196,7 +188,7 @@
       transition: .5s;
       transform: translateY(-50%) scaleY(5);
       background-color: @color-orange;
-      @media screen and (min-width:@min-width) {
+      @media @tablet {
           clear: both;
           height: 0;
       }

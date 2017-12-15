@@ -5,7 +5,7 @@ import logo from './logo.svg';
 class Animation extends Component {
     render() {
         return (
-            <div className="animation">
+            <div className="header__animation animation">
                 <div className="animation--gray"></div>
                 <div className="animation--orange-back"></div>
                 <div className="animation--white"></div>

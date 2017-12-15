@@ -1,0 +1,63 @@
+@import "styles";
+
+.total-section_books__header () {
+  position: absolute;
+  top: 7px;
+  display: inline-block;
+  height: 2px;
+  content: '';
+  background-color: @color-orange;
+  width: 18px;
+}
+
+.section-books {
+  &__header {
+    font-size: @font-size;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 5px;
+    padding-left: 20px;
+    &:before {
+      .total-section_books__header ();
+      left: 0;
+    }
+    &:after {
+      .total-section_books__header ();
+      width: 100%;
+    }
+  }
+  &__books {
+    display: flex;
+    overflow-y: auto;
+    height: 610px;
+    flex-wrap: wrap;
+    @media @tablet {
+      height: 400px;
+    }
+  }
+  &__load-more {
+    font-size: @font-size-big;
+    font-weight: 600;
+    display: block;
+    .size-book;
+    height: 30px;
+    margin: 10px auto;
+    color: @color-orange;
+    .book-border;
+    &:hover {
+      @media @tablet {
+        color: @color-white;
+        border: @border-standard @color-white;
+        background-color: @color-orange;
+        box-shadow: @box-shadow-light @color-white;
+      }
+    }
+  }
+}
+
+
+
+
+

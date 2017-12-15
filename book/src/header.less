@@ -3,13 +3,20 @@
 .header {
   width: 100%;
   height: 120px;
-  margin: @margin-auto;
+  margin: 0 auto;
   border-radius: @border-radius-standard - 10px;
-  background: url('./img/header320.jpg') no-repeat;
+  background: url('./img/header320.jpg') no-repeat bottom;
   background-size: cover;
-  @media screen and (min-width: @min-width) {
+  @media @tablet {
     height: 270px;
     background: url('./img/header768.jpg') no-repeat bottom;
+  }
+  &__nav {
+    float: left;
+    @media @tablet {
+      clear: both;
+      margin-left: 120px;
+    }
   }
   &__office {
     font-size: @font-size;
@@ -25,11 +32,11 @@
     border-radius: @border-radius-standard - 10px;
     background-color: black;
     box-shadow: @box-shadow-light @color-orange;
-    @media screen and (min-width: @min-width) {
+    @media @tablet {
       clear: none;
     }
     &:hover {
-      @media screen and (min-width: @min-width) {
+      @media @tablet {
         opacity: .9;
         color: @color-white;
         border: @border-standard @color-white;
@@ -44,13 +51,25 @@
     width: 200px;
     height: 40px;
     margin-top: 25px;
-    background-image: url('./img/logo.png');
-    background-size: 100%;
-    @media screen and (min-width: @min-width) {
+    background-image: url('./img/logo200.png');
+    @media @tablet {
       float: left;
       width: 370px;
       height: 70px;
       margin: 30px 0 0 90px;
+      background-image: url('./img/logo370.png');
+    }
+  }
+  &__animation {
+    @media @tablet {
+      margin-left: 520px;
+    }
+  }
+  &__search {
+    margin-left: 50px;
+    @media @tablet {
+      clear: both;
+      margin-left: 90px;
     }
   }
 }

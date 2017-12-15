@@ -1,20 +1,23 @@
 @import "styles";
 @background-url-star: './img/star.png';
 
-.star-template(@background-url-star){
+.star-template(){
   width: 20px;
   height: 20px;
   background: url(@background-url-star) no-repeat;
-  background-size: 80%;
+  background-size: 18px;
+  margin-right: 5px;
 }
 
 .stars {
   display: flex;
   padding-top: 5px;
+  padding-left: 65px;
   &__star--fat {
-    .star-template(@background-url-star);
+    .star-template();
   }
   &__star--light {
-    .star-template('./img/star_light.png');
+    .star-template();
+    background: url('./img/star_light.png') no-repeat;
   }
 }

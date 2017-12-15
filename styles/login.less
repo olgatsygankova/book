@@ -1,11 +1,10 @@
 @import "styles";
-@z-index-modal: 99997;
 @width-modal: 290px;
 @width-desktop-modal: 350px;
 
-.modal-template(@z-index-modal){
+.modal-template(){
   position: fixed;
-  z-index: @z-index-modal;
+  z-index: 99997;
   top: 10px;
   right: 0;
   bottom: 0;
@@ -13,7 +12,7 @@
   display: none;
   width: 95%;
   height: 98%;
-  margin: @margin-auto;
+  margin: 0 auto;
   pointer-events: none;
   border-radius: @border-radius-standard - 10px;
   background: rgba(0,0,0,.8);
@@ -34,7 +33,7 @@
   text-align: center;
   color: @color-white;
   border-radius: 10px 10px 0 0;
-  background-color: #428bca;
+  background-color: @color-blue;
 }
 
 .modal-close-template(){
@@ -48,23 +47,21 @@
   text-decoration: none;
   color: @color-white;
   border-radius: 12px;
-  background: #606061;
-  box-shadow: 1px 1px 3px #000;
+  background: @color-dark-gray;
+  box-shadow: 1px 1px 3px @color-black;
 }
 
 .login{
-  .modal-template(@z-index-modal);
+  .modal-template();
   &:target {
     .modal-target-template ();
   }
-  & > div {
-    width: @width-modal;
-    @media screen and (min-width: @min-width) {
-      width: @width-desktop-modal;
-    }
-  }
   &__header {
     .modal-header-template ();
+    width: @width-modal;
+    @media @tablet {
+      width: @width-desktop-modal;
+    }
   }
   &__close {
     .modal-close-template();
