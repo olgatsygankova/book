@@ -1,14 +1,6 @@
-@import "styles";
+@import "variables";
 @book-float: left;
-.size-book (){
-  min-width: 310px;
-  max-width: 360px;
-}
-.book-border (){
-  border: @border-heavy @color-orange;
-  border-radius: @border-radius-standard;
-  box-shadow: @box-shadow @color-orange;
-}
+
 .book-template(){
   font-size: @font-size;
   position: relative;
@@ -69,7 +61,7 @@
     display: flex;
   }
   &__img {
-    width: 107px;
+    min-width: 107px;
     height: 145px;
     padding: 5px 0 5px 5px;
     &--big {
@@ -95,6 +87,8 @@
     padding-left: 10px;
     text-align: left;
     text-indent: 20px;
+    max-height: 48px;
+    overflow: hidden;
   }
   &__header-annotation {
     padding-left: 30px;

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-/*import './book.less';*/
+import './book.less';
 import Stars from './Stars';
+import Home from './Home';
 
 class Book extends Component {
-
     render() {
-        const {book} = this.props;
-
-
         return (
             <article className="book">
                 <figure className="book__description">
@@ -16,20 +13,20 @@ class Book extends Component {
                             <Stars />
                             <div className="book__caption-wrapper">
                                 <span className="book__header">Название:</span>
-
-                                <span className="book__text">{this.props.bookName}</span>
+                                <span className="book__text">{this.props.items.bookName}</span>
                             </div>
                             <div className="book__caption-wrapper">
                                 <span className="book__header">Автор:</span>
-                                <span className="book__text">Александр Грин</span>
+                                <span className="book__text">{this.props.items.author}</span>
                             </div>
                             <div className="book__caption-wrapper">
                                 <span className="book__header">Аннотация:</span>
-                                <p className="book__annotation">Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...</p>
+                                <p className="book__annotation">{this.props.items.annotation}</p>
                             </div>
                             <div className="book__caption-wrapper">
                                 <a href="" className="book__download">Скачать</a>
-                                <a href="bookPage.html" className="book__info">Подробнее</a>
+
+
                             </div>
                         </figcaption>
                 </figure>
@@ -37,6 +34,8 @@ class Book extends Component {
         );
     }
 }
-/*<span className="book__text">{book.bookName}</span>*/
+
 export default Book;
 
+/*<a href="bookPage.html" className="book__info">Подробнее</a>*/
+/*<link to='/book-description' className="book__info">Подробнее</link>*/

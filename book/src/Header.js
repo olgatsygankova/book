@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Nav from './Nav';
 import Animation from './Animation';
 import Search from './Search';
+import './header.less'
 
 
 class Header extends Component {

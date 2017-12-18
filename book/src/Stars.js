@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-/*import './stars.less';*/
+import './stars.less';
 
 class Stars extends Component {
     render() {
