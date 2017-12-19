@@ -1,26 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import Home from './Home';
-import Header from './Header';
-import Footer from './Footer';
-import BookDescription from './BookDescription';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import App from './containers/App';
+import Home from './containers/Home';
+import BookDescription from './containers/BookDescription';
+
+ReactDOM.render((
+    <BrowserRouter>
+        <App>
+            <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route path="/book-description" component={BookDescription}/>
+            </Switch>
+        </App>
+    </BrowserRouter>
+), document.getElementById('root'));
 
 
-ReactDOM.render(
-    <Router>
-        <div>
-            <Header />
-            <Route exact path="/" component={Home}/>
-            <Route path="/book-description" component={BookDescription}/>
-            <Footer />
-        </div>
-    </Router>,
-    document.getElementById('root')
-);
-registerServiceWorker();
+
 
 
 

@@ -1,0 +1,49 @@
+@import "../containers/variables";
+@pad-left: 20px;
+
+.user-template(){
+  padding-bottom: 5px;
+  padding-left: @pad-left;
+}
+
+.user-header-template(){
+  font-weight: 600;
+  display: inline-block;
+  height: 25px;
+  padding-left: 20px;
+}
+
+.user-input-template () {
+  display: inline-block;
+  width: 200px;
+  height: 25px;
+  vertical-align: middle;
+  border: @border-standard @color-gray;
+  border-radius: 5px;
+  outline: none;
+  background-color: transparent;
+}
+
+.user-edit-icon-template () {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  background: url('./img/edit.png') no-repeat;
+  background-size: 24px;
+}
+
+.name-user{
+  .user-template();
+  padding-left: 40px;
+
+  &__header {
+    .user-header-template();
+  }
+  &__input {
+    .user-input-template ();
+  }
+  &__edit-icon {
+    .user-edit-icon-template ()
+  }
+}
