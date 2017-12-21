@@ -17,7 +17,7 @@
     height: @height-book-characteristic;
     margin: 10px auto 0;
     padding-left: 5px;
-    border: @border-standard @color-gray;
+    border: @border-standard @color-green;
     border-radius: @border-radius-standard - 15px;
     outline: none;
     background-color: transparent;
@@ -34,7 +34,7 @@
     width: 100px;
     height: @height-book-characteristic;
     margin: 20px 0 20px 25px;
-    border: @border-standard @color-gray;
+    border: @border-standard @color-green;
     border-radius: 10px;
     outline: none;
     @media @tablet {
@@ -43,11 +43,11 @@
     }
   }
   &__load {
-    color: @color-orange;
-    border-color: @color-orange;
+    color: @color-green;
+    border-color: @color-green;
     @media @tablet {
-      color: @color-orange;
-      border-color: @color-orange;
+      color: @color-green;
+      border-color: @color-green;
     }
   }
   &__picture, &__file {
@@ -67,5 +67,8 @@
     vertical-align: middle;
     background: url('../img/load.png') no-repeat;
     background-size: 25px;
+    @media @retina {
+      background-image: url('../img/load@2x.png');
+    }
   }
 }

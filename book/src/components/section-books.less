@@ -6,13 +6,14 @@
   display: inline-block;
   height: 2px;
   content: '';
-  background-color: @color-orange;
+  background-color: @color-green;
   width: 18px;
 }
 
 .section-books {
   &__header {
     font-size: @font-size;
+    font-weight: @bold;
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -34,7 +35,7 @@
     height: 610px;
     flex-wrap: wrap;
     @media @tablet {
-      height: 400px;
+      height: 420px;
     }
   }
   &__load-more {
@@ -44,13 +45,16 @@
     .size-book;
     height: 30px;
     margin: 10px auto;
-    color: @color-orange;
+    color: @color-green;
     .book-border;
+    box-shadow: @box-shadow-light @color-green;
+    background-color: @color-green-light;
+
     &:hover {
       @media @tablet {
         color: @color-white;
         border: @border-standard @color-white;
-        background-color: @color-orange;
+        background-color: @color-green;
         box-shadow: @box-shadow-light @color-white;
       }
     }

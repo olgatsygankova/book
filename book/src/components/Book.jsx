@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './book.less';
 import Stars from './Stars';
 import { Link } from 'react-router-dom';
+import BookWrapper from './BookWrapper';
 
 export default class Book extends Component {
     render() {
@@ -12,14 +13,8 @@ export default class Book extends Component {
                     <img className="book__img" src="../img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса" />
                         <figcaption className="book__caption">
                             <Stars />
-                            <div className="book__caption-wrapper">
-                                <span className="book__header">Название:</span>
-                                <span className="book__text">{this.props.items.bookName}</span>
-                            </div>
-                            <div className="book__caption-wrapper">
-                                <span className="book__header">Автор:</span>
-                                <span className="book__text">{this.props.items.author}</span>
-                            </div>
+                            <BookWrapper header='Название:' text={this.props.items.bookName}/>
+                            <BookWrapper header='Автор:' text={this.props.items.author}/>
                             <div className="book__caption-wrapper">
                                 <span className="book__header">Аннотация:</span>
                                 <p className="book__annotation">{this.props.items.annotation}</p>

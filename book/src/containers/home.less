@@ -1,5 +1,7 @@
 @import "variables";
 
+@color: rgb(156, 156, 132);
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,15 +12,18 @@ body {
   font-family: @font-family;
   .width-height-100();
   margin: 0 auto;
-  background-color: @color-light-gray;
+  background: -webkit-gradient(linear, left top, right top, from(#cad1c9), to(#727d6f));
+  background: -moz-linear-gradient(linear, left top, right top, from(#cad1c9), to(#727d6f));
+  background: -o-linear-gradient(linear, left top, right top, from(#cad1c9), to(#727d6f));
+  background: -ms-linear-gradient(left top, #cad1c9, #727d6f);
+  background:  linear-gradient(linear, left top, right top, from(#cad1c9), to(#727d6f));
 }
-
 .container {
   min-width: 320px;
   max-width: 460px;
   height: 100%;
   margin: 0 auto;
-  border: @border-standard @color-gray;
+  border: @border-standard @color-green;
   border-radius: @border-radius-standard - 10px;
   @media @tablet {
     min-width: @tablet-min-width;

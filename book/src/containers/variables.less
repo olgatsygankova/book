@@ -2,14 +2,14 @@
 @desktop-min-width: 1024px;
 @width-modal: 290px;
 @width-desktop-modal: 350px;
-@color-orange: #ec7263;
-@color-white: #ffffff;
 @color-light-gray: #dcdcdc;
-@color-gray: #999999;
 @color-ginger: #f0ad4e;
 @color-blue: #428bca;
 @color-dark-gray: #606061;
 @color-black: #000000;
+@color-white: #ffffff;
+@color-green: #2F4F4F;
+@color-green-light: #c3cfc2;
 @font-size-big: 16px;
 @font-size: 14px;
 @font-family: 'Roboto', sans-serif;
@@ -22,6 +22,10 @@
 @pad-top: 0px;
 @tablet: ~"only screen and (min-width: @{tablet-min-width})";
 @desktop: ~"only screen and (min-width: @{desktop-min-width})";
+@retina: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)";
+
+/*@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min-resolution: 144dpi) { ... }*/
 
 
 .header-template () {
@@ -41,7 +45,7 @@
 }
 
 .book-border (){
-  border: @border-heavy @color-orange;
+  border: @border-standard @color-green;
   border-radius: @border-radius-standard;
-  box-shadow: @box-shadow @color-orange;
+  box-shadow: @box-shadow @color-green;
 }

@@ -23,7 +23,7 @@
   content: '';
   transition: .5s;
   border-radius: @border-radius-standard - 15px;
-  background-color: @color-orange;
+  background-color: @color-green;
 }
 
 .menu-item-active() {
@@ -36,7 +36,7 @@
   background: url(@url-background) @background-menu-param;
   &:hover {
     opacity: .9;
-    background: url(@url-background-white) @background-menu-param @color-orange;
+    background: url(@url-background-white) @background-menu-param @color-green;
   }
 }
 
@@ -78,7 +78,7 @@
         text-decoration: none;
         letter-spacing: 0;
         opacity: 1;
-        color: @color-orange;
+        color: @color-green;
         &:before {
           opacity: 0;
         }
@@ -153,10 +153,10 @@
       white-space: normal;
       text-decoration: none;
       letter-spacing: 0;
-      color: @color-orange;
-      border: @border-standard @color-orange;
+      color: @color-green;
+      border: @border-standard @color-green;
       border-radius: @border-radius-standard - 10px;
-      box-shadow: @box-shadow @color-orange;
+      box-shadow: @box-shadow @color-green;
       &:hover {
         .menu-item-active;
       }
@@ -167,11 +167,12 @@
         padding-top: 10px;
         &--active {
           opacity: .9;
-          background: url('../img/home-icon-white.png') @background-menu-param @color-orange;
+          background: url('../img/home-icon-white.png') @background-menu-param @color-green;
         }
         .menu-item-background(@url-background, @url-background-white);
       }
       &--my-books {
+        padding-top: 10px;
         .menu-item-background('../img/books-icon.png', '../img/books-icon-white.png');
       }
       &--download-book {
@@ -187,7 +188,7 @@
       content: '';
       transition: .5s;
       transform: translateY(-50%) scaleY(5);
-      background-color: @color-orange;
+      background-color: @color-green;
       @media @tablet {
           clear: both;
           height: 0;

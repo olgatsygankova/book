@@ -10,5 +10,5 @@ export default class Estimate extends Component {
                 <Stars />
             </div>
         );
-    };
+    }
 }

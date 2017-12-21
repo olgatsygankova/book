@@ -11,6 +11,7 @@
   display: inline-block;
   height: 25px;
   padding-left: 20px;
+  padding-right: 5px;
 }
 
 .user-input-template () {
@@ -18,20 +19,15 @@
   width: 200px;
   height: 25px;
   vertical-align: middle;
-  border: @border-standard @color-gray;
+  border: @border-standard @color-green;
   border-radius: 5px;
   outline: none;
   background-color: transparent;
+  @media @tablet {
+    width: 300px;
+  }
 }
 
-.user-edit-icon-template () {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  background: url('./img/edit.png') no-repeat;
-  background-size: 24px;
-}
 
 .name-user{
   .user-template();
@@ -39,11 +35,9 @@
 
   &__header {
     .user-header-template();
+    padding-right: 7px;
   }
   &__input {
     .user-input-template ();
-  }
-  &__edit-icon {
-    .user-edit-icon-template ()
   }
 }

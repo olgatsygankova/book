@@ -25,17 +25,13 @@ export default class Home extends Component {
     }*/
     render() {
         return (
-
-                <main>
-                    <section className="main__content">
-                        <SectionBooks />
-                        <SectionBooks />
-                        <SectionBooks />
-                    </section>
-                </main>
-
+            <main>
+                <section className="main__content">
+                    <SectionBooks />
+                    <SectionBooks />
+                    <SectionBooks />
+                </section>
+            </main>
         );
     }
 }
-
-/* <div className="container">*/

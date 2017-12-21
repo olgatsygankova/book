@@ -19,7 +19,7 @@
     height: 40px;
     margin: 0 auto 20px;
     padding-left: 45px;
-    border: @border-standard @color-gray;
+    border: @border-standard @color-green;
     border-radius: @border-radius-standard - 10px;
     outline: none;
     background: transparent 8px no-repeat;
@@ -30,9 +30,15 @@
   }
   &__email {
     background-image: url('../img/email.png');
+    @media @retina {
+     background-image: url('../img/email@2x.png');
+    }
   }
   &__password {
     background-image: url('../img/password.png');
+    @media @retina {
+      background-image: url('../img/password@2x.png');
+    }
   }
   &__button {
     font-size: @font-size-big + 2px;

@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import Nav from '../components/Nav';
 import Search from '../components/Search';
 import './header.less'
-import Animation from '../components/Animation'
+import { Link } from 'react-router-dom';
+import Login from './Login';
+import Singup from './Singup';
+import PasswordRecovery from './PasswordRecovery';
 
 export default class Header extends Component {
     render() {
-
         return (
             <header className="header">
                 <div className="header__logo" />
-                <a className="header__office" href="#login">Войти</a>
+                <a className="header__office" href='#login'>Войти</a>
                 <Nav />
-                <Animation />
                 <Search />
+                <Login />
+                <Singup />
+                <PasswordRecovery />
             </header>
         );
     }
