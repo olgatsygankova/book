@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SectionBooks from '../components/SectionBooks';
 import './home.less';
+import getBooks from '../services/getBooks';
 
 /*var getStateFromFlax = () => {
     return {
@@ -9,20 +10,32 @@ import './home.less';
 }*/
 
 export default class Home extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            book: this.props
-        }
-    }
 
- /*   componentWillMount() {
-        addEventListener('change', this._onChange, false);
+        };
     }
+    componentDidMount() {
+        getBooks().then(
+            books => {
+                this.setState({
+                    books: books
+                })
+            }
+        );
+    }
+    /*  render() {
+          const { categoryId } = this.props.match.params;
+          const { books } = this.state;
 
-    _onChange(){
-        this.setState(getStateFromFlax());
-    }*/
+      /*   componentWillMount() {
+             addEventListener('change', this._onChange, false);
+         }
+
+         _onChange(){
+             this.setState(getStateFromFlax());
+         }*/
     render() {
         return (
             <main>

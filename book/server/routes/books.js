@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var books = require('./books.json');
 
-/* GET home page. */
+/* GET books listing. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.send(books);
 });
 
-
-
 module.exports = router;
+
