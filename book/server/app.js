@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var books = require('./routes/books');
+var categories = require('./routes/categories');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use ('/books', books);
+app.use ('/categories', categories);
 
 // catch 404 and forward to error handler axax не оставляй так комп!!!! Надо лочить!
 app.use(function(req1, res, next) {

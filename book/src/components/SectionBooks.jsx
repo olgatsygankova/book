@@ -54,19 +54,27 @@ const items = [
 ];
 
 export default class SectionBooks extends Component {
-    constructor(props) {
+    static defaultProps = {
+        books: [],
+
+    };
+  /*  constructor(props) {
         super(props);
+
         this.state = {
             items: this.props
         }
-    }
+    }*/
     render() {
+        const {category, books}  = this.props;
+        /*console.log(books);*/
+
         let content = [];
-        for (let i = 0; i < items.length; i++) {
-            content[i] = <Book items={items[i]} key={i} />
+        for (let j = 0; j < books.length; j++) {
+            content[j] = <Book books={books[j]} key={j} />
         }
         return <section className="section-books">
-            <span className="section-books__header">{items[1].genre}</span>
+            <span className="section-books__header">{category}</span>
             <div className="section-books__books">
                 {content}
             </div>

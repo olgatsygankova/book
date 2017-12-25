@@ -6,22 +6,23 @@ import BookWrapper from './BookWrapper';
 
 export default class Book extends Component {
     render() {
-        let id="2";
+        const {books}  = this.props;
+        console.log (books);
         return (
             <article className="book">
                 <figure className="book__description">
                     <img className="book__img" src="../img/book_wrapper.jpg" alt="Алые паруса" title="Алые паруса" />
                         <figcaption className="book__caption">
                             <Stars />
-                            <BookWrapper header='Название:' text={this.props.items.bookName}/>
-                            <BookWrapper header='Автор:' text={this.props.items.author}/>
+                            <BookWrapper header='Название:' text={books.bookName}/>
+                            <BookWrapper header='Автор:' text={books.author}/>
                             <div className="book__caption-wrapper">
                                 <span className="book__header">Аннотация:</span>
-                                <p className="book__annotation">{this.props.items.annotation}</p>
+                                <p className="book__annotation">{books.annotation}</p>
                             </div>
                             <div className="book__caption-wrapper">
                                 <a href="" className="book__download">Скачать</a>
-                                <Link to={'/book-description/'+ {id}} className="book__info">Подробнее</Link>
+                                <Link to={'/book-description/'+ books.id} className="book__info">Подробнее</Link>
                             </div>
                         </figcaption>
                 </figure>
