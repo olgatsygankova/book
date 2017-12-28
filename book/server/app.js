@@ -9,15 +9,14 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var books = require('./routes/books');
 var categories = require('./routes/categories');
+var bookById = require('./routes/bookById');
+var categoryById = require('./routes/categoryById');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,6 +27,9 @@ app.use('/', index);
 app.use('/users', users);
 app.use ('/books', books);
 app.use ('/categories', categories);
+app.use('/book', bookById);
+app.use('/category', categoryById);
+
 
 // catch 404 and forward to error handler axax не оставляй так комп!!!! Надо лочить!
 app.use(function(req1, res, next) {

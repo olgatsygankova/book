@@ -1,84 +1,79 @@
 import React, { Component } from 'react';
 import Book from './Book';
 import './section-books.less';
-
-/*var getStateFromFlax = () => {
-    return {
-        books: LibraryStore().books
-    }
-}*/
-
-const items = [
-    {
-        id: "1",
-        bookName: 'Алые паруса',
-        author: 'Александр Грин',
-        genre: 'Фантастика',
-        annotation: 'Книга Алые паруса Александра Грина, написана в 1922 году – удивительно нежное, трогательное произведение, которое не оставит равнодушным любого из читателей. Написанная, казалось бы, о любви и девичьих грезах, эта книга преподаст нам важный жизненный урок о порядочности, верности себе и своим идеалам, мужественности и стойкости перед лицом всеобщего непонимания. И пусть в рассказанной писателем истории царит Ее Величество Романтика, книга «Алые паруса» одна из тех редких книг, которая затронет потаенные струны в душе каждого, независимо от сегодняшнего состояния души, пола и возраста...'
-    },
-    {
-        id: "2",
-        bookName: 'Неалые паруса',
-        author: 'Василий Грин',
-        genre: 'Фантастика',
-        annotation: 'Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...'
-    },
-    {
-        id: "3",
-        bookName: 'Неалые паруса',
-        author: 'Василий Грин',
-        genre: 'Фантастика',
-        annotation: 'Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...'
-    },
-    {
-        id: "4",
-        bookName: 'Неалые паруса',
-        author: 'Василий Грин',
-        genre: 'Фантастика',
-        annotation: 'Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...'
-    },
-    {
-        id: "5",
-        bookName: 'Неалые паруса',
-        author: 'Василий Грин',
-        genre: 'Фантастика',
-        annotation: 'Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...'
-    },
-    {
-        id: "6",
-        bookName: 'Неалые паруса',
-        author: 'Василий Грин',
-        genre: 'Фантастика',
-        annotation: 'Книга Алые паруса написана в 1922 г. – удивительно нежное, трогательное произведен...'
-    }
-];
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import getCategoryById from '../services/getCategoryById';
 
 export default class SectionBooks extends Component {
-    static defaultProps = {
-        books: [],
-
-    };
-  /*  constructor(props) {
-        super(props);
-
+    constructor() {
+        super();
         this.state = {
-            items: this.props
+            category: {
+            }
+        };
+    }
+    componentDidMount() {
+        if (this.props.match) {
+            let categoryId = this.props.match.params.id;
+            getCategoryById(categoryId).then(
+                category => this.setState({
+                    category: category
+                })
+            );
         }
-    }*/
-    render() {
-        const {category, books}  = this.props;
-        /*console.log(books);*/
+    }
 
-        let content = [];
-        for (let j = 0; j < books.length; j++) {
-            content[j] = <Book books={books[j]} key={j} />
+        static defaultProps = {
+        books: [{}],
+    };
+
+    render() {
+        const { books, category, id}  = this.state.category;
+        if (category) {
+            return   <BooksForCategoryPage {...this.state.category}  />
         }
-        return <section className="section-books">
+        else {
+            return ( <BooksForHomePage {...this.props}  />)
+        }
+    }
+}
+
+const BooksForCategoryPage = ({books, category, id}) => {
+    let content = books ? books.map((books, j) => {
+            return (
+                <Book books={books} key={j} />
+            );
+    }): <Book key={0} />;
+    return (
+        <section className="section-books">
+            <span className="section-books__header">{category}</span>
+            <div className="section-books__books section-books__books--big-height">
+                {content}
+            </div>
+        </section>
+    );
+};
+
+const BooksForHomePage = ({books, category, id}) => {
+    let content = books ? books.map((books, j) => {
+        if (j<6) {
+            return (
+                <Book books={books} key={j} />
+            );
+        }
+    }): <Book key={0} />;
+    return (
+        <section className="section-books">
             <span className="section-books__header">{category}</span>
             <div className="section-books__books">
                 {content}
             </div>
-            <button className="section-books__load-more">Показать всё</button>
+            <Link to={'/category/'+ id} className="section-books__load-more">Показать всё</Link>
         </section>
-    }
-}
+    );
+};
+
+SectionBooks.propTypes = {
+   books: PropTypes.array,
+};

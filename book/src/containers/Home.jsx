@@ -5,17 +5,9 @@ import getBooks from '../services/getBooks';
 import getCategories from '../services/getCategories';
 import Category from '../services/Categories';
 import Book from '../services/Books';
-
-
-/*var getStateFromFlax = () => {
-    return {
-        books: LibraryStore().books
-    }
-}*/
+import PropTypes from 'prop-types';
 
 export default class Home extends Component {
-
-
     constructor() {
         super();
         this.state = {
@@ -23,15 +15,11 @@ export default class Home extends Component {
             }]
         };
     }
-
     componentDidMount() {
         getCategories().then(
-            books => {
-                this.setState({
-                    isLoading: false,
-                    books: books
-                })
-            }
+            books => this.setState({
+                books: books
+            })
         );
     }
 
@@ -43,14 +31,12 @@ export default class Home extends Component {
              this.setState(getStateFromFlax());*/
 
     render() {
-       /* const { books }  = this.state; */
         const { books }  = this.state;
-
-        let content = [];
-        for (let i = 0; i < books.length; i++) {
-            content[i] =  <SectionBooks category = {books[i].category} books = {books[i].books} key={i}  />
-        }
-
+           let content = books ?  books.map((books, i) => {
+               return (
+                   <SectionBooks books={books.books} category={books.category} id={books.id} key={i}/>
+               );
+           }): <SectionBooks key={0}/>;
         return (
             <main>
                 <section className="main__content">
@@ -60,3 +46,6 @@ export default class Home extends Component {
         );
     }
 }
+
+
+

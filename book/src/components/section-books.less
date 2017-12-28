@@ -37,10 +37,15 @@
     @media @tablet {
       height: 420px;
     }
+    &--big-height {
+     height: 100%;
+    }
   }
   &__load-more {
     font-size: @font-size-big;
     font-weight: 600;
+    text-decoration: none;
+    text-align: center;
     display: block;
     .size-book;
     height: 30px;
@@ -49,6 +54,7 @@
     .book-border;
     box-shadow: @box-shadow-light @color-green;
     background-color: @color-green-light;
+    padding-top: 5px;
 
     &:hover {
       @media @tablet {
@@ -60,8 +66,3 @@
     }
   }
 }
-
-
-
-
-
