@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Nav from '../components/Nav';
 import Search from '../components/Search';
 import './header.less'
-import { Link } from 'react-router-dom';
 import Login from './Login';
 import Singup from './Singup';
 import PasswordRecovery from './PasswordRecovery';

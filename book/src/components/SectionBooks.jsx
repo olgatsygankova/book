@@ -29,7 +29,7 @@ export default class SectionBooks extends Component {
     };
 
     render() {
-        const { books, category, id}  = this.state.category;
+        const { category }  = this.state.category;
         if (category) {
             return   <BooksForCategoryPage {...this.state.category}  />
         }

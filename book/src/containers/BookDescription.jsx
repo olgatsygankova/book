@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import BookPage from '../components/BookPage';
 import './home.less';
 import getBookById from '../services/getBookById';
-import getCategories from "../services/getCategories";
-
 
 export default class BookDescription extends Component {
 

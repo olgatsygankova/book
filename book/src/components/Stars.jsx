@@ -4,9 +4,8 @@ import './stars.less';
 export default class Stars extends Component {
     render() {
         const {estimate} = this.props;
-
         const OneStar = ({estimate}) => {
-            if (estimate<1){
+            if (estimate<1 || isNaN(estimate)){
                 return (
                     <div className="stars__star--light" />
                 );

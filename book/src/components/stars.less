@@ -2,22 +2,42 @@
 @background-url-star: '../img/star.png';
 
 .star-template(){
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background: url(@background-url-star) no-repeat;
-  background-size: 18px;
+  background-size: 25px;
   margin-right: 5px;
+}
+.estimate__stars {
+  flex-flow:row-reverse nowrap;
 }
 
 .stars {
   display: flex;
-  padding-top: 5px;
-  padding-left: 65px;
+  justify-content: center;
+  padding: 5px 0;
   &__star--fat {
     .star-template();
   }
   &__star--light {
     .star-template();
     background: url('../img/star_light.png') no-repeat;
+    background-size: 25px;
+  }
+  &__star {
+    width: 25px;
+    height: 25px;
+    background: url('../img/star_light.png') no-repeat;
+    background-size: 25px;
   }
 }
+.stars > input[type="radio"]{
+  visibility: hidden;
+}
+
+.stars > input:checked ~ .stars__star, input:hover ~ .stars__star
+{
+  background: url('../img/star.png') no-repeat;
+  background-size: 25px;
+}
+

@@ -3,6 +3,7 @@ import './comments.less';
 import PropTypes from 'prop-types';
 
 export default class Comments extends Component {
+
     static defaultProps = {
         comments: [{}],
     };

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import SectionBooks from '../components/SectionBooks';
 import './home.less';
-import getBooks from '../services/getBooks';
 import getCategories from '../services/getCategories';
-import Category from '../services/Categories';
-import Book from '../services/Books';
-import PropTypes from 'prop-types';
+
 
 export default class Home extends Component {
     constructor() {

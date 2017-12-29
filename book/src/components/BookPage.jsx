@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureComponent from 'react';
 import './book.less';
 import Stars from './Stars';
 import Estimate from './Estimate';
@@ -14,11 +13,6 @@ export default class BookPage extends Component {
     static defaultProps = {
         book: {},
     };
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const urlCover = '../img/';
         const {book} = this.props;
@@ -33,7 +27,7 @@ export default class BookPage extends Component {
                         <BookWrapper header='Жанр:' text={book.genre}/>
                         <BookWrapper header='ISBN:' text={book.ISBN}/>
                         <div className="book__caption-wrapper">
-                            <a href="#" className="book__download book__download-description">Скачать</a>
+                            <a href="" className="book__download book__download-description">Скачать</a>
                         </div>
                     </figcaption>
                 </figure>
