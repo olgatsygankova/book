@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import './stars.less';
+import PropTypes from 'prop-types';
 
 export default class Stars extends Component {
+    static propTypes = {
+        estimate: PropTypes.number
+    };
     render() {
         const {estimate} = this.props;
         const OneStar = ({estimate}) => {
@@ -14,7 +18,6 @@ export default class Stars extends Component {
                 return (<div className="stars__star--fat" />)
             }
         };
-
         return (
             <div className="stars">
                 <OneStar estimate = {estimate} />

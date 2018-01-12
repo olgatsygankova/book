@@ -4,15 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-var books = require('./routes/books');
-var categories = require('./routes/categories');
-var bookById = require('./routes/bookById');
-var categoryById = require('./routes/categoryById');
-
+var router = express.Router();
 var app = express();
+var books = require('./books.json');
+var categories = require('./categoriesBooks.json');
+var search = require('./search.json');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,23 +19,42 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-app.use ('/books', books);
-app.use ('/categories', categories);
-app.use('/book', bookById);
-app.use('/category', categoryById);
+app.get('/categories', (req, res) => {
+    res.send(categories);
+});
 
+app.get('/books', (req, res) => {
+    res.send(books);
+});
 
-// catch 404 and forward to error handler axax не оставляй так комп!!!! Надо лочить!
-app.use(function(req1, res, next) {
+app.get('/book/:id', (req, res) => {
+    res.send(books[req.params.id]);
+});
+
+app.get('/category/:id', (req, res) => {
+    res.send(categories[req.params.id]);
+});
+
+app.get('/search/aaa/', (req, res) => {
+    res.send(search);
+});
+
+app.get('/aaa/category/:id', (req, res) => {
+    res.send(search[req.params.id]);
+});
+
+app.get('/read/:id', (req, res) => {
+    res.send(books[req.params.id]);
+});
+
+app.use((req1, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

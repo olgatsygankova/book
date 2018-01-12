@@ -3,6 +3,9 @@ import './comments.less';
 import PropTypes from 'prop-types';
 
 export default class Comments extends Component {
+    static propTypes = {
+        comments: PropTypes.array
+    };
 
     static defaultProps = {
         comments: [{}],
@@ -10,14 +13,13 @@ export default class Comments extends Component {
 
     render() {
         const {comments} = this.props;
-        let content = comments ? comments.map((comments, j) => {
-            return (
-                <Comment user={comments.user} date={comments.date} comment={comments.text}key={j} />
-            );
-        }): <Comment key={0} />;
         return (
             <div className="comments">
-                {content}
+                {
+                    comments ? comments.map((comments, j) => {
+                        return <Comment user={comments.user} date={comments.date} comment={comments.text}key={j} />
+                    }) : <Comment key={0} />
+                }
             </div>
         )
     }
@@ -31,6 +33,4 @@ const Comment = (props) => <div className="comment">
     <span className="comment__text">{props.comment}</span>
 </div>;
 
-Comments.propTypes = {
-    Comments: PropTypes.object,
-};
+

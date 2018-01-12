@@ -1,13 +1,14 @@
 @import "variables";
 
 .header {
-  min-width: 320px;
+  min-width: 318px;
   max-width: 460px;
   height: 120px;
   margin: 0 auto;
   border-radius: @border-radius-standard - 10px;
   background: url('../img/header3.jpg') no-repeat top;
   background-size: cover;
+  position: relative;
   @media @tablet {
     min-width: @tablet-min-width;
     max-width: 1240px;
@@ -15,6 +16,10 @@
   }
   &__nav {
     float: left;
+    z-index: 66;
+    position: absolute;
+    top: 0;
+    left: 0;
     @media @tablet {
       clear: both;
       margin-left: 120px;
@@ -42,6 +47,7 @@
       margin: 20px 30px 0 0;
     }
     &:hover {
+      outline: none;
       @media @tablet {
         opacity: .9;
         color: @color-white;
@@ -56,8 +62,7 @@
     clear: both;
     width: 200px;
     height: 40px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin: 15px 0 10px 50px;
     background-image: url('../img/logo.png');
     background-size: cover;
     @media @tablet {
