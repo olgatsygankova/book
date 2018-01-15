@@ -1,15 +1,14 @@
-@import "variables";
+@import "../containers/variables";
 @import "login";
 
-.password-recovery{
+.singup{
   .modal-template();
-  z-index: 99998;
+  z-index: 99999;
   &:target {
     .modal-target-template ();
   }
   &--active {
     .modal-target-template ();
-    background: rgba(0,0,0,0);
   }
   &__header {
     .modal-header-template ();

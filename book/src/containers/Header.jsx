@@ -1,30 +1,40 @@
 import React, { Component } from 'react';
+import './header.less'
 import Nav from '../components/Nav';
 import Search from '../components/Search';
-import './header.less'
-import {Login} from './Login';
+import Login from '../components/Login';
+import Singup from '../components/Singup';
+import PasswordRecovery from '../components/PasswordRecovery';
 
 export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            className: 'login'
+            isLogin: false,
+            isSignup: false,
+            isPassRecovery: false
         };
+        this.handleModal = this.handleModal.bind(this);
     }
-    handleChangeClassForLogin(className) {
+
+    handleModal (type) {
         this.setState({
-            className: className
+            isLogin: type.isLogin || false,
+            isSignup: type.isSignup || false,
+            isPassRecovery: type.isPassRecovery || false
         });
     }
+
     render() {
-        console.log (this.state.className);
         return (
             <header className="header">
                 <div className="header__logo" />
-                <button className="header__office" onClick={ () => this.handleChangeClassForLogin("login login--active") }>Войти</button>
+                <button className="header__office" onClick={ () => this.handleModal({isLogin:true})}>Войти</button>
                 <Nav />
                 <Search />
-                <Login className={this.state.className === "login" ? "login" : this.state.className}/>
+                <Login className={this.state.isLogin ? "login login--active" : "login"} onHandleChangeModal={this.handleModal} />
+                <Singup className={this.state.isSignup ? "singup singup--active" : "singup"} onHandleChangeModal={this.handleModal}/>
+                <PasswordRecovery className={this.state.isPassRecovery ? "password-recovery password-recovery--active" : "password-recovery"} onHandleChangeModal={this.handleModal}/>
             </header>
         );
     }
