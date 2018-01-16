@@ -3,13 +3,13 @@
 .account {
   position: relative;
   width: @width-modal;
-  height: 255px;
+  height: 300px;
   margin: 0 auto;
   padding-top: 20px;
   border-radius: 0 0 10px 10px;
   background-color: @color-light-gray;
   @media @tablet {
-    height: 280px;
+    height: 300px;
     width: @width-desktop-modal;
   }
   &__email, &__password {
@@ -82,5 +82,12 @@
     width: 240px;
     margin: 0 auto;
     padding-bottom: 20px;
+  }
+  &__error {
+    margin: 0 0 20px 20px;
+    color: red;
+    @media @tablet {
+      margin-left: 47px;
+    }
   }
 }

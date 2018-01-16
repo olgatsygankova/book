@@ -5,6 +5,8 @@ import Search from '../components/Search';
 import Login from '../components/Login';
 import Singup from '../components/Singup';
 import PasswordRecovery from '../components/PasswordRecovery';
+import { checkAuth } from '../services/Authentication';
+import { logout } from '../services/Authentication'
 
 export default class Header extends Component {
     constructor(props) {
@@ -15,6 +17,7 @@ export default class Header extends Component {
             isPassRecovery: false
         };
         this.handleModal = this.handleModal.bind(this);
+        this.handleLogout = this.handleModal.bind(this);
     }
 
     handleModal (type) {
@@ -25,11 +28,15 @@ export default class Header extends Component {
         });
     }
 
+    handleLogout () {
+
+    }
+
     render() {
         return (
             <header className="header">
                 <div className="header__logo" />
-                <button className="header__office" onClick={ () => this.handleModal({isLogin:true})}>Войти</button>
+                {checkAuth() ? <button className="header__office" onClick={ () => logout()}>Выйти</button> : <button className="header__office" onClick={ () => this.handleModal({isLogin:true})}>Войти</button>}
                 <Nav />
                 <Search />
                 <Login className={this.state.isLogin ? "login login--active" : "login"} onHandleChangeModal={this.handleModal} />

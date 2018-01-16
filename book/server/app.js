@@ -9,6 +9,7 @@ var app = express();
 var books = require('./books.json');
 var categories = require('./categoriesBooks.json');
 var search = require('./search.json');
+var users = require('./users.json');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,6 +46,12 @@ app.get('/aaa/category/:id', (req, res) => {
 
 app.get('/read/:id', (req, res) => {
     res.send(books[req.params.id]);
+});
+
+app.post('/login', (req, res) => {
+    const {emailPassword} = req.body;
+    let user = users.find(user => user.emailPassword === emailPassword);
+    res.send(user);
 });
 
 app.use((req1, res, next) => {
