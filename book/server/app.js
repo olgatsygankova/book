@@ -54,11 +54,16 @@ app.post('/login', (req, res) => {
     res.send(user);
 });
 
+app.get('/user/:id', (req, res) => {
+    res.send(users[req.params.id]);
+});
+
 app.use((req1, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
 
 // error handler
 app.use((err, req, res) => {

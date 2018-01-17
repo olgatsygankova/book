@@ -1,10 +1,46 @@
 [
   {
     "id": 0,
-    "emailPassword": "b2xnYW9sZ2E="
+    "emailPassword": "b2xnYW9sZ2E=",
+    "email": "olya@gmail.com",
+    "password": "olga",
+    "books": [
+      {
+        "id": 1,
+        "bookName": "Неалые паруса",
+        "author": "Григорий Грин",
+        "genre": "Фантастика",
+        "ISBN": 9785699360955,
+        "bookText": "Много много букв",
+        "cover": "book_wrapper.jpg",
+        "annotation": "Книга Алые паруса Александра Грина, написана в 1922 году – удивительно нежное, трогательное произведение, которое не оставит равнодушным любого из читателей. Написанная, казалось бы, о любви и девичьих грезах, эта книга преподаст нам важный жизненный урок о порядочности, верности себе и своим идеалам, мужественности и стойкости перед лицом всеобщего непонимания. И пусть в рассказанной писателем истории царит Ее Величество Романтика, книга «Алые паруса» одна из тех редких книг, которая затронет потаенные струны в душе каждого, независимо от сегодняшнего состояния души, пола и возраста...",
+        "comments": [{
+          "id": 0,
+          "user": "Александр",
+          "date": "27.11.2017 11:39",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempor condimentum dui eget vehicula. Pellentesque urna felis, commodo ut semper ac, feugiat porta urna."
+        }],
+        "estimate": [
+          {
+            "id": 0,
+            "estimate": 5
+          },
+          {
+            "id": 1,
+            "estimate": 3
+          },
+          {
+            "id": 2,
+            "estimate": 2
+          }
+        ]
+      }
+    ]
 },
 {
   "id": 1,
-  "emailPassword": "dGVzdHRlc3Q="
+  "emailPassword": "dGVzdHRlc3Q=",
+  "email": "test@gmail.com",
+  "password": "test"
 }
 ]

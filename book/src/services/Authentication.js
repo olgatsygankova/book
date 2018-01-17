@@ -1,6 +1,7 @@
+import { history } from '../history';
 let base64 = require('base-64');
 
-export const postlogin = (email, password) => {
+export const postlogin = (email, password, privatePath) => {
     let body = 'emailPassword=' + base64.encode(email + password);
     return fetch(`/login`, {
         method: 'post',
@@ -12,6 +13,7 @@ export const postlogin = (email, password) => {
         .then((response) => response.json())
         .then((responseJson) => {
             localStorage.setItem('token', responseJson.emailPassword);
+            history.push(privatePath ? privatePath : window.location.pathname);
             return (responseJson)
         })
         .catch((error) => {
@@ -28,6 +30,6 @@ export const checkAuth = () => {
 
 export const logout = () => {
     localStorage.clear();
-    window.location.href = '/'
+    history.push('/');
 };
 

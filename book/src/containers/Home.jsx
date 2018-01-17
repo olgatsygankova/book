@@ -48,4 +48,3 @@ export default class Home extends Component {
 
 
 
-//<SectionBooks books={books.books} category={books.category} id={books.id} key={i}/>

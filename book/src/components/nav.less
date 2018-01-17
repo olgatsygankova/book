@@ -38,6 +38,11 @@
     opacity: .9;
     background: url(@url-background-white) @background-menu-param @color-green;
   }
+  &--active {
+    opacity: .9;
+    background: url(@url-background-white) @background-menu-param @color-green;
+    .menu-item-active()
+  }
 }
 
 #toggle {
@@ -161,9 +166,6 @@
       &:hover {
         .menu-item-active;
       }
-      &--home--active {
-        .menu-item-active;
-      }
       &--home {
         padding-top: 10px;
         &--active {
@@ -172,8 +174,7 @@
         }
         .menu-item-background(@url-background, @url-background-white);
       }
-      &--my-books {
-        padding-top: 10px;
+      &--my-office {
         .menu-item-background('../img/books-icon.png', '../img/books-icon-white.png');
       }
       &--download-book {

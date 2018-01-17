@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { totalEstimate } from '../services/BooksService';
 import { Link } from 'react-router-dom';
 
+
 export default class BookPage extends Component {
     static propTypes = {
         book: PropTypes.shape ({

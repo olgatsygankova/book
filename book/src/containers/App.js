@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import registerServiceWorker from '../registerServiceWorker';
 import Header from './Header';
 import Footer from './Footer';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Route, Switch, Router} from 'react-router-dom';
 import SectionBooks from "../components/SectionBooks";
 import Home from "./Home";
 import ReadBook from "../components/ReadBook";
 import BookDescription from "./BookDescription";
 import Office from "../components/OfficePage";
 import FadeIn from "../components/FadeIn";
+import { history } from '../history';
 
 const Opacity = ({component: Component, transition, ...all}) => (
     <Route render={(matchProps) => (
@@ -21,7 +22,7 @@ const Opacity = ({component: Component, transition, ...all}) => (
 export default class App extends Component {
     render() {
         return (
-            <BrowserRouter>
+            <Router history={ history }>
                 <div className="container">
                     <Header/>
                     <Opacity exact path="/" component={Home}/>
@@ -35,7 +36,7 @@ export default class App extends Component {
                     </Switch>
                     <Footer/>
                 </div>
-            </BrowserRouter>
+            </Router>
         );
     }
 }

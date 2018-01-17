@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './account.less';
 import './login.less'
 import { postlogin } from '../services/Authentication';
-import { logout } from '../services/Authentication';
 
 export default class Login extends Component {
     constructor(props) {
@@ -34,16 +33,15 @@ export default class Login extends Component {
     }
 
     onBtnClickHandler(){
-        postlogin(this.state.emailValue, this.state.passwordValue).then(
+        postlogin(this.state.emailValue, this.state.passwordValue, this.props.privatePath).then(
             res => {
                 this.setState({
                     res : res
                 });
-                this.state.res.errorMessage ? '' : this.handleOpenModal({});
+                this.handleOpenModal(this.state.res.errorMessage ? {isLogin: true} : {});
             }
         );
     }
-
     render() {
         let errorMessage = this.state.res.errorMessage;
         return (

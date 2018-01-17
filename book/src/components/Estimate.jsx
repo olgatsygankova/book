@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import './estimate.less';
 import './stars.less';
+import {checkAuth} from "../services/Authentication";
 
 export default class Estimate extends Component {
+
+    handleOffice (e) {
+        e.preventDefault();
+        let path = e.target.pathname;
+        this.props.handleOnPrivate(path);
+    }
+
     render() {
         return (
             <div className="estimate">
@@ -23,3 +31,4 @@ export default class Estimate extends Component {
         );
     }
 }
+//    { checkAuth() ? <div className="stars estimate__stars"> : <div className="stars estimate__stars"> }

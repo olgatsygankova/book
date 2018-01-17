@@ -57,7 +57,18 @@
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempor condimentum dui eget vehicula. Pellentesque urna felis, commodo ut semper ac, feugiat porta urna."
   }],
   "estimate": [
-
+    {
+      "id": 0,
+      "estimate": 5
+    },
+    {
+      "id": 1,
+      "estimate": 3
+    },
+    {
+      "id": 2,
+      "estimate": 2
+    }
   ]
 }
 ]

@@ -14,10 +14,20 @@ export default class Header extends Component {
         this.state = {
             isLogin: false,
             isSignup: false,
-            isPassRecovery: false
+            isPassRecovery: false,
+            privatePath: ''
         };
         this.handleModal = this.handleModal.bind(this);
         this.handleLogout = this.handleModal.bind(this);
+        this.handleChangePrivatePath = this.handleChangePrivatePath.bind(this);
+    }
+
+    handleChangePrivatePath(path) {
+        this.setState({
+            privatePath: path
+        });
+
+        this.handleModal({isLogin: true});
     }
 
     handleModal (type) {
@@ -28,18 +38,14 @@ export default class Header extends Component {
         });
     }
 
-    handleLogout () {
-
-    }
-
-    render() {
+     render() {
         return (
             <header className="header">
                 <div className="header__logo" />
                 {checkAuth() ? <button className="header__office" onClick={ () => logout()}>Выйти</button> : <button className="header__office" onClick={ () => this.handleModal({isLogin:true})}>Войти</button>}
-                <Nav />
+                <Nav handleOnPrivate={this.handleChangePrivatePath} />
                 <Search />
-                <Login className={this.state.isLogin ? "login login--active" : "login"} onHandleChangeModal={this.handleModal} />
+                <Login className={this.state.isLogin ? "login login--active" : "login"} onHandleChangeModal={this.handleModal} privatePath={this.state.privatePath} />
                 <Singup className={this.state.isSignup ? "singup singup--active" : "singup"} onHandleChangeModal={this.handleModal}/>
                 <PasswordRecovery className={this.state.isPassRecovery ? "password-recovery password-recovery--active" : "password-recovery"} onHandleChangeModal={this.handleModal}/>
             </header>
