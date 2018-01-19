@@ -5,16 +5,16 @@ import Search from '../components/Search';
 import Login from '../components/Login';
 import Singup from '../components/Singup';
 import PasswordRecovery from '../components/PasswordRecovery';
-import { checkAuth } from '../services/Authentication';
-import { logout } from '../services/Authentication'
+import { checkAuth } from '../services/AuthenticationService';
+import { logout } from '../services/AuthenticationService'
 
 export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLogin: false,
-            isSignup: false,
-            isPassRecovery: false,
+            showLogin: false,
+            showSignup: false,
+            showPassRecovery: false,
             privatePath: ''
         };
         this.handleModal = this.handleModal.bind(this);
@@ -27,29 +27,28 @@ export default class Header extends Component {
             privatePath: path
         });
 
-        this.handleModal({isLogin: true});
+        this.handleModal({showLogin: true});
     }
 
     handleModal (type) {
         this.setState({
-            isLogin: type.isLogin || false,
-            isSignup: type.isSignup || false,
-            isPassRecovery: type.isPassRecovery || false
+            showLogin: type.showLogin || false,
+            showSignup: type.showSignup || false,
+            showPassRecovery: type.showPassRecovery || false
         });
     }
 
      render() {
         return (
-            <header className="header">
+            <header className="header" ref={(div)=>{this._header = div}}>
                 <div className="header__logo" />
-                {checkAuth() ? <button className="header__office" onClick={ () => logout()}>Выйти</button> : <button className="header__office" onClick={ () => this.handleModal({isLogin:true})}>Войти</button>}
+                <button className="header__office" onClick= { () => {checkAuth() ?  logout() : this.handleModal({showLogin:true})}}>{checkAuth() ? "Выйти" : "Войти"}</button>
                 <Nav handleOnPrivate={this.handleChangePrivatePath} />
                 <Search />
-                <Login className={this.state.isLogin ? "login login--active" : "login"} onHandleChangeModal={this.handleModal} privatePath={this.state.privatePath} />
-                <Singup className={this.state.isSignup ? "singup singup--active" : "singup"} onHandleChangeModal={this.handleModal}/>
-                <PasswordRecovery className={this.state.isPassRecovery ? "password-recovery password-recovery--active" : "password-recovery"} onHandleChangeModal={this.handleModal}/>
+                <Login className={this.state.showLogin ? "login login--active" : "login"} onHandleChangeModal={this.handleModal} privatePath={this.state.privatePath} />
+                <Singup className={this.state.showSignup ? "singup singup--active" : "singup"} onHandleChangeModal={this.handleModal}/>
+                <PasswordRecovery className={this.state.showPassRecovery ? "password-recovery password-recovery--active" : "password-recovery"} onHandleChangeModal={this.handleModal}/>
             </header>
         );
     }
 }
-

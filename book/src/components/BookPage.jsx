@@ -44,7 +44,7 @@ export default class BookPage extends Component {
                             <a href="" className="book__download book__download-description">Скачать</a>
                         </div>
                         <div className="book__caption-wrapper">
-                            <Link to={'/read/' + book.id} className="book__download book__download-description">Читать</Link>
+                            <Link to={`/read/${book.id}`} className="book__download book__download-description">Читать</Link>
                         </div>
                     </figcaption>
                 </figure>
@@ -57,6 +57,4 @@ export default class BookPage extends Component {
         );
     }
 }
-
-
 

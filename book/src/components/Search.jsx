@@ -22,11 +22,12 @@ export default class Search extends Component {
     }
 
     render() {
+        const text = this.state.text;
         return (
             <div className="header__search search">
-                <input className="search__input" type="search" name="search" placeholder="Поиск..." value={this.state.text}
+                <input className="search__input" type="search" name="search" placeholder="Поиск..." value={text}
                        onChange={(e) => this.onChangeHandler (e)} />
-                <Link to={'/search/' + this.state.text} className="search__btn" onClick={ () => this.openSearchPage(this.state.text) }/>
+                <Link to={`/search/${text}`} className="search__btn" onClick={ () => this.openSearchPage(text) }/>
             </div>
         );
     };

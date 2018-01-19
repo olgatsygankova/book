@@ -24,6 +24,7 @@
     border-radius: @border-radius-standard - 10px;
     outline: none;
     box-shadow: @box-shadow-light @color-green;
+    background-color: transparent;
     .office-template();
     &:hover {
       @media @tablet {
@@ -33,5 +34,11 @@
         box-shadow: @box-shadow-light @color-white;
       }
     }
+  }
+  &__no-book {
+    width: 300px;
+    height: 50px;
+    font-size: @font-size-big;
+    margin: 20px auto;
   }
 }

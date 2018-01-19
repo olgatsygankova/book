@@ -35,12 +35,15 @@ export default class SectionBooks extends Component {
     }
     render() {
         const { category }  = this.state.category;
+        const myPage = this.props.category;
         if(category){
             return   <BooksForCategoryPage {...this.state.category}  />
         }
         else {
+            if (myPage === 'Мои книги') {
+                return ( <BooksForOfficePage {...this.props}  />)
+            } else
             return ( <BooksForHomePage {...this.props}  />)
-
         }
     }
 }
@@ -76,10 +79,23 @@ const BooksForHomePage = ({books, category, id, text}) => {
             <div className="section-books__books">
                 {content}
             </div>
-            { (typeof text === "undefined") ?
-                <Link to={'/category/'+ id} className="section-books__load-more">Показать всё</Link> : <Link to={'/' + text + '/category/'+ id} className="section-books__load-more">Показать всё</Link>
-            }
+            <Link to={ !text ? `/category/${id}` : `/${text}/category/${id}`} className="section-books__load-more">Показать всё</Link>
         </section>
     );
 };
-/**/
+
+const BooksForOfficePage = ({books, category, id}) => {
+    let content = books.length ? books.map((books, j) => {
+        return (
+            <Book book={books} key={j} />
+        );
+    }): <div className="office__no-book">У вас нет загруженных книг</div>;
+    return (
+        <section className="section-books">
+            <span className="section-books__header">{category}</span>
+            <div className="section-books__books section-books__books--big-height">
+                {content}
+            </div>
+        </section>
+    );
+};

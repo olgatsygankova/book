@@ -3,7 +3,6 @@ import './account.less';
 import './password-recovery.less'
 
 export default class PasswordRecovery extends Component {
-
     handleOpenModal(type) {
         this.props.onHandleChangeModal(type);
     }
@@ -14,9 +13,10 @@ export default class PasswordRecovery extends Component {
                 <div className="singup__header">Регистрация</div>
                 <div className="account">
                     <span className="account__text-recovery-password">Введите Ваш e-mail адрес и на него Вам будет выслан новый пароль </span>
+                    <div className="account__email--picture"/>
                     <input className="account__email" name="email" placeholder="Email" />
                     <button className="account__button">Отправить запрос</button>
-                    <div className="account__login-with-recover-password" onClick={ () =>  this.handleOpenModal({isLogin:true}) }>Войти</div>
+                    <div className="account__login-with-recover-password" onClick={ () =>  this.handleOpenModal({showLogin:true}) }>Войти</div>
                 </div>
             </div>
         );

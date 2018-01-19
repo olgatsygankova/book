@@ -38,7 +38,7 @@ export default class Book extends Component {
                         </div>
                         <div className="book__caption-wrapper">
                             <a href="" className="book__download">Скачать</a>
-                            <Link to={'/book/'+ book.id} className="book__info">Подробнее</Link>
+                            <Link to={`/book/${ book.id}`} className="book__info">Подробнее</Link>
                         </div>
                     </figcaption>
                 </figure>

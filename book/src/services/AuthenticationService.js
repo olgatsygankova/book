@@ -13,6 +13,7 @@ export const postlogin = (email, password, privatePath) => {
         .then((response) => response.json())
         .then((responseJson) => {
             localStorage.setItem('token', responseJson.emailPassword);
+            localStorage.setItem('id', responseJson.id);
             history.push(privatePath ? privatePath : window.location.pathname);
             return (responseJson)
         })

@@ -12,13 +12,15 @@ export default class Singup extends Component {
             <div id="singup" className={this.props.className}>
                 <a href="" title="Закрыть" className="singup__close">X</a>
                 <div className="singup__header">Регистрация</div>
-                <div className="account">
+                <form className="account">
+                    <div className="account__email--picture"/>
                     <input className="account__email" name="email" placeholder="Email" />
+                    <div className="account__password--picture"/>
                     <input className="account__password" type="password" name="password" placeholder="Password" />
                     <button className="account__button">Создать аккаунт</button>
-                    <span className="account__login-with-singup" onClick={ () => this.handleOpenLogin({isLogin:true})}>Войти</span>
+                    <span className="account__login-with-singup" onClick={ () => this.handleOpenLogin({showLogin:true})}>Войти</span>
                     <span className="account__text">если у вас уже есть аккаунт</span>
-                </div>
+                </form>
             </div>
         );
     }

@@ -29,7 +29,7 @@ export default class App extends Component {
                     <Switch>
                         <Opacity path="/book/:id" component={BookDescription}/>
                         <Opacity path="/category/:id" component={SectionBooks}/>
-                        <Opacity path="/office" component={Office}/>
+                        <Opacity path="/user" component={Office}/>
                         <Opacity path="/search/:text" component={Home}/>
                         <Opacity path="/:text/category/:id" component={SectionBooks}/>
                         <Opacity path="/read/:id" component={ReadBook}/>

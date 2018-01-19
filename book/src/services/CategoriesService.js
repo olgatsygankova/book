@@ -1,5 +1,6 @@
 export const getCategories = (text) => {
-    if(typeof text === "undefined") {
+    console.log (text);
+    if(!text) {
         return fetch('/categories')
             .then((response) => response.json())
             .then((responseJson) => {
@@ -21,7 +22,7 @@ export const getCategories = (text) => {
 };
 
 export const getCategoryById = (categoryId, text) => {
-    if(typeof text === "undefined") {
+    if(!text) {
         return fetch(`/category/${categoryId}`)
             .then((response) => response.json())
             .then((responseJson) => {

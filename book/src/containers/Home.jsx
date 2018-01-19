@@ -2,16 +2,8 @@ import React, { Component } from 'react';
 import SectionBooks from '../components/SectionBooks';
 import './home.less';
 import {getCategories} from '../services/CategoriesService';
-import PropTypes from 'prop-types';
 
 export default class Home extends Component {
-    static propTypes = {
-        books: PropTypes.shape ({
-            id: PropTypes.number,
-            category: PropTypes.string,
-            books: PropTypes.object
-        })
-    };
     constructor() {
         super();
         this.state = {

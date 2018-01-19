@@ -14,28 +14,44 @@
   }
   &__email, &__password {
     font-size: @font-size-big;
-    display: block;
+    display: inline-block;
     width: 205px;
     height: 40px;
     margin: 0 auto 20px;
-    padding-left: 45px;
+    padding-left: 5px;
     border: @border-standard @color-green;
     border-radius: @border-radius-standard - 10px;
     outline: none;
     background: transparent 8px no-repeat;
     background-size: 28px;
     @media @tablet {
-      width: 280px;
+      width: 260px;
     }
   }
-  &__email {
-    background-image: url('../img/email.png');
+  &__email--picture {
+    float: left;
+    display: inline-block;
+    width: 50px;
+    height: 40px;
+    margin-left: 20px;
+    background: url('../img/email.png') transparent 10px no-repeat;
+    background-size: 28px;
+    border: @border-standard @color-green;
+    border-radius: @border-radius-standard - 10px;
     @media @retina {
      background-image: url('../img/email@2x.png');
     }
   }
-  &__password {
-    background-image: url('../img/password.png');
+  &__password--picture {
+    float: left;
+    display: inline-block;
+    width: 50px;
+    height: 40px;
+    margin-left: 20px;
+    background: url('../img/password.png') transparent 10px no-repeat;
+    background-size: 28px;
+    border: @border-standard @color-green;
+    border-radius: @border-radius-standard - 10px;
     @media @retina {
       background-image: url('../img/password@2x.png');
     }
