@@ -1,32 +1,35 @@
 import React, { Component } from 'react';
 import './read-book.less';
-import {getBookTextById} from '../services/BooksService';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { loadBookText } from '../actions/index';
 
-export default class ReadBook extends Component {
-    constructor() {
-        super();
-        this.state = {
-            book: {
-            }
-        };
+class ReadBook extends Component {
+    constructor(props) {
+        super(props);
     }
     componentDidMount() {
         let bookId = this.props.match.params.id;
-        getBookTextById(bookId).then(
-            book => this.setState({
-                book: book
-            })
-        );
+        this.props.loadBookText(bookId);
     }
 
     render() {
-        const book = this.state.book;
+        const {author, bookName, bookText} = this.props.readBook;
         return (
             <div className="read-book">
-                <div className="read-book__header">{book.author}</div>
-                <div className="read-book__header">{book.bookName}</div>
-                <div className="read-book__text">{book.bookText}</div>
+                <div className="read-book__header">{author}</div>
+                <div className="read-book__header">{bookName}</div>
+                <div className="read-book__text">{bookText}</div>
             </div>
         );
     }
 }
+
+export default connect(
+    state => ({
+        readBook: state.books.readBook
+    }),
+    dispatch => ({
+        loadBookText: bindActionCreators(loadBookText, dispatch)
+    })
+)(ReadBook)

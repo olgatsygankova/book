@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './estimate.less';
 import './stars.less';
-import {checkAuth } from "../services/AuthenticationService";
+import { checkAuth } from "../services/AuthenticationService";
 
 export default class Estimate extends Component {
     constructor(props) {

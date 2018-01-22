@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './load-book.less'
 import './book-characteristic.less'
 
-
 export default class LoadBook extends Component {
     render() {
         return (

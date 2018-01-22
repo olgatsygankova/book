@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
 import SectionBooks from '../components/SectionBooks';
 import './home.less';
-import {getCategories} from '../services/CategoriesService';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { loadGetCategories } from '../actions/index';
 
-export default class Home extends Component {
+
+class Home extends Component {
     constructor() {
         super();
-        this.state = {
-            books: [{
-            }]
-        };
     }
     componentDidMount() {
-        if (this.props.match){
+        if (this.props.match) {
             let searchText = this.props.match.params.text;
-            getCategories(searchText).then(
-                books => this.setState({
-                    books: books
-                })
-            );
+            this.props.loadGetCategories(searchText);
         }
     }
+
     render() {
-        const { books }  = this.state;
-           let content = books ? books.map((books, i) => {
-               return (
-                   <SectionBooks books={books.books} category={books.category} id={books.id} text = {this.props.match.params.text} key={i}/>
-               );
-           }): <SectionBooks key={0}/>;
+        const {books}  = this.props;
+        console.log(books);
+        let content = books ? books.map((category, i) => {
+            return (
+                <SectionBooks books={category.books} category={category.category} id={category.id} text = {this.props.match.params.text} key={i}/>
+            );
+        }): <SectionBooks key={0}/>;
         return (
             <main>
                 <section className="main__content">
@@ -38,5 +35,12 @@ export default class Home extends Component {
     }
 }
 
-
+export default connect(
+    state => ({
+        books: state.books.booksInHome
+    }),
+    dispatch => ({
+        loadGetCategories: bindActionCreators(loadGetCategories, dispatch)
+    })
+)(Home)
 

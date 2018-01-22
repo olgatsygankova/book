@@ -1,5 +1,4 @@
 export const getCategories = (text) => {
-    console.log (text);
     if(!text) {
         return fetch('/categories')
             .then((response) => response.json())

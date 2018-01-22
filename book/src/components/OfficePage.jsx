@@ -7,7 +7,6 @@ import SectionBooks from './SectionBooks';
 import LoadBook from './LoadBook';
 import {getUserById, getUserIdlocalStorage} from "../services/UsersService";
 
-
 export default class Office extends Component {
     constructor(props) {
         super(props);
