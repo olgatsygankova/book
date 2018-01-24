@@ -44,3 +44,21 @@ export const totalEstimate = (estimate) => {
     );
 };
 
+export const setEstimateForBook = (bookId, estimateValue) => {
+    let body = {
+        method: 'PUT'
+       /* headers: {
+            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: 'estimateValue=' + estimateValue*/
+    };
+    return fetch(`/book/${bookId}/star?value=${estimateValue}`)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
+

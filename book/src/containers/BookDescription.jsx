@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
 import BookPage from '../components/BookPage';
 import './home.less';
-import { getBookById } from '../services/BooksService';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { loadBookDescription } from '../actions/index';
 
-export default class BookDescription extends Component {
+class BookDescription extends Component {
     static propTypes = {
         book: PropTypes.object,
         bookId: PropTypes.number
     };
-    constructor() {
-        super();
-        this.state = {
-            book: {
-            }
-        };
-    }
+
     componentDidMount() {
         let bookId = this.props.match.params.id;
-        getBookById(bookId).then(
-            book => this.setState({
-                book: book
-            })
-        );
+        this.props.loadBookDescription(bookId);
     }
-    render() {      
-        const book = this.state.book;
+
+    render() {
+        const book = this.props.bookDescription;
         return (
             <main>
                 <section className="main__content">
@@ -38,3 +31,11 @@ export default class BookDescription extends Component {
     }
 }
 
+export default connect(
+    state => ({
+        bookDescription: state.books.bookDescription
+    }),
+    dispatch => ({
+        loadBookDescription: bindActionCreators(loadBookDescription, dispatch)
+    })
+)(BookDescription)

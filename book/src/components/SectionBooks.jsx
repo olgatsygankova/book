@@ -3,9 +3,11 @@ import Book from './Book';
 import './section-books.less';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getCategoryById } from '../services/CategoriesService';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {loadGetCategory} from "../actions";
 
-export default class SectionBooks extends Component {
+class SectionBooks extends Component {
     static propTypes = {
         books: PropTypes.array,
         categoryId: PropTypes.number
@@ -13,37 +15,26 @@ export default class SectionBooks extends Component {
 
     static defaultProps = {
         books: [{}],
+        booksForCategory: [{}]
     };
 
-    constructor() {
-        super();
-        this.state = {
-            category: {
-            }
-        };
-    }
     componentDidMount() {
         if (this.props.match) {
             let categoryText = this.props.match.params.text;
             let categoryId = this.props.match.params.id;
-            getCategoryById(categoryId, categoryText).then(
-                category => this.setState({
-                    category: category
-                })
-            );
+            this.props.loadGetCategory(categoryId, categoryText);
         }
     }
     render() {
-        const { category }  = this.state.category;
-        const myPage = this.props.category;
-        if(category){
-            return   <BooksForCategoryPage {...this.state.category}  />
+        const {booksForCategory} = this.props;
+        if (!this.props.match) {
+            return ( <BooksForHomePage {...this.props}  />)
         }
         else {
-            if (myPage === 'Мои книги') {
+            if (this.props.category === 'Мои книги') {
                 return ( <BooksForOfficePage {...this.props}  />)
             } else
-            return ( <BooksForHomePage {...this.props}  />)
+            return   <BooksForCategoryPage books = {booksForCategory.books} category = {booksForCategory.category} id = {booksForCategory.id} />
         }
     }
 }
@@ -84,6 +75,7 @@ const BooksForHomePage = ({books, category, id, text}) => {
     );
 };
 
+
 const BooksForOfficePage = ({books, category, id}) => {
     let content = books.length ? books.map((books, j) => {
         return (
@@ -99,3 +91,12 @@ const BooksForOfficePage = ({books, category, id}) => {
         </section>
     );
 };
+
+export default connect(
+    state => ({
+        booksForCategory: state.books.booksForCategory
+    }),
+    dispatch => ({
+        loadGetCategory: bindActionCreators(loadGetCategory, dispatch)
+    })
+)(SectionBooks)

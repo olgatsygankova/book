@@ -26,7 +26,6 @@ export default class Header extends Component {
         this.setState({
             privatePath: path
         });
-
         this.handleModal({showLogin: true});
     }
 

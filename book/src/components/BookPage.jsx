@@ -49,7 +49,7 @@ export default class BookPage extends Component {
                 </figure>
                 <span className="book__header book__header-annotation">Аннотация:</span>
                 <p className="book__annotation book__annotation--big">{book.annotation}</p>
-                <Estimate />
+                <Estimate bookId={book.id}/>
                 <AddComment />
                 <Comments comments={book.comments}/>
             </article>

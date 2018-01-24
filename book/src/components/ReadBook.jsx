@@ -5,9 +5,7 @@ import { bindActionCreators } from 'redux'
 import { loadBookText } from '../actions/index';
 
 class ReadBook extends Component {
-    constructor(props) {
-        super(props);
-    }
+
     componentDidMount() {
         let bookId = this.props.match.params.id;
         this.props.loadBookText(bookId);

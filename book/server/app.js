@@ -32,6 +32,15 @@ app.get('/book/:id', (req, res) => {
     res.send(books[req.params.id]);
 });
 
+
+
+app.put('/book/:id/star?value=:value', (req, res) => {
+    //res.send(books[req.params.id]);
+
+});
+
+
+
 app.get('/category/:id', (req, res) => {
     res.send(categories[req.params.id]);
 });
@@ -58,7 +67,7 @@ app.get('/user/:id', (req, res) => {
     res.send(users[req.params.id]);
 });
 
-app.use((req1, res, next) => {
+app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

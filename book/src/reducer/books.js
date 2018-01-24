@@ -1,8 +1,11 @@
-import {GET_BOOK_TEXT_FAIL, GET_BOOK_TEXT_SUCCESS, GET_CATEGORIES_FAIL, GET_CATEGORIES_SUCCESS} from "../constants";
+import {GET_BOOK_TEXT_FAIL, GET_BOOK_TEXT_SUCCESS, GET_CATEGORIES_FAIL, GET_CATEGORIES_SUCCESS, GET_CATEGORY_FAIL, GET_CATEGORY_SUCCESS, GET_BOOK_SUCCESS, GET_BOOK_FAIL, SET_ESTIMATE_SUCCESS, SET_ESTIMATE_FAIL} from "../constants";
 
 const initialState = {
     booksInHome: [],
-    readBook: {}
+    readBook: {},
+    booksForCategory: [],
+    bookDescription: {},
+    estimateValue: ''
 };
 
 export default function books(state = initialState, action){
@@ -18,6 +21,17 @@ export default function books(state = initialState, action){
                 ...state,
                 error: action.payload
             };
+        case GET_CATEGORY_SUCCESS:
+            return {
+                ...state,
+                booksForCategory: action.payload,
+                error: '',
+            };
+        case GET_CATEGORY_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            };
         case GET_BOOK_TEXT_SUCCESS:
             return {
                 ...state,
@@ -25,6 +39,28 @@ export default function books(state = initialState, action){
                 error: '',
             };
         case GET_BOOK_TEXT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case GET_BOOK_SUCCESS:
+            return {
+                ...state,
+                bookDescription: action.payload,
+                error: '',
+            };
+        case GET_BOOK_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case SET_ESTIMATE_SUCCESS:
+            return {
+                ...state,
+                estimateValue: action.payload,
+                error: '',
+            };
+        case SET_ESTIMATE_FAIL:
             return {
                 ...state,
                 error: action.payload

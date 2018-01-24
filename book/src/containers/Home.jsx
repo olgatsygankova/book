@@ -7,9 +7,7 @@ import { loadGetCategories } from '../actions/index';
 
 
 class Home extends Component {
-    constructor() {
-        super();
-    }
+
     componentDidMount() {
         if (this.props.match) {
             let searchText = this.props.match.params.text;
@@ -19,7 +17,6 @@ class Home extends Component {
 
     render() {
         const {books}  = this.props;
-        console.log(books);
         let content = books ? books.map((category, i) => {
             return (
                 <SectionBooks books={category.books} category={category.category} id={category.id} text = {this.props.match.params.text} key={i}/>
