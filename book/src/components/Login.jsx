@@ -1,63 +1,27 @@
 import React, { Component } from 'react';
 import './account.less';
 import './login.less'
-import { postlogin } from '../services/AuthenticationService';
 
 export default class Login extends Component {
-     constructor(props) {
-        super(props);
-        this.state = {
-            emailValue: '',
-            passwordValue: '',
-            res: ''
-        };
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
-        this.handleChangePassword = this.handleChangePassword.bind(this);
-        this.onBtnClickHandler = this.onBtnClickHandler.bind(this);
-    }
-
-    handleOpenModal(type) {
-        this.props.onHandleChangeModal(type);
-    }
-
-    handleChangeEmail(e) {
-        this.setState({
-            emailValue: e.target.value
-        });
-    }
-
-    handleChangePassword(e) {
-        this.setState({
-            passwordValue: e.target.value
-        });
-    }
-
-    onBtnClickHandler(e){
-        e.preventDefault();
-        postlogin(this.state.emailValue, this.state.passwordValue, this.props.privatePath).then(
-            res => {
-                this.setState({
-                    res : res
-                });
-                this.handleOpenModal(this.state.res.errorMessage ? {showLogin: true} : {});
-            }
-        );
-    }
     render() {
-        let errorMessage = this.state.res.errorMessage;
+        const {emailValue} = this.props.emailValue;
+        const {passwordValue} = this.props.passwordValue;
         return (
             <div id="login" className={this.props.className}>
                 <a href="" title="Закрыть" className="login__close">X</a>
                 <div className="login__header">Вход</div>
-                <form className="account" onSubmit={this.onBtnClickHandler}>
+                <form className="account" onSubmit={this.props.onBtnClickHandler}>
                     <div className="account__email--picture"/>
-                    <input className="account__email" name="email" placeholder="Email" type="email" value={ this.emailValue } onChange={ this.handleChangeEmail } required />
+                    <input className="account__email" name="email" placeholder="Email" type="email" value={ emailValue } onChange={this.props.changeEmail} required />
                     <div className="account__password--picture"/>
-                    <input className="account__password" name="password" placeholder="Password" type="password" value={ this.passwordValue } onChange={ this.handleChangePassword } required />
-                    <div className="account__error"> {errorMessage ? errorMessage : ''} </div>
+                    <input className="account__password" name="password" placeholder="Password" type="password" value={ passwordValue } onChange={ this.props.changePassword } required />
+                    {this.props.errorMessage
+                        ? <div className="account__error"> {this.props.errorMessage} </div>
+                        : <div className="account__error"></div>
+                    }
                     <button className="account__button" type = "submit">Войти</button>
-                    <div className="account__create-account" onClick={ () => this.handleOpenModal({showSignup: true})} >Создать аккаунт</div>
-                    <div className="account__forget-password" onClick={ () => this.handleOpenModal({showPassRecovery:true})}>Забыли пароль?</div>
+                    <div className="account__create-account" onClick={ () => this.props.onHandleChangeModal({showSignup: true})} >Создать аккаунт</div>
+                    <div className="account__forget-password" onClick={ () => this.props.onHandleChangeModal({showPassRecovery:true})}>Забыли пароль?</div>
                 </form>
             </div>
         );

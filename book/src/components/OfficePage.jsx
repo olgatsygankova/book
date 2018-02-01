@@ -3,7 +3,7 @@ import './office.less'
 import './name-user.less'
 import './email-user.less'
 import './password-user.less'
-import SectionBooks from './SectionBooks';
+import SectionBooks from '../containers/SectionBooks';
 import LoadBook from './LoadBook';
 import {getUserById, getUserIdlocalStorage} from "../services/UsersService";
 

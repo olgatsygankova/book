@@ -29,14 +29,17 @@
     "estimate": [
       {
         "id": 0,
+        "userId": 0,
         "estimate": 4
       },
       {
         "id": 1,
+        "userId": 1,
         "estimate": 3
       },
       {
         "id": 2,
+        "userId": 2,
         "estimate": 1
       }
     ]
@@ -59,14 +62,17 @@
   "estimate": [
     {
       "id": 0,
+      "userId": 0,
       "estimate": 5
     },
     {
       "id": 1,
+      "userId": 1,
       "estimate": 3
     },
     {
       "id": 2,
+      "userId": 2,
       "estimate": 2
     }
   ]

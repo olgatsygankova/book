@@ -1,53 +1,36 @@
 import React, { Component } from 'react';
-import './estimate.less';
 import './stars.less';
+import './estimate.less';
+import PropTypes from 'prop-types';
 import { checkAuth } from "../services/AuthenticationService";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { setEstimate } from '../actions/index';
+import { myEstimate } from '../services/BooksService';
 
-class Estimate extends Component {
-    constructor(props) {
-        super(props);
-        this.onEstimateBtnClick = this.onEstimateBtnClick.bind(this);
-    }
+export default class Estimate extends Component {
 
-    onEstimateBtnClick(e){
-        this.props.setEstimate(this.props.bookId, +e.target.value)
-      /*  {
-            checkAuth() ?
-                this.setState({
-                    estimateValue: e.target.value
-                }) : console.log("Необходимо залогиниться");
-        }*/
-    }
-
+    static propTypes = {
+        estimate: PropTypes.number
+    };
     render() {
+        const {estimate} = this.props;
         return (
-            <div className="estimate">
+            <div className="estimate" >
                 <span className="estimate__header">Ваша оценка:</span>
                 <div className="stars estimate__stars">
-                    <input type="radio" id="5" name="stars" value="5" onClick={this.onEstimateBtnClick}/>
-                    <label className="stars__star" htmlFor="5" />
-                    <input type="radio" id="4" name="stars" value="4" onClick={this.onEstimateBtnClick}/>
-                    <label className="stars__star" htmlFor="4" />
-                    <input type="radio" id="3" name="stars" value="3" onClick={this.onEstimateBtnClick}/>
-                    <label className="stars__star" htmlFor="3" />
-                    <input type="radio" id="2" name="stars" value="2" onClick={this.onEstimateBtnClick}/>
-                    <label className="stars__star" htmlFor="2" />
-                    <input type="radio" id="1" name="stars" value="1" onClick={this.onEstimateBtnClick}/>
-                    <label className="stars__star" htmlFor="1"/>
+                    <input type="radio" id="5" name="stars" value="5" defaultChecked={estimate == 5 ? true : false}  onClick={(e)=>this.props.setEstimate(this.props.bookId, +e.target.value)}/>
+                    <label className= "stars__star stars__star--light" htmlFor="5" />
+                    <input type="radio" id="4" name="stars" value="4" defaultChecked={estimate == 4 ? true : false} onClick={(e)=>this.props.setEstimate(this.props.bookId, +e.target.value)}/>
+                    <label className="stars__star stars__star--light" htmlFor="4" />
+                    <input type="radio" id="3" name="stars" value="3" defaultChecked={estimate == 3 ? true : false} onClick={(e)=>this.props.setEstimate(this.props.bookId, +e.target.value)}/>
+                    <label className= "stars__star stars__star--light" htmlFor="3" />
+                    <input type="radio" id="2" name="stars" value="2" defaultChecked={estimate == 2 ? true : false} onClick={(e)=>this.props.setEstimate(this.props.bookId, +e.target.value)}/>
+                    <label className= "stars__star stars__star--light" htmlFor="2" />
+                    <input type="radio" id="1" name="stars" value="1" defaultChecked={estimate ==1 ? true : false} onClick={(e)=>this.props.setEstimate(this.props.bookId, +e.target.value)}/>
+                    <label className= "stars__star stars__star--light" htmlFor="1" />
                 </div>
-           </div>
+            </div>
         );
-    }
+    };
 }
-
-export default connect(
-    state => ({
-        estimateValue: state.books.estimateValue
-    }),
-    dispatch => ({
-        setEstimate: bindActionCreators(setEstimate, dispatch)
-    })
-)(Estimate)

@@ -10,6 +10,8 @@ var books = require('./books.json');
 var categories = require('./categoriesBooks.json');
 var search = require('./search.json');
 var users = require('./users.json');
+var usersSingup = require('./usersSingup');
+var status = require('./status.json');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,14 +34,14 @@ app.get('/book/:id', (req, res) => {
     res.send(books[req.params.id]);
 });
 
-
-
-app.put('/book/:id/star?value=:value', (req, res) => {
-    //res.send(books[req.params.id]);
-
+app.put('/book/:id/star', (req, res) => {
+    res.send(status);
+    //res.send(status[req.query]);
 });
 
-
+app.put('/book/:id/add-comment', (req, res) => {
+    res.send(books);
+});
 
 app.get('/category/:id', (req, res) => {
     res.send(categories[req.params.id]);
@@ -60,6 +62,18 @@ app.get('/read/:id', (req, res) => {
 app.post('/login', (req, res) => {
     const {emailPassword} = req.body;
     let user = users.find(user => user.emailPassword === emailPassword);
+    res.send(user);
+});
+
+app.post('/singup', (req, res) => {
+    const {email, password} = req.body;
+    let user = usersSingup.find(user => user.email === email);
+    res.send (user);
+});
+
+app.post('/recovery-password', (req, res) => {
+    const {email} = req.body;
+    let user = users.find(user => user.email === email);
     res.send(user);
 });
 

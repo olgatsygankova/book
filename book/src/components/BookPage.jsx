@@ -6,8 +6,9 @@ import AddComment from './AddComment';
 import Comments from './Comments';
 import BookWrapper from './BookWrapper';
 import PropTypes from 'prop-types';
-import { totalEstimate } from '../services/BooksService';
+import { totalEstimate, myEstimate } from '../services/BooksService';
 import { Link } from 'react-router-dom';
+import { checkAuth } from '../services/AuthenticationService';
 
 export default class BookPage extends Component {
     static propTypes = {
@@ -49,11 +50,10 @@ export default class BookPage extends Component {
                 </figure>
                 <span className="book__header book__header-annotation">Аннотация:</span>
                 <p className="book__annotation book__annotation--big">{book.annotation}</p>
-                <Estimate bookId={book.id}/>
-                <AddComment />
+                {checkAuth() ? <Estimate book = {book} bookId={book.id} setEstimate = {this.props.setEstimate} estimate = {myEstimate(book.estimate)}/> : <div />}
+                <AddComment  addComment = {this.props.addComment} myCommentText = {this.props.myCommentText} changeComment={this.props.changeComment}/>
                 <Comments comments={book.comments}/>
             </article>
         );
     }
 }
-

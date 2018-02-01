@@ -1,12 +1,12 @@
 import { history } from '../history';
 let base64 = require('base-64');
 
-export const postlogin = (email, password, privatePath) => {
-    let body = 'emailPassword=' + base64.encode(email + password);
+export const postLogin = (email, password, privatePath) => {
+    let body =JSON.stringify ({"emailPassword": base64.encode(email + password)});
     return fetch(`/login`, {
         method: 'post',
         headers: {
-            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            "Content-type": "application/json"
         },
         body: body
         })
@@ -19,7 +19,48 @@ export const postlogin = (email, password, privatePath) => {
         })
         .catch((error) => {
             return ({
-                errorMessage: 'Неправильный email или пароль'
+                errorMessage: ''
+            })
+        });
+};
+
+export const postSingup = (email, password, privatePath) => {
+    let body = JSON.stringify({email: email,
+        password: password});
+    return fetch(`/singup`, {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: body
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return (responseJson)
+        })
+        .catch((error) => {
+            return ({
+                errorMessage: 'error'
+            })
+        });
+};
+
+export const postRecoveryPassword = (email, privatePath) => {
+    let body = JSON.stringify({email: email});
+    return fetch(`/recovery-password`, {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: body
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return (responseJson)
+        })
+        .catch((error) => {
+            return ({
+                errorMessage: 'error'
             })
         });
 };

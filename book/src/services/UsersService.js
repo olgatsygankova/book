@@ -10,6 +10,6 @@ export const getUserById = (userId) => {
 };
 
 export const getUserIdlocalStorage = () => {
-    let userId = localStorage.getItem('id');
+    let userId = Number(localStorage.getItem('id'));
     return userId
 };

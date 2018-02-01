@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SectionBooks from '../components/SectionBooks';
+import SectionBooks from './SectionBooks';
 import './home.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

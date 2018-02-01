@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Book from './Book';
+import Book from '../components/Book';
 import './section-books.less';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
