@@ -13,3 +13,8 @@ export const getUserIdlocalStorage = () => {
     let userId = Number(localStorage.getItem('id'));
     return userId
 };
+
+export const getUserNamelocalStorage = () => {
+    let userName = localStorage.getItem('userName');
+    return userName
+};

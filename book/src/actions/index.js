@@ -12,7 +12,10 @@ import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAIL,
     LOGOUT_SUCCESS, LOGOUT_FAIL,
     POST_RECOVERY_PASSWORD_SUCCESS, POST_RECOVERY_PASSWORD_FAIL,
     PUT_ADD_COMMENT_SUCCESS, PUT_ADD_COMMENT_FAIL,
-    CHANGE_COMMENT_SUCCESS, CHANGE_COMMENT_FAIL
+    CHANGE_COMMENT_SUCCESS, CHANGE_COMMENT_FAIL,
+    CHANGE_OFFICE_EMAIL_SUCCESS,
+    CHANGE_OFFICE_PASSWORD_SUCCESS,
+    CHANGE_OFFICE_USERNAME_SUCCESS
 } from '../constants/index';
 import { getCategories, getCategoryById } from "../services/CategoriesService";
 import { getBookTextById, getBookById, putEstimateForBook, putAddComment } from "../services/BooksService";
@@ -106,9 +109,8 @@ export function loadBookDescription(bookId) {
     }
 }
 
-export function addComment(bookId, user, date, text) {
+export function addNewComment(bookId, user, date, text) {
     return (dispatch) => {
-        console.log("add comment");
         start(dispatch);
         putAddComment(bookId, user, date, text)
             .then(responseJson => {
@@ -187,6 +189,33 @@ export function changeComment(myCommentText) {
     }
 }
 
+export function changeOfficeEmail(officeEmailValue) {
+    return (dispatch) => {
+        dispatch({
+            type: CHANGE_OFFICE_EMAIL_SUCCESS,
+            payload: officeEmailValue
+        })
+    }
+}
+
+export function changeOfficePassword(officePasswordValue) {
+    return (dispatch) => {
+        dispatch({
+            type: CHANGE_OFFICE_PASSWORD_SUCCESS,
+            payload: officePasswordValue
+        })
+    }
+}
+
+export function changeOfficeUserName(officeUserNameValue) {
+    return (dispatch) => {
+        dispatch({
+            type: CHANGE_OFFICE_USERNAME_SUCCESS,
+            payload: officeUserNameValue
+        })
+    }
+}
+
 
 export function login(email, password, privatePath) {
     return (dispatch) => {
@@ -194,7 +223,7 @@ export function login(email, password, privatePath) {
         postLogin(email, password, privatePath)
             .then(responseJson => {
                 stop(dispatch);
-                responseJson.errorMessage == "" ?
+                responseJson.errorMessage === "" ?
                     dispatch({
                         type: POST_LOGIN_FAIL,
                         payload: "Неправильное имя пользователя или пароль"
@@ -220,7 +249,7 @@ export function singup (email, password, privatePath) {
                     postLogin(email, password, privatePath)
                         .then(responseJson => {
                             stop(dispatch);
-                            if(responseJson.errorMessage == "") {
+                            if(responseJson.errorMessage === "") {
                                 dispatch({
                                     type: POST_LOGIN_FAIL,
                                     payload: "Неправильное имя пользователя или пароль"

@@ -15,10 +15,7 @@ export default class Login extends Component {
                     <input className="account__email" name="email" placeholder="Email" type="email" value={ emailValue } onChange={this.props.changeEmail} required />
                     <div className="account__password--picture"/>
                     <input className="account__password" name="password" placeholder="Password" type="password" value={ passwordValue } onChange={ this.props.changePassword } required />
-                    {this.props.errorMessage
-                        ? <div className="account__error"> {this.props.errorMessage} </div>
-                        : <div className="account__error"></div>
-                    }
+                    {this.props.errorMessage ? <div className="account__error"> {this.props.errorMessage} </div> : <div className="account__error"></div>                    }
                     <button className="account__button" type = "submit">Войти</button>
                     <div className="account__create-account" onClick={ () => this.props.onHandleChangeModal({showSignup: true})} >Создать аккаунт</div>
                     <div className="account__forget-password" onClick={ () => this.props.onHandleChangeModal({showPassRecovery:true})}>Забыли пароль?</div>

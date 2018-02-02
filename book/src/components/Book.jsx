@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './book.less';
 import Stars from './Stars';
 import { Link } from 'react-router-dom';
-import BookWrapper from './BookWrapper';
+import { BookWrapper } from './BookWrapper';
 import PropTypes from 'prop-types';
 import { totalEstimate } from '../services/BooksService';
 

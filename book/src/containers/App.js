@@ -9,7 +9,7 @@ import SectionBooks from "./SectionBooks";
 import Home from "./Home";
 import ReadBook from "./ReadBook";
 import BookDescription from "./BookDescription";
-import Office from "../components/OfficePage";
+import Office from "./OfficePage";
 import FadeIn from "../components/FadeIn";
 import { history } from '../history';
 

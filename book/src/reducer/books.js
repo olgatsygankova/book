@@ -78,6 +78,7 @@ export default function books(state = initialState, action){
         case PUT_ADD_COMMENT_SUCCESS:
             return {
                 ...state,
+                myCommentText: '',
                 error: '',
             };
         case PUT_ADD_COMMENT_FAIL:

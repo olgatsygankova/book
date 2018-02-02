@@ -28,12 +28,12 @@ class SectionBooks extends Component {
     render() {
         const {booksForCategory} = this.props;
         if (!this.props.match) {
-            return ( <BooksForHomePage {...this.props}  />)
-        }
-        else {
             if (this.props.category === 'Мои книги') {
                 return ( <BooksForOfficePage {...this.props}  />)
             } else
+            return ( <BooksForHomePage {...this.props}  />)
+        }
+        else {
             return   <BooksForCategoryPage books = {booksForCategory.books} category = {booksForCategory.category} id = {booksForCategory.id} />
         }
     }
@@ -74,7 +74,6 @@ const BooksForHomePage = ({books, category, id, text}) => {
         </section>
     );
 };
-
 
 const BooksForOfficePage = ({books, category, id}) => {
     let content = books.length ? books.map((books, j) => {

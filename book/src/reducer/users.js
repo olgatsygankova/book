@@ -4,7 +4,10 @@ import { SHOW_MODAL_SUCCESS, SHOW_MODAL_FAIL,
     POST_LOGIN_SUCCESS, POST_LOGIN_FAIL,
     POST_SINGUP_SUCCESS, POST_SINGUP_FAIL,
     LOGOUT_SUCCESS, LOGOUT_FAIL,
-    POST_RECOVERY_PASSWORD_SUCCESS, POST_RECOVERY_PASSWORD_FAIL
+    POST_RECOVERY_PASSWORD_SUCCESS, POST_RECOVERY_PASSWORD_FAIL,
+    CHANGE_OFFICE_USERNAME_SUCCESS,
+    CHANGE_OFFICE_PASSWORD_SUCCESS,
+    CHANGE_OFFICE_EMAIL_SUCCESS
 } from "../constants/index";
 import {history} from "../history";
 
@@ -76,6 +79,24 @@ export default function users(state = initialState, action){
                 ...state,
                 user: {},
                 error: action.payload
+            };
+        case CHANGE_OFFICE_USERNAME_SUCCESS:
+            return {
+                ...state,
+                officeUserNameValue: action.payload,
+                error: '',
+            };
+        case CHANGE_OFFICE_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                officePasswordValue: action.payload,
+                error: '',
+            };
+        case CHANGE_OFFICE_EMAIL_SUCCESS:
+            return {
+                ...state,
+                officeEmailValue: action.payload,
+                error: '',
             };
         case LOGOUT_SUCCESS:
             localStorage.clear();
