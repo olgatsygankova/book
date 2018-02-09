@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {loadGetCategory} from "../actions";
+import {loadGetCategory} from "../actions/books";
 
 class SectionBooks extends Component {
     static propTypes = {

@@ -4,23 +4,25 @@ import './book-characteristic.less'
 
 export default class LoadBook extends Component {
     render() {
+        console.log (this.props);
         return (
-            <div id="load-book" className="load-book">
+            <div id="load-book" className={this.props.className}>
                 <a href="" title="Закрыть" className="load-book__close">X</a>
-                <div className="book-characteristic">
-                    <input className="book-characteristic__title book-characteristic__text" name="title" placeholder="Название" />
-                    <input className="book-characteristic__author book-characteristic__text" name="author" placeholder="Автор" />
-                    <input className="book-characteristic__genre book-characteristic__text" name="genre" placeholder="Жанр" />
-                    <input className="book-characteristic__isbn book-characteristic__text" name="isbn" placeholder="ISBN" />
-                    <textarea className="book-characteristic__annotation book-characteristic__text" name="annotation" placeholder="Аннотация" />
+                <form className="book-characteristic">
+                    <input className="book-characteristic__title book-characteristic__text" name="title" placeholder="Название"  value={ this.props.titleValue } onChange={this.props.changeTitle} required />
+                    <input className="book-characteristic__author book-characteristic__text" name="author" placeholder="Автор"  value={ this.props.authorValue } onChange={this.props.changeAuthor} required/>
+                    <input className="book-characteristic__genre book-characteristic__text" name="genre" placeholder="Жанр"  value={ this.props.genreValue } onChange={this.props.changeGenre} required/>
+                    <input className="book-characteristic__isbn book-characteristic__text" name="isbn" placeholder="ISBN"  value={ this.props.isbnValue } onChange={this.props.changeIsbn} />
+                    <textarea className="book-characteristic__annotation book-characteristic__text" name="annotation" placeholder="Аннотация"  value={ this.props.annotationValue } onChange={this.props.changeAnnotation}/>
                     <input className="book-characteristic__picture book-characteristic__text" name="picture" placeholder="Выберите обложку книги" />
                     <div className="book-characteristic__load-picture" />
                     <input className="book-characteristic__file book-characteristic__text" name="file" placeholder="Выберите файл" />
                     <div className="book-characteristic__load-picture" />
-                    <button className="book-characteristic__cancel">Отменить</button>
                     <button className="book-characteristic__load">Загрузить</button>
-                </div>
+                </form>
             </div>
         );
+
+        // <button className="book-characteristic__cancel" onClick={this.props.showModalClose}>Отменить</button>
     }
 }

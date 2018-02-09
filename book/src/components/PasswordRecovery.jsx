@@ -14,7 +14,7 @@ export default class PasswordRecovery extends Component {
                     <span className="account__text-recovery-password">Введите Ваш e-mail адрес и на него Вам будет выслан новый пароль </span>
                     <div className="account__email--picture"/>
                     <input className="account__email" name="email" placeholder="Email"   type="email" value={ emailValue } onChange={this.props.changeEmail} required/>
-                    {this.props.user.userName
+                    {this.props.user
                         ? <div className="account__message">Новый пароль выслан Вам на почту</div>
                         : <div className="account__error"> {this.props.errorMessage} </div>
                     }

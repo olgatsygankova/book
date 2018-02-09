@@ -30,7 +30,7 @@ export default class Nav extends Component {
                 <nav className="nav__menu">
                     <NavLink exact to={'/'} className="nav__menu-item nav__menu-item--home" activeClassName="nav__menu-item--home--active" onClick={ (e) => this.handleChangePage(e)}>Главная</NavLink>
                     <NavLink to={'/user'} className="nav__menu-item nav__menu-item--my-office" activeClassName="nav__menu-item--my-office--active" onClick={ (e) => this.handleOffice(e)}>Личный кабинет</NavLink>
-                    <NavLink to={'/about'} className="nav__menu-item nav__menu-item nav__menu-item--about" activeClassName="nav__menu-item--about--active" onClick={ (e) => this.handleChangePage(e)}>Контакты </NavLink>
+                    <NavLink to={'/info'} className="nav__menu-item nav__menu-item nav__menu-item--about" activeClassName="nav__menu-item--about--active" onClick={ (e) => this.handleChangePage(e)}>Справка </NavLink>
                 </nav>
             </div>
         );

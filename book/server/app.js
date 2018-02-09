@@ -10,6 +10,7 @@ var books = require('./books.json');
 var categories = require('./categoriesBooks.json');
 var search = require('./search.json');
 var users = require('./users.json');
+var userBooks = require('./userBooks');
 var usersSingup = require('./usersSingup');
 var status = require('./status.json');
 
@@ -78,7 +79,7 @@ app.post('/recovery-password', (req, res) => {
 });
 
 app.get('/user/:id', (req, res) => {
-    res.send(users[req.params.id]);
+    res.send(userBooks[req.params.id]);
 });
 
 app.use((req, res, next) => {

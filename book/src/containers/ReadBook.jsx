@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './read-book.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { loadBookText } from '../actions/index';
+import { loadBookText } from '../actions/books';
 
 class ReadBook extends Component {
 

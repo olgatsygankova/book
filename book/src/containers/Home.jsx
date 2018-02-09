@@ -3,7 +3,7 @@ import SectionBooks from './SectionBooks';
 import './home.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loadGetCategories } from '../actions/index';
+import { loadGetCategories } from '../actions/books';
 
 
 class Home extends Component {

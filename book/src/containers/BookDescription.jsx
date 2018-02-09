@@ -3,10 +3,9 @@ import BookPage from '../components/BookPage';
 import './home.less';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { loadBookDescription } from '../actions/index';
-import {setEstimate,  addNewComment, changeComment} from "../actions/index";
-import {showModal} from "../actions";
+import { bindActionCreators } from 'redux';
+import {setEstimate,  addNewComment, changeComment, loadBookDescription} from "../actions/books";
+import {showModal} from "../actions/auth";
 
 class BookDescription extends Component {
     static propTypes = {
@@ -43,7 +42,7 @@ export default connect(
         bookDescription: state.books.bookDescription,
         estimateValue: state.books.estimateValue,
         myCommentText: state.books.myCommentText,
-        showModalTrue: state.users.showModalTrue
+        showModalTrue: state.auth.showModalTrue
     }),
     dispatch => ({
         loadBookDescription: bindActionCreators(loadBookDescription, dispatch),

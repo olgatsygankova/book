@@ -8,48 +8,57 @@ import PasswordRecovery from '../components/PasswordRecovery';
 import { checkAuth } from '../services/AuthenticationService';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {showModal, changeEmailR, changePasswordR, login, singup, logout, recoveryPassword} from "../actions/index";
+import {showModal, login, singup, logout, recoveryPassword, changeEmailLogin, changeEmailPassRec, changeEmailSingup, changePasswordLogin, changePasswordSingup} from "../actions/auth";
 
 class Header extends Component {
     componentWillReceiveProps (nextProps){
-        if (nextProps.user.userName && (this.props.showModalTrue.showLogin || this.props.showModalTrue.showSignup)) {
-            this.props.showModal({showLogin: false, privatePath:this.props.showModalTrue.privatePath})
+        if (nextProps.users.user.userName && (this.props.auth.showModalTrue.showLogin || this.props.auth.showModalTrue.showSignup)) {
+            this.props.showModal({showLogin: false, privatePath:this.props.auth.showModalTrue.privatePath})
         }
     }
      render() {
+        const showModalTrue = this.props.auth.showModalTrue;
+        const emailValueLogin = this.props.auth.emailValueLogin;
+        const passwordValueLogin = this.props.auth.passwordValueLogin;
+        const emailValueSingup = this.props.auth.emailValueSingup;
+        const passwordValueSingup = this.props.auth.passwordValueSingup;
+        const emailValuePassRec = this.props.auth.emailValuePassRec;
+        const authorization = this.props;
+        const userId = this.props.users.user.id;
+
         return (
             <header className="header" ref={(div)=>{this._header = div}}>
                 <div className="header__logo" />
-                <button className="header__office" onClick= { () => {checkAuth() ?  this.props.logout() : this.props.showModal({showLogin:true})}}> {checkAuth() ? "Выйти" : "Войти"}</button>
-                <Nav handleOnPrivate={(e)=> this.props.showModal(e)} />
+                <button className="header__office" onClick= { () => {checkAuth() ?  authorization.logout() : authorization.showModal({showLogin:true})}}> {checkAuth() ? "Выйти" : "Войти"}</button>
+                <Nav handleOnPrivate={(e)=> authorization.showModal(e)} />
                 <Search />
-                <Login className={this.props.showModalTrue.showLogin ? "login login--active" : "login"}
-                       onHandleChangeModal={(e)=> this.props.showModal (e)}
-                       privatePath={this.props.showModalTrue.privatePath}
-                       changeEmail={(e)=>this.props.changeEmailR(e.target.value)}
-                       changePassword ={(e)=> this.props.changePasswordR(e.target.value)}
-                       emailValue = {this.props.emailValue}
-                       passwordValue = {this.props.passwordValue}
+                <Login className={showModalTrue.showLogin ? "login login--active" : "login"}
+                       onHandleChangeModal={(e)=> authorization.showModal (e)}
+                       privatePath={showModalTrue.privatePath}
+                       changeEmail={(e)=>authorization.changeEmailLogin(e.target.value)}
+                       changePassword ={(e)=> authorization.changePasswordLogin(e.target.value)}
+                       emailValue = {emailValueLogin}
+                       passwordValue = {passwordValueLogin}
                        onBtnClickHandler={(e)=>{ e.preventDefault();
-                           this.props.login (this.props.emailValue, this.props.passwordValue, this.props.showModalTrue.privatePath)}}
-                       errorMessage = {this.props.users.error}/>
-                <Singup className={this.props.showModalTrue.showSignup ? "singup singup--active" : "singup"}
-                        handleOpenLogin={()=> this.props.showModal({showLogin:true})}
+                           authorization.login (emailValueLogin, passwordValueLogin, showModalTrue.privatePath)}}
+                       errorMessage = {authorization.auth.error}/>
+                <Singup className={showModalTrue.showSignup ? "singup singup--active" : "singup"}
+                        handleOpenLogin={()=> authorization.showModal({showLogin:true})}
                         onBtnClickHandlerSingup={(e)=> {e.preventDefault();
-                            this.props.singup (this.props.emailValue, this.props.passwordValue, this.props.showModalTrue.privatePath);}}
-                        changeEmail={(e)=>this.props.changeEmailR(e.target.value)}
-                        changePassword ={(e)=> this.props.changePasswordR(e.target.value)}
-                        emailValue = {this.props.emailValue}
-                        passwordValue = {this.props.passwordValue}
-                        errorMessage = {this.props.users.error}/>
-                <PasswordRecovery className={this.props.showModalTrue.showPassRecovery ? "password-recovery password-recovery--active" : "password-recovery"}
-                                  onHandleChangeModal={()=> this.props.showModal({showLogin:true})}
-                                  emailValue = {this.props.emailValue}
-                                  changeEmail={(e)=>this.props.changeEmailR(e.target.value)}
+                            authorization.singup (emailValueSingup, passwordValueSingup, showModalTrue.privatePath);}}
+                        changeEmail={(e)=>authorization.changeEmailSingup(e.target.value)}
+                        changePassword ={(e)=> authorization.changePasswordSingup(e.target.value)}
+                        emailValue = {emailValueSingup}
+                        passwordValue = {passwordValueSingup}
+                        errorMessage = {authorization.auth.error}/>
+                <PasswordRecovery className={showModalTrue.showPassRecovery ? "password-recovery password-recovery--active" : "password-recovery"}
+                                  onHandleChangeModal={()=> authorization.showModal({showLogin:true})}
+                                  emailValue = {emailValuePassRec}
+                                  changeEmail={(e)=>authorization.changeEmailPassRec(e.target.value)}
                                   onBtnClickHandlerRecPass = {(e)=> { e.preventDefault();
-                                      this.props.recoveryPassword (this.props.emailValue, this.props.showModalTrue.privatePath);}}
-                                  user = {this.props.user}
-                                  errorMessage = {this.props.users.error}/>
+                                      authorization.recoveryPassword (emailValuePassRec, showModalTrue.privatePath);}}
+                                  user = {userId}
+                                  errorMessage = {authorization.auth.error}/>
             </header>
         );
     }
@@ -57,16 +66,16 @@ class Header extends Component {
 
 export default connect(
     state => ({
-        showModalTrue: state.users.showModalTrue,
-        emailValue: state.users.emailValue,
-        passwordValue: state.users.passwordValue,
-        user: state.users.user,
+        auth: state.auth,
         users: state.users
     }),
     dispatch => ({
         showModal: bindActionCreators(showModal, dispatch),
-        changeEmailR: bindActionCreators(changeEmailR, dispatch),
-        changePasswordR: bindActionCreators(changePasswordR, dispatch),
+        changeEmailLogin: bindActionCreators(changeEmailLogin, dispatch),
+        changePasswordLogin: bindActionCreators(changePasswordLogin, dispatch),
+        changeEmailSingup: bindActionCreators(changeEmailSingup, dispatch),
+        changePasswordSingup: bindActionCreators(changePasswordSingup, dispatch),
+        changeEmailPassRec: bindActionCreators(changeEmailPassRec, dispatch),
         login: bindActionCreators(login, dispatch),
         singup: bindActionCreators(singup, dispatch),
         recoveryPassword: bindActionCreators(recoveryPassword, dispatch),

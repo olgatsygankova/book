@@ -11,6 +11,7 @@ import ReadBook from "./ReadBook";
 import BookDescription from "./BookDescription";
 import Office from "./OfficePage";
 import FadeIn from "../components/FadeIn";
+import { Info } from "../components/Info";
 import { history } from '../history';
 
 const Opacity = ({component: Component, transition, ...all}) => (
@@ -37,6 +38,8 @@ export default class App extends Component {
                             <Opacity path="/search/:text" component={Home}/>
                             <Opacity path="/:text/category/:id" component={SectionBooks}/>
                             <Opacity path="/read/:id" component={ReadBook}/>
+                            <Opacity path="/read/:id" component={ReadBook}/>
+                            <Opacity path="/info" component={Info}/>
                         </Switch>
                         <Footer/>
                     </div>
