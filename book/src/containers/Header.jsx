@@ -12,7 +12,7 @@ import {showModal, login, singup, logout, recoveryPassword, changeEmailLogin, ch
 
 class Header extends Component {
     componentWillReceiveProps (nextProps){
-        if (nextProps.users.user.userName && (this.props.auth.showModalTrue.showLogin || this.props.auth.showModalTrue.showSignup)) {
+        if (nextProps.users.user.username && (this.props.auth.showModalTrue.showLogin || this.props.auth.showModalTrue.showSignup)) {
             this.props.showModal({showLogin: false, privatePath:this.props.auth.showModalTrue.privatePath})
         }
     }

@@ -13,6 +13,8 @@ var users = require('./users.json');
 var userBooks = require('./userBooks');
 var usersSingup = require('./usersSingup');
 var status = require('./status.json');
+var pgp = require("pg-promise")(/*options*/);
+const db = pgp("postgres://otsygankova:147258369@localhost:5432/book_addict");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,10 +62,21 @@ app.get('/read/:id', (req, res) => {
     res.send(books[req.params.id]);
 });
 
-app.post('/login', (req, res) => {
+/*app.post('/login', (req, res) => {
     const {emailPassword} = req.body;
     let user = users.find(user => user.emailPassword === emailPassword);
     res.send(user);
+});*/
+
+app.post('/login', (req, res) => {
+    const {emailPassword} = req.body;
+    db.query('SELECT username, id, password, email, emailpassword as token FROM users WHERE users.emailpassword = ${emailPassword}', {emailPassword: emailPassword})
+        .then((data) => {
+            res.send(data[0]);
+        })
+        .catch((error) => {
+            res.send(error);
+        });
 });
 
 app.post('/singup', (req, res) => {

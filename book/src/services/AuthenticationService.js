@@ -12,9 +12,9 @@ export const postLogin = (email, password, privatePath) => {
         })
         .then((response) => response.json())
         .then((responseJson) => {
-            localStorage.setItem('token', responseJson.emailPassword);
+            localStorage.setItem('token', responseJson.token);
             localStorage.setItem('id', responseJson.id);
-            localStorage.setItem('userName', responseJson.userName);
+            localStorage.setItem('userName', responseJson.username);
             localStorage.setItem('email', responseJson.email);
             localStorage.setItem('password', base64.encode(responseJson.password));
             history.push(privatePath ? privatePath : window.location.pathname);
