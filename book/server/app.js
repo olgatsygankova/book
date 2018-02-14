@@ -15,6 +15,8 @@ var usersSingup = require('./usersSingup');
 var status = require('./status.json');
 var pgp = require("pg-promise")(/*options*/);
 const db = pgp("postgres://otsygankova:147258369@localhost:5432/book_addict");
+const uuidv4 = require('uuid/v4');
+var base64 = require('base-64');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +27,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/categories', (req, res) => {
+/*app.get('/categories', (req, res) => {
     res.send(categories);
+});*/
+
+app.get('/categories', (req, res, err) => {
+    db.query('SELECT categories.name as category, array_to_json(array_agg(row_to_json (t))) as books from (SELECT cover, annotation, author, title, genre_id from books) t LEFT JOIN categories ON t.genre_id = categories.id GROUP BY categories.name')
+        .then((data) => {
+            res.send(data);
+            console.log (data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log (err);
+        });
 });
 
 app.get('/books', (req, res) => {
@@ -68,21 +82,35 @@ app.get('/read/:id', (req, res) => {
     res.send(user);
 });*/
 
-app.post('/login', (req, res) => {
+app.post('/login', (req, res, err) => {
     const {emailPassword} = req.body;
     db.query('SELECT username, id, password, email, emailpassword as token FROM users WHERE users.emailpassword = ${emailPassword}', {emailPassword: emailPassword})
         .then((data) => {
             res.send(data[0]);
         })
-        .catch((error) => {
-            res.send(error);
+        .catch((err) => {
+            res.send(err);
         });
 });
 
-app.post('/singup', (req, res) => {
+//uuidv4();
+
+/*app.post('/singup', (req, res) => {
     const {email, password} = req.body;
     let user = usersSingup.find(user => user.email === email);
     res.send (user);
+});*/
+
+app.post('/singup', (req, res, err) => {
+    const {email, password} = req.body;
+    let params = [uuidv4(), null, password, email, base64.encode(email + password)];
+    db.one('INSERT INTO users VALUES ($1, $2, $3, $4, $5) RETURNING emailpassword', params)
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
 });
 
 app.post('/recovery-password', (req, res) => {

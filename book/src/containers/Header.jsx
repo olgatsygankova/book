@@ -12,7 +12,7 @@ import {showModal, login, singup, logout, recoveryPassword, changeEmailLogin, ch
 
 class Header extends Component {
     componentWillReceiveProps (nextProps){
-        if (nextProps.users.user.username && (this.props.auth.showModalTrue.showLogin || this.props.auth.showModalTrue.showSignup)) {
+        if (nextProps.auth.user.token && (this.props.auth.showModalTrue.showLogin || this.props.auth.showModalTrue.showSignup)) {
             this.props.showModal({showLogin: false, privatePath:this.props.auth.showModalTrue.privatePath})
         }
     }
@@ -24,7 +24,7 @@ class Header extends Component {
         const passwordValueSingup = this.props.auth.passwordValueSingup;
         const emailValuePassRec = this.props.auth.emailValuePassRec;
         const authorization = this.props;
-        const userId = this.props.users.user.id;
+        const userId = this.props.auth.user.id;
 
         return (
             <header className="header" ref={(div)=>{this._header = div}}>
@@ -33,7 +33,7 @@ class Header extends Component {
                 <Nav handleOnPrivate={(e)=> authorization.showModal(e)} />
                 <Search />
                 <Login className={showModalTrue.showLogin ? "login login--active" : "login"}
-                       onHandleChangeModal={(e)=> authorization.showModal (e)}
+                       onHandleChangeModal={(e)=> authorization.showModal(e)}
                        privatePath={showModalTrue.privatePath}
                        changeEmail={(e)=>authorization.changeEmailLogin(e.target.value)}
                        changePassword ={(e)=> authorization.changePasswordLogin(e.target.value)}
@@ -45,7 +45,7 @@ class Header extends Component {
                 <Singup className={showModalTrue.showSignup ? "singup singup--active" : "singup"}
                         handleOpenLogin={()=> authorization.showModal({showLogin:true})}
                         onBtnClickHandlerSingup={(e)=> {e.preventDefault();
-                            authorization.singup (emailValueSingup, passwordValueSingup, showModalTrue.privatePath);}}
+                            authorization.singup (emailValueSingup, passwordValueSingup, showModalTrue.privatePath)}}
                         changeEmail={(e)=>authorization.changeEmailSingup(e.target.value)}
                         changePassword ={(e)=> authorization.changePasswordSingup(e.target.value)}
                         emailValue = {emailValueSingup}

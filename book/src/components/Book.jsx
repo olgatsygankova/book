@@ -10,7 +10,7 @@ export default class Book extends Component {
     static propTypes = {
         book: PropTypes.shape ({
         id: PropTypes.number,
-        bookName: PropTypes.string,
+        title: PropTypes.string,
         estimate: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
         author: PropTypes.string,
         annotation: PropTypes.string
@@ -30,7 +30,7 @@ export default class Book extends Component {
                     <img className="book__img" src={urlCover + (book.cover ? book.cover : '')} alt={book.bookName} title={book.bookName} />
                     <figcaption className="book__caption">
                         <Stars estimate = {totalEstimate(book.estimate)}/>
-                        <BookWrapper header='Название:' text={book.bookName}/>
+                        <BookWrapper header='Название:' text={book.title}/>
                         <BookWrapper header='Автор:' text={book.author}/>
                         <div className="book__caption-wrapper">
                             <span className="book__header">Аннотация:</span>

@@ -18,7 +18,6 @@ const initialState = {
     officeUserNameValue: userInitialState.userName,
     officePasswordValue: userInitialState.password,
     officeEmailValue: userInitialState.email,
-    user: {},
     myBooks: {}
 };
 
@@ -52,38 +51,6 @@ export default function users(state = initialState, action){
             return {
                 ...state,
                 error: action.payload
-            };
-        case POST_LOGIN_SUCCESS:
-            return {
-                ...state,
-                user: action.payload,
-                error: '',
-            };
-        case POST_SINGUP_SUCCESS:
-            return {
-                ...state,
-                user: action.payload,
-                error: '',
-            };
-        case POST_RECOVERY_PASSWORD_SUCCESS:
-            return {
-                ...state,
-                user: action.payload,
-                error: '',
-            };
-        case POST_RECOVERY_PASSWORD_FAIL:
-            return {
-                ...state,
-                user: {},
-                error: action.payload
-            };
-        case LOGOUT_SUCCESS:
-            localStorage.clear();
-            history.push('/');
-            return {
-                ...state,
-                user: {},
-                error: '',
             };
         default:
             return state

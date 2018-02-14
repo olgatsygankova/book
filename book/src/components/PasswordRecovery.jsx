@@ -19,7 +19,7 @@ export default class PasswordRecovery extends Component {
                         : <div className="account__error"> {this.props.errorMessage} </div>
                     }
                     <button className="account__button">Отправить запрос</button>
-                    <div className="account__login-with-recover-password" onClick={() => this.handleOpenModal({showLogin:true})}>Войти</div>
+                    <div className="account__login-with-recover-password" onClick={() => this.props.onHandleChangeModal({showLogin:true})}>Войти</div>
                 </div>
             </form>
         );

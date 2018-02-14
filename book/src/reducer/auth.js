@@ -18,7 +18,8 @@ const initialState = {
     passwordValueLogin: '',
     emailValueSingup: '',
     passwordValueSingup: '',
-    emailValuePassRec: ''
+    emailValuePassRec: '',
+    user: {}
 };
 
 export default function auth (state = initialState, action){
@@ -32,6 +33,30 @@ export default function auth (state = initialState, action){
         case SHOW_MODAL_FAIL:
             return {
                 ...state,
+                error: action.payload
+            };
+        case POST_LOGIN_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                error: '',
+            };
+        case POST_SINGUP_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                error: '',
+            };
+        case POST_RECOVERY_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                error: '',
+            };
+        case POST_RECOVERY_PASSWORD_FAIL:
+            return {
+                ...state,
+                user: {},
                 error: action.payload
             };
         case POST_LOGIN_FAIL:
@@ -73,6 +98,14 @@ export default function auth (state = initialState, action){
             return {
                 ...state,
                 emailValuePassRec: action.payload,
+                error: '',
+            };
+        case LOGOUT_SUCCESS:
+            localStorage.clear();
+            history.push('/');
+            return {
+                ...state,
+                user: {},
                 error: '',
             };
         default:

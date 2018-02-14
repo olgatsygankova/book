@@ -93,8 +93,9 @@ export function singup (email, password, privatePath) {
         start(dispatch);
         postSingup(email, password, privatePath)
             .then(responseJson => {
+                console.log (responseJson);
                 stop(dispatch);
-                if (responseJson.errorMessage) {
+                if (responseJson.emailpassword) {
                     dispatch({
                         type: POST_SINGUP_SUCCESS,
                         payload: responseJson
