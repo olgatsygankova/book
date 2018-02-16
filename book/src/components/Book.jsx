@@ -9,9 +9,8 @@ import { totalEstimate } from '../services/BooksService';
 export default class Book extends Component {
     static propTypes = {
         book: PropTypes.shape ({
-        id: PropTypes.number,
+        id: PropTypes.string,
         title: PropTypes.string,
-        estimate: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
         author: PropTypes.string,
         annotation: PropTypes.string
         })
@@ -24,6 +23,7 @@ export default class Book extends Component {
     render() {
         const urlCover = '../../img/';
         const {book} = this.props;
+        console.log ("See", this.props);
         return (
             <article className="book">
                 <figure className="book__description">
@@ -37,7 +37,7 @@ export default class Book extends Component {
                             <p className="book__annotation">{book.annotation}</p>
                         </div>
                         <div className="book__caption-wrapper">
-                            <a href="" className="book__download">Скачать</a>
+
                             <Link to={`/book/${ book.id}`} className="book__info">Подробнее</Link>
                         </div>
                     </figcaption>
@@ -46,3 +46,5 @@ export default class Book extends Component {
         );
     }
 }
+
+/*  <a href="#" className="book__download" onClick = {book.loadBookText}>Скачать</a>*/

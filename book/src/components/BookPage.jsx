@@ -13,32 +13,35 @@ import { checkAuth } from '../services/AuthenticationService';
 export default class BookPage extends Component {
     static propTypes = {
         book: PropTypes.shape ({
-            id: PropTypes.number,
-            bookName: PropTypes.string,
-            estimate: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
+            id: PropTypes.string,
+            title: PropTypes.string,
+            estimate: PropTypes.array,
             author: PropTypes.string,
-            genre: PropTypes.string,
+            genre: PropTypes.array,
             annotation: PropTypes.string,
-            ISBN: PropTypes.number
+            isbn: PropTypes.string
         }),
-        comments: PropTypes.object
+        comments: PropTypes.array
     };
 
     render() {
         const urlCover = '../img/';
-        const {book} = this.props;
+        const {book, testEs} = this.props;
+        console.log('enter bookpage', book.estimate);
         return (
             <article className="book-page">
                 <figure className="book__description">
                     <img className="book__img book__img--big" src={urlCover + (book.cover ? book.cover : '')} alt={book.bookName} title={book.bookName} />
                     <figcaption className="book__caption book__caption--big">
                         <Stars estimate = {totalEstimate(book.estimate)}/>
-                        <BookWrapper header='Название:' text={book.bookName}/>
+                        <BookWrapper header='Название:' text={book.title}/>
                         <BookWrapper header='Автор:' text={book.author}/>
-                        <BookWrapper header='Жанр:' text={book.genre}/>
-                        <BookWrapper header='ISBN:' text={book.ISBN}/>
+                        <BookWrapper header='Жанр:' text={book.genre ? book.genre.join(', '): ''}/>
+                        <BookWrapper header='ISBN:' text={book.isbn}/>
                         <div className="book__caption-wrapper">
-                            <a href="" className="book__download book__download-description">Скачать</a>
+                            <a className="book__download book__download-description"
+                            href={`data:text/plain;charset=utf-8, ${book.text}`}
+                            download={`${book.title}.txt`}>Скачать</a>
                         </div>
                         <div className="book__caption-wrapper">
                             <Link to={`/read/${book.id}`} className="book__download book__download-description">Читать</Link>
@@ -49,7 +52,7 @@ export default class BookPage extends Component {
                 <p className="book__annotation book__annotation--big">{book.annotation}</p>
                 {checkAuth() ? <Estimate bookId={book.id} setEstimate = {this.props.setEstimate} estimate = {myEstimate(book.estimate)}/> : <div />}
                 <AddComment {...this.props}/>
-                <Comments comments={book.comments}/>
+                <Comments comment={this.props.comments}/>
             </article>
         );
     }

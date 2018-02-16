@@ -5,20 +5,22 @@ import {
     GET_BOOK_SUCCESS, GET_BOOK_FAIL,
     SET_ESTIMATE_SUCCESS, SET_ESTIMATE_FAIL,
     PUT_ADD_COMMENT_SUCCESS, PUT_ADD_COMMENT_FAIL,
-    CHANGE_COMMENT_SUCCESS, CHANGE_COMMENT_FAIL
+    CHANGE_COMMENT_SUCCESS, CHANGE_COMMENT_FAIL,
+    GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL
 } from "../constants";
 
 const initialState = {
     booksInHome: [],
     readBook: {},
-    booksForCategory: [],
+    booksForCategory: {},
     bookDescription: {},
     estimateValue: '',
     myEstimateValue: 0,
-    myCommentText: ""
+    myCommentText: "",
+    bookComments: []
 };
 
-export default function books(state = initialState, action){
+export default function books(state = initialState, action) {
     switch (action.type) {
         case GET_CATEGORIES_SUCCESS:
             return {
@@ -64,10 +66,26 @@ export default function books(state = initialState, action){
                 ...state,
                 error: action.payload
             };
+        case GET_COMMENTS_SUCCESS:
+            return {
+                ...state,
+                bookComments: action.payload,
+                error: '',
+            };
+        case GET_CATEGORIES_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            };
         case SET_ESTIMATE_SUCCESS:
             return {
                 ...state,
                 estimateValue: action.payload,
+                bookDescription: {
+                    ...state.bookDescription,
+                    estimate: state.bookDescription.estimate &&
+                    state.bookDescription.estimate.concat(action.payload) || action.payload
+                },
                 error: '',
             };
         case SET_ESTIMATE_FAIL:

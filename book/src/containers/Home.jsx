@@ -3,8 +3,7 @@ import SectionBooks from './SectionBooks';
 import './home.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loadGetCategories } from '../actions/books';
-
+import {loadBookText, loadGetCategories} from '../actions/books';
 
 class Home extends Component {
 
@@ -16,7 +15,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log ("Ghjgcbr", this.props);
         const {books}  = this.props;
         let content = books ? books.map((category, i) => {
             return (

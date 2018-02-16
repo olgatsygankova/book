@@ -12,12 +12,12 @@ class ReadBook extends Component {
     }
 
     render() {
-        const {author, bookName, bookText} = this.props.readBook;
+        const {author, title, text} = this.props.readBook;
         return (
             <div className="read-book">
                 <div className="read-book__header">{author}</div>
-                <div className="read-book__header">{bookName}</div>
-                <div className="read-book__text">{bookText}</div>
+                <div className="read-book__header">{title}</div>
+                <div className="read-book__text">{text}</div>
             </div>
         );
     }

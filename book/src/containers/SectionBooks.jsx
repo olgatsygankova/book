@@ -10,7 +10,7 @@ import {loadGetCategory} from "../actions/books";
 class SectionBooks extends Component {
     static propTypes = {
         books: PropTypes.array,
-        categoryId: PropTypes.number
+        categoryId: PropTypes.string
     };
 
     static defaultProps = {
@@ -56,13 +56,10 @@ const BooksForCategoryPage = ({books, category, id}) => {
 };
 
 const BooksForHomePage = ({books, category, id, text}) => {
-    const maxBooks = 6;
     let content = books ? books.map((books, j) => {
-        if (j < maxBooks) {
             return (
                 <Book book={books} key={j} />
-            );
-        } return ""
+            )
     }): <Book key={0} />;
     return (
         <section className="section-books">

@@ -10,11 +10,13 @@ import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAIL,
     CHANGE_LOAD_BOOK_AUTHOR_SUCCESS,
     CHANGE_LOAD_BOOK_GENRE_SUCCESS,
     CHANGE_LOAD_BOOK_ISBN_SUCCESS,
-    CHANGE_LOAD_BOOK_TITLE_SUCCESS
+    CHANGE_LOAD_BOOK_TITLE_SUCCESS,
+    GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL
 } from '../constants/index';
 import { start, stop } from './index';
 import { getCategories, getCategoryById } from "../services/CategoriesService";
-import { getBookTextById, getBookById, putEstimateForBook, putAddComment } from "../services/BooksService";
+import { getBookTextById, getBookById, putEstimateForBook, putAddComment, getCommentsBook } from "../services/BooksService";
+
 
 export function loadGetCategories(searchText) {
     return (dispatch) => {
@@ -96,6 +98,26 @@ export function loadBookDescription(bookId) {
     }
 }
 
+export function loadCommentsBook(bookId) {
+    return (dispatch) => {
+        start(dispatch);
+        getCommentsBook(bookId)
+            .then(responseJson => {
+                stop(dispatch);
+                dispatch({
+                    type: GET_COMMENTS_SUCCESS,
+                    payload: responseJson
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: GET_COMMENTS_FAIL,
+                    payload: err
+                })
+            });
+    }
+}
+
 export function addNewComment(bookId, user, date, text) {
     return (dispatch) => {
         start(dispatch);
@@ -121,17 +143,18 @@ export function setEstimate(bookId, estimateValue) {
         start(dispatch);
         putEstimateForBook(bookId, estimateValue)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: SET_ESTIMATE_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: SET_ESTIMATE_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }

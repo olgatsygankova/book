@@ -4,20 +4,20 @@ import PropTypes from 'prop-types';
 
 export default class Comments extends Component {
     static propTypes = {
-        comments: PropTypes.array
+        comment: PropTypes.array
     };
 
     static defaultProps = {
-        comments: [{}],
+        comment: [{}],
     };
 
     render() {
-        const {comments} = this.props;
+        const {comment} = this.props;
         return (
             <div className="comments">
                 {
-                    comments ? comments.map((comments, j) => {
-                        return <Comment user={comments.user} date={comments.date} comment={comments.text}key={j} />
+                    comment ? comment.map((comment, j) => {
+                        return <Comment username={comment.username} date='12' comment={comment.comment}key={j} />
                     }) : <Comment key={0} />
                 }
             </div>
@@ -27,7 +27,7 @@ export default class Comments extends Component {
 
 const Comment = (props) => <div className="comment">
     <div className="comment__header">
-        <span className="comment__user">{props.user}</span>
+        <span className="comment__user">{props.username}</span>
         <span className="comment__date">{props.date}</span>
     </div>
     <span className="comment__text">{props.comment}</span>
