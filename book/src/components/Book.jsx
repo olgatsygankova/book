@@ -23,7 +23,6 @@ export default class Book extends Component {
     render() {
         const urlCover = '../../img/';
         const {book} = this.props;
-        console.log ("See", this.props);
         return (
             <article className="book">
                 <figure className="book__description">

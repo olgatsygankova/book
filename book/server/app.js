@@ -59,6 +59,18 @@ app.get('/category/:id', (req, res) => {
         });
 });
 
+//`/my-books/${userId}
+app.get('/my-books/:id', (req, res) => {
+    const id_params = req.params.id;
+    db.query('SELECT books.text, books.isbn, books.cover, books.annotation, books.author, books.title, books.id, es.estimate, t.genre from (SELECT array_to_json(array_agg(row_to_json(r))) as estimate from (SELECT estimates.estimate, estimates.id, estimates.user_id as user_id, estimates.book_id from estimates GROUP BY estimates.book_id, estimates.estimate, estimates.id ) r) as es RIGHT JOIN (SELECT category_book.book_id, array_to_json(array_agg(categories.name)) as genre from categories RIGHT JOIN category_book ON categories.id = category_book.category_id GROUP BY category_book.book_id) t LEFT JOIN books ON books.id = t.book_id ON t.book_id = books.id where books.user_id = ${id_params}', {id_params: id_params})
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+});
+
 
 app.get('/books', (req, res) => {
     res.send(books);
@@ -91,9 +103,9 @@ app.put('/book/stars', (req, res) => {
     const {userid, estimate, bookid} = req.body;
     let params = {
         id: uuidv4(),
-            userid,
-            estimate,
-            bookid
+        userid,
+        estimate,
+        bookid
     };
     db.query('INSERT INTO estimates (id, user_id, estimate, book_id)' +
         '    VALUES (${id}, ${userid}, ${estimate}, ${bookid})' +
@@ -116,8 +128,50 @@ app.put('/book/stars', (req, res) => {
     //res.send(status[req.query]);*/
 });
 
-app.put('/book/:id/add-comment', (req, res) => {
+/*app.put('/book/:id/add-comment', (req, res) => {
     res.send(books);
+});*/
+
+app.put('/book/add-comment', (req, res) => {
+    const {userid, bookid, comment, date} = req.body;
+    let params = {
+        id: uuidv4(),
+        userid,
+        bookid,
+        comment,
+        date
+    };
+    db.one('INSERT INTO comments (id, user_id, book_id, comment, date) VALUES (${id}, ${userid}, ${bookid}, ${comment}, ${date}) RETURNING *', params)
+        .then((data) => {
+            res.send(data);
+            console.log (data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log (err);
+        });
+
+});
+
+app.post('/user/update', (req, res) => {
+    const {userid, username, email, password} = req.body;
+    let params = {
+        userid,
+        username,
+        email,
+        password,
+        emailpassword: base64.encode(email + password)
+    };
+    db.one('UPDATE users SET username = ${username}, password = ${password}, email = ${email}, emailpassword = ${emailpassword} WHERE id = ${userid} RETURNING username, email, password, emailpassword', params)
+        .then((data) => {
+            res.send(data);
+            console.log (data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log (err);
+        });
+
 });
 
 /*app.get('/category/:id', (req, res) => {
@@ -149,7 +203,7 @@ app.get('/read/:id', (req, res) => {
 
 app.get('/comments/:id', (req, res) => {
     const id_book = req.params.id;
-    db.query('SELECT comments.comment, comments.user_id, comments.book_id, users.username FROM comments RIGHT JOIN users ON comments.user_id = users.id WHERE comments.book_id = ${id_book}', {id_book: id_book})
+    db.query('SELECT comments.comment, comments.user_id, comments.book_id, comments.date, users.username FROM comments RIGHT JOIN users ON comments.user_id = users.id WHERE comments.book_id = ${id_book}', {id_book: id_book})
         .then((data) => {
             res.send(data);
             console.log(data);
@@ -177,6 +231,7 @@ app.post('/login', (req, res, err) => {
         });
 });
 
+
 //uuidv4();
 
 /*app.post('/singup', (req, res) => {
@@ -187,7 +242,7 @@ app.post('/login', (req, res, err) => {
 
 app.post('/singup', (req, res, err) => {
     const {email, password} = req.body;
-    let params = [uuidv4(), null, password, email, base64.encode(email + password)];
+    let params = [uuidv4(), '', password, email, base64.encode(email + password)];
     db.one('INSERT INTO users VALUES ($1, $2, $3, $4, $5) RETURNING emailpassword', params)
         .then((data) => {
             res.send(data);
@@ -203,8 +258,21 @@ app.post('/recovery-password', (req, res) => {
     res.send(user);
 });
 
-app.get('/user/:id', (req, res) => {
+/*app.get('/user/:id', (req, res) => {
     res.send(userBooks[req.params.id]);
+});*/
+
+app.get('/user/:id', (req, res) => {
+    const id = req.params.id;
+    db.one('SELECT * FROM users WHERE id = ${id}', {id: id})
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log (err);
+        });
+   // res.send(userBooks[req.params.id]);
 });
 
 app.use((req, res, next) => {

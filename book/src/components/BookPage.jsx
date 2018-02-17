@@ -26,8 +26,7 @@ export default class BookPage extends Component {
 
     render() {
         const urlCover = '../img/';
-        const {book, testEs} = this.props;
-        console.log('enter bookpage', book.estimate);
+        const {book} = this.props;
         return (
             <article className="book-page">
                 <figure className="book__description">
@@ -51,7 +50,7 @@ export default class BookPage extends Component {
                 <span className="book__header book__header-annotation">Аннотация:</span>
                 <p className="book__annotation book__annotation--big">{book.annotation}</p>
                 {checkAuth() ? <Estimate bookId={book.id} setEstimate = {this.props.setEstimate} estimate = {myEstimate(book.estimate)}/> : <div />}
-                <AddComment {...this.props}/>
+                <AddComment bookid = {book.id} changeComment = {this.props.changeComment} myCommentText = {this.props.myCommentText} addNewComment = {this.props.addNewComment} showModal = {this.props.showModal}/>
                 <Comments comment={this.props.comments}/>
             </article>
         );

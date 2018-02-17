@@ -6,7 +6,8 @@ import {
     SET_ESTIMATE_SUCCESS, SET_ESTIMATE_FAIL,
     PUT_ADD_COMMENT_SUCCESS, PUT_ADD_COMMENT_FAIL,
     CHANGE_COMMENT_SUCCESS, CHANGE_COMMENT_FAIL,
-    GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL
+    GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL,
+    GET_MY_BOOKS_SUCCESS, GET_MY_BOOKS_FAIL
 } from "../constants";
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
     estimateValue: '',
     myEstimateValue: 0,
     myCommentText: "",
-    bookComments: []
+    bookComments: [],
+    myBooks: []
 };
 
 export default function books(state = initialState, action) {
@@ -72,7 +74,7 @@ export default function books(state = initialState, action) {
                 bookComments: action.payload,
                 error: '',
             };
-        case GET_CATEGORIES_FAIL:
+        case GET_COMMENTS_FAIL:
             return {
                 ...state,
                 error: action.payload
@@ -83,8 +85,7 @@ export default function books(state = initialState, action) {
                 estimateValue: action.payload,
                 bookDescription: {
                     ...state.bookDescription,
-                    estimate: state.bookDescription.estimate &&
-                    state.bookDescription.estimate.concat(action.payload) || action.payload
+                    estimate: state.bookDescription.estimate && state.bookDescription.estimate.concat(action.payload) || action.payload
                 },
                 error: '',
             };
@@ -109,6 +110,17 @@ export default function books(state = initialState, action) {
                 ...state,
                 myCommentText: action.payload,
                 error: '',
+            };
+        case GET_MY_BOOKS_SUCCESS:
+            return {
+                ...state,
+                myBooks: action.payload,
+                error: '',
+            };
+        case GET_MY_BOOKS_FAIL:
+            return {
+                ...state,
+                error: action.payload
             };
         default:
             return state

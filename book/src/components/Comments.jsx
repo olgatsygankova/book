@@ -17,7 +17,7 @@ export default class Comments extends Component {
             <div className="comments">
                 {
                     comment ? comment.map((comment, j) => {
-                        return <Comment username={comment.username} date='12' comment={comment.comment}key={j} />
+                        return <Comment username={comment.username} date={comment.date} comment={comment.comment}key={j} />
                     }) : <Comment key={0} />
                 }
             </div>

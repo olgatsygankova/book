@@ -44,12 +44,24 @@ export const getBookTextById = (bookId) => {
         });
 };
 
-export const putAddComment = (bookId, user, date, text) => {
-    let body = JSON.stringify({user: user,
-        date: date,
-        text: text
+export const getMyBooks = (userId) => {
+    return fetch(`/my-books/${userId}` )
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
+
+export const putAddComment = (userid, bookid, comment, date) => {
+    let body = JSON.stringify({userid: userid,
+        bookid: bookid,
+        comment: comment,
+        date: date
     });
-    return fetch(`/book/${bookId}/add-comment`, {
+    return fetch(`/book/add-comment`, {
         method: 'put',
         headers: {
             "Content-type": "application/json"

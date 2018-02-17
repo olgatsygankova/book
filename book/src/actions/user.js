@@ -2,12 +2,14 @@ import {
     GET_USER_BY_ID_SUCCESS, GET_USER_BY_ID_FAIL,
     CHANGE_OFFICE_EMAIL_SUCCESS,
     CHANGE_OFFICE_PASSWORD_SUCCESS,
-    CHANGE_OFFICE_USERNAME_SUCCESS
+    CHANGE_OFFICE_USERNAME_SUCCESS,
+    POST_OFFICE_SUCCESS, POST_OFFICE_FAIL
 } from '../constants/index';
 import { start, stop } from './index';
-import { getUserById } from '../services/UsersService';
+import { getUserById, postUpdateOffice } from '../services/UsersService';
 
 export function loadGetUserById(userId) {
+    console.log ("action", userId );
     return (dispatch) => {
         start(dispatch);
         getUserById(userId)
@@ -54,3 +56,22 @@ export function changeOfficeUserName(officeUserNameValue) {
     }
 }
 
+export function updateOffice(userId, username, email, password) {
+    return (dispatch) => {
+        start(dispatch);
+        postUpdateOffice(userId, username, email, password)
+            .then(responseJson => {
+                stop(dispatch);
+                dispatch({
+                    type: POST_OFFICE_SUCCESS,
+                    payload: responseJson
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: POST_OFFICE_FAIL,
+                    payload: err
+                })
+            });
+    }
+}

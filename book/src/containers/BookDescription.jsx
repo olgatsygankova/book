@@ -26,7 +26,6 @@ class BookDescription extends Component {
                 <section className="main__content">
                     <section className="section-book">
                         <BookPage book = {book}
-                                  testEs={this.props.estimateValue}
                                   setEstimate = {this.props.setEstimate}
                                   addNewComment = {this.props.addNewComment}
                                   myCommentText = {this.props.myCommentText}
@@ -43,7 +42,7 @@ class BookDescription extends Component {
 export default connect(
     state => ({
         bookDescription: state.books.bookDescription,
-        estimateValue: state.books.estimateValue,
+        //estimateValue: state.books.estimateValue,
         myCommentText: state.books.myCommentText,
         showModalTrue: state.auth.showModalTrue,
         bookComments: state.books.bookComments

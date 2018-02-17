@@ -11,12 +11,12 @@ import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAIL,
     CHANGE_LOAD_BOOK_GENRE_SUCCESS,
     CHANGE_LOAD_BOOK_ISBN_SUCCESS,
     CHANGE_LOAD_BOOK_TITLE_SUCCESS,
-    GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL
+    GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL,
+    GET_MY_BOOKS_SUCCESS, GET_MY_BOOKS_FAIL
 } from '../constants/index';
 import { start, stop } from './index';
 import { getCategories, getCategoryById } from "../services/CategoriesService";
-import { getBookTextById, getBookById, putEstimateForBook, putAddComment, getCommentsBook } from "../services/BooksService";
-
+import { getBookTextById, getBookById, putEstimateForBook, putAddComment, getCommentsBook, getMyBooks } from "../services/BooksService";
 
 export function loadGetCategories(searchText) {
     return (dispatch) => {
@@ -118,10 +118,10 @@ export function loadCommentsBook(bookId) {
     }
 }
 
-export function addNewComment(bookId, user, date, text) {
+export function addNewComment(userid, bookid, comment, date) {
     return (dispatch) => {
         start(dispatch);
-        putAddComment(bookId, user, date, text)
+        putAddComment(userid, bookid, comment, date)
             .then(responseJson => {
                 stop(dispatch);
                 dispatch({
@@ -168,3 +168,22 @@ export function changeComment(myCommentText) {
     }
 }
 
+export function loadMyBooks(userid) {
+    return (dispatch) => {
+        start(dispatch);
+        getMyBooks(userid)
+            .then(responseJson => {
+                stop(dispatch);
+                dispatch({
+                    type: GET_MY_BOOKS_SUCCESS,
+                    payload: responseJson
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: GET_MY_BOOKS_FAIL,
+                    payload: err
+                })
+            });
+    }
+}

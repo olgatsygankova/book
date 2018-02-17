@@ -8,31 +8,23 @@ import { bindActionCreators } from 'redux';
 import SectionBooks from '../containers/SectionBooks';
 import LoadBook from '../components/LoadBook';
 import {getUserById, getUserIdlocalStorage} from "../services/UsersService";
-import {changeOfficeEmail, changeOfficePassword, changeOfficeUserName, loadGetUserById} from "../actions/user";
+import {changeOfficeEmail, changeOfficePassword, changeOfficeUserName, loadGetUserById, updateOffice} from "../actions/user";
 import {changeLoadBookTitle, changeLoadBookAuthor, changeLoadBookIsbn, changeLoadBookAnnotation, changeLoadBookGenre } from '../actions/loadBook';
+import {loadMyBooks} from "../actions/books";
 import { showModal } from "../actions/auth";
 
 class Office extends Component {
-    constructor(props) {
-        super(props);
-       /* this.state = {
-                userName: '',
-                userEmail: '',
-                userPassword: '',
-                books: []
-        };*/
-     /*   this.handleChangeUserName = this.handleChangeUserName.bind(this);
-        this.handleChangeUserEmail = this.handleChangeUserEmail.bind(this);
-        this.handleChangeUserPassword = this.handleChangeUserPassword.bind(this);*/
-    }
 
     componentDidMount() {
         this.props.loadGetUserById(getUserIdlocalStorage());
+        this.props.loadMyBooks(getUserIdlocalStorage());
     }
 
     render() {
         const user = this.props.user;
         const loadBook = this.props.loadBook;
+        const userid = getUserIdlocalStorage();
+        console.log ("userid", userid);
         return (
             <main>
                 <section className="main__content">
@@ -50,7 +42,7 @@ class Office extends Component {
                             <label className = 'password-user__header'>Пароль</label>
                             <input className= 'password-user__input' name='userPassword' type="password" value={ this.props.officePasswordValue } onChange={(e)=> this.props.changeOfficePassword(e.target.value) }/>
                         </div>
-                            <button className="office__load-book">Сохранить изменения</button>
+                            <button className="office__load-book" onClick={()=> this.props.updateOffice(userid, this.props.officeUserNameValue, this.props.officeEmailValue, this.props.officePasswordValue)}>Сохранить изменения</button>
                         <div className="office__load-book" onClick= { () => { this.props.showModal({showLoadBook:true})}}>Загрузить книгу</div>
                         <LoadBook className={this.props.showLoadBook ? "load-book load-book--active" : "load-book"}
                                   titleValue = {loadBook.titleValue}
@@ -77,7 +69,7 @@ export default connect(
     state => ({
         showLoadBook: state.auth.showModalTrue.showLoadBook,
         user: state.users.user,
-        myBooks: state.users.myBooks.books,
+        myBooks: state.books.myBooks,
         officeEmailValue: state.users.officeEmailValue,
         officePasswordValue: state.users.officePasswordValue,
         officeUserNameValue: state.users.officeUserNameValue,
@@ -94,10 +86,13 @@ export default connect(
         changeLoadBookAuthor: bindActionCreators(changeLoadBookAuthor, dispatch),
         changeLoadBookIsbn: bindActionCreators(changeLoadBookIsbn, dispatch),
         changeLoadBookAnnotation: bindActionCreators(changeLoadBookAnnotation, dispatch),
-        changeLoadBookGenre: bindActionCreators(changeLoadBookGenre, dispatch)
+        changeLoadBookGenre: bindActionCreators(changeLoadBookGenre, dispatch),
+        updateOffice: bindActionCreators(updateOffice, dispatch),
+        loadMyBooks: bindActionCreators(loadMyBooks, dispatch)
     })
 )(Office)
 
 
 
 
+//<SectionBooks books={this.props.myBooks} category="Мои книги"/>

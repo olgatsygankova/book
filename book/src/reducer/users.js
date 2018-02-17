@@ -2,7 +2,8 @@ import {
     CHANGE_OFFICE_USERNAME_SUCCESS,
     CHANGE_OFFICE_PASSWORD_SUCCESS,
     CHANGE_OFFICE_EMAIL_SUCCESS,
-    GET_USER_BY_ID_SUCCESS, GET_USER_BY_ID_FAIL
+    GET_USER_BY_ID_SUCCESS, GET_USER_BY_ID_FAIL,
+    POST_OFFICE_SUCCESS, POST_OFFICE_FAIL
 } from "../constants/index";
 import {
     LOGOUT_SUCCESS,
@@ -15,10 +16,10 @@ import {history} from "../history";
 const userInitialState = getUserlocalStorage();
 
 const initialState = {
-    officeUserNameValue: userInitialState.userName,
-    officePasswordValue: userInitialState.password,
-    officeEmailValue: userInitialState.email,
-    myBooks: {}
+    officeUserNameValue: '',
+    officePasswordValue: '',
+    officeEmailValue: '',
+   // myBooks: {}
 };
 
 export default function users(state = initialState, action){
@@ -44,10 +45,25 @@ export default function users(state = initialState, action){
         case GET_USER_BY_ID_SUCCESS:
             return {
                 ...state,
-                myBooks: action.payload,
+                officeEmailValue: action.payload.email,
+                officeUserNameValue: action.payload.username,
+                officePasswordValue: action.payload.password,
                 error: '',
             };
         case GET_USER_BY_ID_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case POST_OFFICE_SUCCESS:
+            return {
+                ...state,
+                officeUserNameValue: action.payload.username,
+                officeEmailValue: action.payload.email,
+                officePasswordValue: action.payload.password,
+                error: '',
+            };
+        case POST_OFFICE_FAIL:
             return {
                 ...state,
                 error: action.payload

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './add-comment.less';
-import {getUserNamelocalStorage} from "../services/UsersService";
+import {getUserIdlocalStorage} from "../services/UsersService";
 import {checkAuth} from "../services/AuthenticationService";
 
 export default class AddComment extends Component {
 
     onClickAddComment (e){
-        const {addNewComment, bookId, myCommentText} = this.props;
-        const userName = getUserNamelocalStorage();
+        const {addNewComment, bookid, myCommentText} = this.props;
+        const userid = getUserIdlocalStorage();
         const nowDate = new Date();
         const nowDay = String (nowDate.getDate());
         const nowMonth = String (nowDate.getMonth());
@@ -15,7 +15,7 @@ export default class AddComment extends Component {
         if (myCommentText === "") {}
         else {
             if (checkAuth()) {
-                addNewComment(bookId, userName, dateComment, myCommentText)
+                addNewComment(userid, bookid, myCommentText, dateComment)
             } else {
                 let path = e.target.pathname;
                 e.preventDefault();

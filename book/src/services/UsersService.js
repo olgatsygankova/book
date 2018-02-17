@@ -11,6 +11,35 @@ export const getUserById = (userId) => {
         });
 };
 
+export const postUpdateOffice = (userid, username, email, password) => {
+    let body = JSON.stringify({userid: userid,
+        username: username,
+        email: email,
+        password: password
+    });
+    return fetch(`/user/update`, {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: body
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            localStorage.setItem('token', responseJson.emailpassword);
+            localStorage.setItem('userName', responseJson.username);
+            localStorage.setItem('email', responseJson.email);
+            localStorage.setItem('password', base64.encode(responseJson.password));
+            return (responseJson)
+        })
+        .catch((error) => {
+            return ({
+                errorMessage: 'error'
+            })
+        });
+};
+
+
 export const getUserIdlocalStorage = () => {
     let userId = localStorage.getItem('id');
     return userId
