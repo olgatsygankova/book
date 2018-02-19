@@ -42,3 +42,13 @@ export const getCategoryById = (categoryId, text) => {
     }
 };
 
+export const getCategoriesName = () => {
+    return fetch(`/categories-name` )
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};

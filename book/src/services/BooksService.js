@@ -125,3 +125,31 @@ export const myEstimate = (estimate) => {
        myEstimateValue
     );
 };
+
+//putLoadNewBook(title, author, genre, isbn, annotation, cover, text, userid)
+export const putLoadNewBook = (title, author, genre, isbn, annotation, cover, text) => {
+    let userid = getUserIdlocalStorage();
+    let body = JSON.stringify({userid: userid,
+        title: title,
+        author: author,
+        isbn: isbn,
+        annotation: annotation,
+        cover: cover,
+        text: text,
+        categories: genre
+    });
+    return fetch(`/load-book`, {
+        method: 'PUT',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: body
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return (responseJson)
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};

@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/categories', (req, res, err) => {
     //db.query('SELECT categories.name as category, array_to_json(array_agg(row_to_json (t))) as books from (SELECT cover, annotation, author, title, id from books) t LEFT JOIN category_book ON t.id = category_book.book_id LEFT JOIN categories ON categories.id = category_book.category_id GROUP BY categories.name')
    // db.query('SELECT categories.name as category, array_to_json(array_agg(row_to_json (t))) as books from (SELECT books.cover, books.annotation, books.author, books.title, books.id, sum(estimates.estimate) from books LEFT JOIN estimates ON estimates.book_id = books.id GROUP BY books.id) t LEFT JOIN category_book ON t.id = category_book.book_id LEFT JOIN categories ON categories.id = category_book.category_id GROUP BY categories.name')
-    db.query('SELECT categories.name as category, categories.id, array_to_json(array_agg(row_to_json (t))) as books from (SELECT books.cover, books.annotation, books.author, books.title, books.id, array_to_json(array_agg(row_to_json (es))) as estimate from (SELECT estimates.book_id, estimates.estimate from estimates) es RIGHT JOIN books ON es.book_id = books.id GROUP BY books.id LIMIT 7) t LEFT JOIN category_book ON t.id = category_book.book_id LEFT JOIN categories ON categories.id = category_book.category_id GROUP BY categories.name, categories.id')
+    db.query('SELECT categories.name as category, categories.id, array_to_json(array_agg(row_to_json (t))) as books from (SELECT books.cover, books.annotation, books.author, books.title, books.id, array_to_json(array_agg(row_to_json (es))) as estimate from (SELECT estimates.book_id, estimates.estimate from estimates) es RIGHT JOIN books ON es.book_id = books.id GROUP BY books.id) t LEFT JOIN category_book ON t.id = category_book.book_id LEFT JOIN categories ON categories.id = category_book.category_id GROUP BY categories.name, categories.id')
         .then((data) => {
             res.send(data);
         })
@@ -68,6 +68,18 @@ app.get('/my-books/:id', (req, res) => {
         })
         .catch((err) => {
             res.send(err);
+        });
+});
+
+app.get('/categories-name', (req, res) => {
+    db.query('SELECT name, id from categories')
+        .then((data) => {
+            res.send(data);
+            console.log (data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log (err);
         });
 });
 
@@ -152,6 +164,80 @@ app.put('/book/add-comment', (req, res) => {
         });
 
 });
+
+app.put('/load-book', (req, res) => {
+    const {userid, id, title, author, categories} = req.body;
+    let book_id = uuidv4();
+    let params1 = {
+        id: book_id,
+        userid,
+        title,
+        author
+    };
+   /* let params2 = {
+        id: uuidv4(),
+        book_id: book_id,
+      //  category_id: '092d933b-48a8-4a37-8e8c-7602acde0497'
+    };*/
+    //console.log ("categories", categories);
+   /* let content = categories ? categories.map((categories) => {
+
+    }):  '';*/
+    db.one('INSERT INTO books (id, user_id, title, author) VALUES (${id}, ${userid}, ${title}, ${author}) RETURNING *', params1)
+        .then((data) => {
+            categories ? categories.map((categories) => {
+                let params2 = {
+                    id: uuidv4(),
+                    book_id: book_id,
+                    categoriesid: categories
+                };
+                console.log ("categories", categories);
+                db.one('INSERT INTO category_book (id, book_id, category_id) VALUES (${id}, ${book_id}, ${categoriesid}) RETURNING *', params2)
+                    .then((nextData) => {
+                        res.send(nextData);
+                        console.log("nextData", nextData);
+                    })
+                    .catch((nextErr) => {
+                        res.send(nextErr);
+                        console.log(nextErr);
+                    });
+            }) : ''
+        })
+
+        .catch((err) => {
+            res.send(err);
+            console.log (err);
+        });
+
+
+});
+
+
+/*app.post('/users/sign-in', (req, res) => {
+    const {email, password} = req.body;
+
+    let params = ['*', 'users', email];
+    db.query('SELECT $1:name FROM $2:name WHERE username LIKE \'%$3:value%\'', params)
+        .then((data) => {
+            let dataTemp = data.find(el => el);
+            params.push(sha512(dataTemp.salt + password));
+            //console.log(params)
+            db.query('SELECT $1:name FROM $2:name WHERE username LIKE \'%$3:value%\' and password LIKE \'%$4:value%\'', params)
+                .then((nextData) => {
+                    res.send(nextData[0]);
+                    //console.log(nextData[0]);
+                })
+                .catch((nextError) => {
+                    res.send(nextError);
+                    console.log(error);
+                });
+        })
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+});*/
+
+
 
 app.post('/user/update', (req, res) => {
     const {userid, username, email, password} = req.body;

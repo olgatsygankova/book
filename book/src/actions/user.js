@@ -9,7 +9,6 @@ import { start, stop } from './index';
 import { getUserById, postUpdateOffice } from '../services/UsersService';
 
 export function loadGetUserById(userId) {
-    console.log ("action", userId );
     return (dispatch) => {
         start(dispatch);
         getUserById(userId)

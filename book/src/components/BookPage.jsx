@@ -25,12 +25,11 @@ export default class BookPage extends Component {
     };
 
     render() {
-        const urlCover = '../img/';
         const {book} = this.props;
         return (
             <article className="book-page">
                 <figure className="book__description">
-                    <img className="book__img book__img--big" src={urlCover + (book.cover ? book.cover : '')} alt={book.bookName} title={book.bookName} />
+                    <img className="book__img book__img--big" src={book.cover ? book.cover : ''} alt={book.bookName} title={book.bookName} />
                     <figcaption className="book__caption book__caption--big">
                         <Stars estimate = {totalEstimate(book.estimate)}/>
                         <BookWrapper header='Название:' text={book.title}/>
