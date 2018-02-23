@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import './nav.less';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { checkAuth } from '../services/AuthenticationService';
 
 export default class Nav extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     handleOffice (e) {
+        const {handleOnPrivate} = this.props;
         let path = e.target.pathname;
-        if(checkAuth()) return this.props.handleOnPrivate({privatePath: path});
-        e.preventDefault();
-        this.props.handleOnPrivate({showLogin: true, privatePath: path});
+        if(checkAuth()) {
+            return handleOnPrivate({privatePath: path})
+        } else {
+            e.preventDefault();
+            handleOnPrivate({showLogin: true, privatePath: path});
+        }
     }
 
     handleChangePage (e) {
@@ -36,4 +37,3 @@ export default class Nav extends Component {
         );
     };
 }
-

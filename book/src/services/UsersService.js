@@ -51,9 +51,8 @@ export const getUserNamelocalStorage = () => {
 };
 
 export const getUserlocalStorage = () => {
-    let userLocalStorage = {};
     let userName = localStorage.getItem('userName');
     let email = localStorage.getItem('email');
     let password = base64.decode(localStorage.getItem('password'));
-    return  userLocalStorage = {'userName': userName, 'email': email, 'password': password};
+    return  {'userName': userName, 'email': email, 'password': password};
 };

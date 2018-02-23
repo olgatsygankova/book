@@ -119,7 +119,7 @@ export const myEstimate = (estimate) => {
     const currentUserId = getUserIdlocalStorage();
     let myEstimateValue = 0;
     estimate.filter(estimate => {
-       return estimate.user_id == currentUserId ? myEstimateValue = estimate.estimate : 0
+       return estimate.user_id === currentUserId ? myEstimateValue = estimate.estimate : 0
     });
     return (
        myEstimateValue
@@ -129,14 +129,15 @@ export const myEstimate = (estimate) => {
 //putLoadNewBook(title, author, genre, isbn, annotation, cover, text, userid)
 export const putLoadNewBook = (title, author, genre, isbn, annotation, cover, text) => {
     let userid = getUserIdlocalStorage();
-    let body = JSON.stringify({userid: userid,
+    let body = JSON.stringify({
         title: title,
         author: author,
+        categories: genre,
         isbn: isbn,
         annotation: annotation,
         cover: cover,
         text: text,
-        categories: genre
+        userid: userid,
     });
     return fetch(`/load-book`, {
         method: 'PUT',

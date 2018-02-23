@@ -62,7 +62,7 @@ app.get('/category/:id', (req, res) => {
 //`/my-books/${userId}
 app.get('/my-books/:id', (req, res) => {
     const id_params = req.params.id;
-    db.query('SELECT books.text, books.isbn, books.cover, books.annotation, books.author, books.title, books.id, es.estimate, t.genre from (SELECT array_to_json(array_agg(row_to_json(r))) as estimate from (SELECT estimates.estimate, estimates.id, estimates.user_id as user_id, estimates.book_id from estimates GROUP BY estimates.book_id, estimates.estimate, estimates.id ) r) as es RIGHT JOIN (SELECT category_book.book_id, array_to_json(array_agg(categories.name)) as genre from categories RIGHT JOIN category_book ON categories.id = category_book.category_id GROUP BY category_book.book_id) t LEFT JOIN books ON books.id = t.book_id ON t.book_id = books.id where books.user_id = ${id_params}', {id_params: id_params})
+    db.query('SELECT books.cover, books.annotation, books.author, books.title, books.id, array_to_json(array_agg(row_to_json(es))) as estimate from (SELECT estimates.estimate, estimates.id, estimates.user_id as user_id, estimates.book_id from estimates GROUP BY estimates.book_id, estimates.estimate, estimates.id) es RIGHT JOIN books ON books.id = es.book_id where books.user_id = ${id_params} GROUP BY books.cover, books.annotation, books.author, books.title, books.id', {id_params: id_params})
         .then((data) => {
             res.send(data);
         })
@@ -166,13 +166,17 @@ app.put('/book/add-comment', (req, res) => {
 });
 
 app.put('/load-book', (req, res) => {
-    const {userid, id, title, author, categories} = req.body;
+    const {userid, id, title, author, categories, isbn, annotation, cover, text} = req.body;
     let book_id = uuidv4();
     let params1 = {
         id: book_id,
         userid,
         title,
-        author
+        author,
+        isbn,
+        annotation,
+        cover,
+        text
     };
    /* let params2 = {
         id: uuidv4(),
@@ -183,7 +187,7 @@ app.put('/load-book', (req, res) => {
    /* let content = categories ? categories.map((categories) => {
 
     }):  '';*/
-    db.one('INSERT INTO books (id, user_id, title, author) VALUES (${id}, ${userid}, ${title}, ${author}) RETURNING *', params1)
+    db.one('INSERT INTO books (id, user_id, title, author, isbn, annotation, cover, text) VALUES (${id}, ${userid}, ${title}, ${author}, ${isbn}, ${annotation}, ${cover}, ${text}) RETURNING *', params1)
         .then((data) => {
             categories ? categories.map((categories) => {
                 let params2 = {
@@ -191,7 +195,6 @@ app.put('/load-book', (req, res) => {
                     book_id: book_id,
                     categoriesid: categories
                 };
-                console.log ("categories", categories);
                 db.one('INSERT INTO category_book (id, book_id, category_id) VALUES (${id}, ${book_id}, ${categoriesid}) RETURNING *', params2)
                     .then((nextData) => {
                         res.send(nextData);
@@ -202,6 +205,10 @@ app.put('/load-book', (req, res) => {
                         console.log(nextErr);
                     });
             }) : ''
+                .catch((err) => {
+                    res.send(err);
+                    console.log(err);
+                });
         })
 
         .catch((err) => {
@@ -264,13 +271,13 @@ app.post('/user/update', (req, res) => {
     res.send(categories[req.params.id]);
 });*/
 
-app.get('/search/aaa/', (req, res) => {
+/*app.get('/search/aaa/', (req, res) => {
     res.send(search);
 });
 
 app.get('/aaa/category/:id', (req, res) => {
     res.send(search[req.params.id]);
-});
+});*/
 
 /*app.get('/read/:id', (req, res) => {
     res.send(books[req.params.id]);
@@ -290,6 +297,160 @@ app.get('/read/:id', (req, res) => {
 app.get('/comments/:id', (req, res) => {
     const id_book = req.params.id;
     db.query('SELECT comments.comment, comments.user_id, comments.book_id, comments.date, users.username FROM comments RIGHT JOIN users ON comments.user_id = users.id WHERE comments.book_id = ${id_book}', {id_book: id_book})
+        .then((data) => {
+            res.send(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log(err);
+        });
+});
+
+app.get('/search/full/:text', (req, res) => {
+    const text = req.params.text.replace(/\s+/g, '|');
+  //  let word = req.params.text.replace(/\s+/g, '|'),
+    let params = {
+        options: "StartSel=<mark>, StopSel=</mark>, MaxFragments=2, ShortWord=1, FragmentDelimiter=<p>...</p>," +
+        "MaxWords=35, MinWords=15, HighlightAll=True",
+        text,
+        typeText: 'text',
+        typeAuthor: 'author',
+        typeTitle: 'title',
+        typeIsbn: 'isbn'
+    };
+
+    db.query('SELECT foo.*, ts_headline(${typeText:name}, query, ${options}) as ${typeText:name}, ts_headline(${typeAuthor:name}, query, ${options}) as ${typeAuthor:name}, ts_headline(${typeTitle:name}, query, ${options}) as ${typeTitle:name}, rank, es.estimate\n' +
+        'FROM (SELECT b.id, b.author, b.title, b.text, b.cover, b.isbn, query, ts_rank_cd(ti, query) as rank\n' +
+        '      FROM (SELECT b_ti.*\n' +
+        '            FROM (SELECT books.*, setweight(to_tsvector(coalesce(books.title, \'\')), \'A\') || ' +
+        'setweight(to_tsvector(coalesce(books.author, \'\')), \'B\') || ' +
+        'setweight(to_tsvector(coalesce(books.isbn, \'\')), \'B\') || ' +
+        'setweight(to_tsvector(coalesce(books.text, \'\')), \'D\') as ti\n' +
+        '                  FROM books) as b_ti) as b, to_tsquery(${text}) query\n' +
+        '      WHERE query @@ ti\n' +
+        '      ORDER BY rank DESC LIMIT 100) AS foo LEFT JOIN (SELECT t.book_id, array_to_json(array_agg(t)) as estimate\n' +
+        '           FROM (SELECT book_id, estimate from estimates) t\n' +
+        '           GROUP BY book_id) es\n' +
+        '  ON es.book_id = foo.id', params)
+        .then((data) => {
+            res.send(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log(err);
+        });
+});
+/*||\n' +
+'                                  setweight(to_tsvector(coalesce(books.title,\'\')), \'B\') ||\n' +
+'                                  setweight(to_tsvector(coalesce(books.author,\'\')), \'C\') ||\n' +
+'                                  setweight(to_tsvector(coalesce(books.isbn,\'\')), \'D\')*/
+
+app.get('/search/title/:text', (req, res) => {
+    const text = req.params.text.replace(/\s+/g, '|');
+    let params = {
+        options: "StartSel=<mark>, StopSel=</mark>, MaxFragments=2, ShortWord=10, FragmentDelimiter=<p>...</p>," +
+        "MaxWords=35, MinWords=1, HighlightAll=True",
+        text,
+        type: 'title'
+    };
+    db.query('SELECT foo.*, ts_headline(${type:name}, query, ${options}) as ${type:name}, rank, es.estimate\n' +
+        'FROM (SELECT b.id, b.title, b.text, b.cover, b.author, b.isbn, query, ts_rank_cd(ti, query) as rank\n' +
+        '      FROM (SELECT b_ti.*\n' +
+        '            FROM (SELECT books.*, setweight(to_tsvector(coalesce(books.title, \'\')), \'A\') as ti\n' +
+        '                  FROM books) as b_ti) as b, to_tsquery(${text}) query\n' +
+        '      WHERE query @@ ti ORDER BY rank DESC LIMIT 100) AS foo LEFT JOIN (SELECT t.book_id, array_to_json(array_agg(t)) as estimate\n' +
+        '           FROM (SELECT book_id, estimate from estimates) t\n' +
+        '           GROUP BY book_id) es\n' +
+        '  ON es.book_id = foo.id', params)
+        .then((data) => {
+            res.send(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log(err);
+        });
+});
+
+app.get('/search/author/:text', (req, res) => {
+    const text = req.params.text.replace(/\s+/g, '|');
+    let params = {
+        options: "StartSel=<mark>, StopSel=</mark>, MaxFragments=2, ShortWord=1, FragmentDelimiter=<p>...</p>," +
+        "MaxWords=20, MinWords=15, HighlightAll=True",
+        text,
+        type: 'author'
+    };
+    db.query('SELECT foo.*, ts_headline(${type:name}, query, ${options}) as ${type:name}, rank, es.estimate\n' +
+        'FROM (SELECT b.id, b.author, b.title, b.text, b.cover, b.isbn, query, ts_rank_cd(ti, query) as rank\n' +
+        '      FROM (SELECT b_ti.*\n' +
+        '            FROM (SELECT books.*, setweight(to_tsvector(coalesce(books.author, \'\')), \'A\') as ti\n' +
+        '                  FROM books) as b_ti) as b, to_tsquery(${text}) query\n' +
+        '      WHERE query @@ ti ORDER BY rank DESC LIMIT 100) AS foo LEFT JOIN (SELECT t.book_id, array_to_json(array_agg(t)) as estimate\n' +
+        '           FROM (SELECT book_id, estimate from estimates) t\n' +
+        '           GROUP BY book_id) es\n' +
+        '  ON es.book_id = foo.id', params)
+        .then((data) => {
+            res.send(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log(err);
+        });
+});
+/*String params = "\'StartSel=<mark>, StopSel=</mark>, MaxFragments=1, ShortWord=0, FragmentDelimiter=<p>...</p>," +
+                " MaxWords=75, MinWords=1, HighlightAll=True\'";
+        String sql = "SELECT booktext.id, ts_headline(text, to_tsquery(:searchInput), " + params + ")" +
+                " as foundText FROM booktext";
+*/
+
+/*app.get('/search/author/:text', (req, res) => {
+    const text = req.params.text;
+    let params = {
+        options: "StartSel=<mark>, StopSel=</mark>, MaxFragments=2, ShortWord=10, FragmentDelimiter=<p>...</p>," +
+        "MaxWords=35, MinWords=1, HighlightAll=True",
+        text,
+        type: 'author'
+    };
+    db.query('SELECT foo.*, ts_headline(${type:name}, query, ${options}) as ${type:name}, rank, es.estimate\n' +
+        'FROM (SELECT b.id, b.title, b.text, b.cover, b.author, b.isbn, query, ts_rank_cd(ti, query) as rank\n' +
+        '      FROM (SELECT b_ti.*\n' +
+        '            FROM (SELECT books.*, setweight(to_tsvector(coalesce(books.author, \'\')), \'A\') as ti\n' +
+        '                  FROM books) as b_ti) as b, to_tsquery(${text}) query\n' +
+        '      WHERE query @@ ti ORDER BY rank DESC LIMIT 100) AS foo LEFT JOIN (SELECT t.book_id, array_to_json(array_agg(t)) as estimate\n' +
+        '           FROM (SELECT book_id, estimate from estimates) t\n' +
+        '           GROUP BY book_id) es\n' +
+        '  ON es.book_id = foo.id', params)
+        .then((data) => {
+            res.send(data);
+            console.log(data);
+        })
+        .catch((err) => {
+            res.send(err);
+            console.log(err);
+        });
+});*/
+
+app.get('/search/isbn/:text', (req, res) => {
+    const text = req.params.text.replace(/\s+/g, '|');
+    let params = {
+        options: "StartSel=<mark>, StopSel=</mark>, MaxFragments=2, ShortWord=10, FragmentDelimiter=<p>...</p>," +
+        "MaxWords=35, MinWords=1, HighlightAll=True",
+        text,
+        type: 'author'
+    };
+    db.query('SELECT foo.*, ts_headline(${type:name}, query, ${options}) as ${type:name}, rank, es.estimate\n' +
+        'FROM (SELECT b.id, b.title, b.text, b.cover, b.author, b.isbn, query, ts_rank_cd(ti, query) as rank\n' +
+        '      FROM (SELECT b_ti.*\n' +
+        '            FROM (SELECT books.*, setweight(to_tsvector(coalesce(books.isbn,\'\')), \'D\') as ti\n' +
+        '                  FROM books) as b_ti) as b, to_tsquery(${text}) query\n' +
+        '      WHERE query @@ ti\n' +
+        '      ORDER BY rank DESC LIMIT 100) AS foo LEFT JOIN (SELECT t.book_id, array_to_json(array_agg(t)) as estimate\n' +
+        '           FROM (SELECT book_id, estimate from estimates) t\n' +
+        '           GROUP BY book_id) es\n' +
+        '  ON es.book_id = foo.id', params)
         .then((data) => {
             res.send(data);
             console.log(data);

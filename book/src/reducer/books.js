@@ -5,7 +5,7 @@ import {
     GET_BOOK_SUCCESS, GET_BOOK_FAIL,
     SET_ESTIMATE_SUCCESS, SET_ESTIMATE_FAIL,
     PUT_ADD_COMMENT_SUCCESS, PUT_ADD_COMMENT_FAIL,
-    CHANGE_COMMENT_SUCCESS, CHANGE_COMMENT_FAIL,
+    CHANGE_COMMENT_SUCCESS,
     GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL,
     GET_MY_BOOKS_SUCCESS, GET_MY_BOOKS_FAIL
 } from "../constants";
@@ -86,6 +86,7 @@ export default function books(state = initialState, action) {
                 bookDescription: {
                     ...state.bookDescription,
                     estimate: state.bookDescription.estimate && state.bookDescription.estimate.concat(action.payload) || action.payload
+                   // estimate: action.payload
                 },
                 error: '',
             };

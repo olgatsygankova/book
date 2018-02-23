@@ -36,7 +36,7 @@ export default class App extends Component {
                             <Opacity path="/category/:id" component={SectionBooks}/>
                             <Opacity path="/user" component={Office}/>
                             <Opacity path="/search/:text" component={Home}/>
-                            <Opacity path="/:text/category/:id" component={SectionBooks}/>
+                            <Opacity path="/:text/category/:category" component={SectionBooks}/>
                             <Opacity path="/read/:id" component={ReadBook}/>
                             <Opacity path="/read/:id" component={ReadBook}/>
                             <Opacity path="/info" component={Info}/>

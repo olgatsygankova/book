@@ -13,17 +13,18 @@ export function loadGetUserById(userId) {
         start(dispatch);
         getUserById(userId)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: GET_USER_BY_ID_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: GET_USER_BY_ID_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }
@@ -60,17 +61,18 @@ export function updateOffice(userId, username, email, password) {
         start(dispatch);
         postUpdateOffice(userId, username, email, password)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: POST_OFFICE_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: POST_OFFICE_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }

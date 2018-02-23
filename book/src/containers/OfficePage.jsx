@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SectionBooks from '../containers/SectionBooks';
 import LoadBook from '../components/LoadBook';
-import {getUserById, getUserIdlocalStorage} from "../services/UsersService";
+import {getUserIdlocalStorage} from "../services/UsersService";
 import {changeOfficeEmail, changeOfficePassword, changeOfficeUserName, loadGetUserById, updateOffice} from "../actions/user";
 import {changeLoadBookTitle, changeLoadBookAuthor, changeLoadBookIsbn, changeLoadBookAnnotation, changeLoadBookGenre, loadCategoriesName, changeLoadBookText, changeLoadBookCover, loadNewBook } from '../actions/loadBook';
 import {loadMyBooks} from "../actions/books";
@@ -34,7 +34,6 @@ class Office extends Component {
     }
 
     render() {
-        const user = this.props.user;
         const loadBook = this.props.loadBook;
         const userid = getUserIdlocalStorage();
         return (
@@ -72,7 +71,7 @@ class Office extends Component {
                                   showModalClose = { this.props.showModal}
                                   categoriesName = {loadBook.categoriesName}
                                   handleFileBookChange = {(e) => this.handleFileBookChange(e)}
-                                  loadNewBook = {() => this.props.loadNewBook(loadBook.titleValue, loadBook.authorValue, loadBook.genreValue)}
+                                  loadNewBook = {() => this.props.loadNewBook(loadBook.titleValue, loadBook.authorValue, loadBook.genreValue, loadBook.isbnValue, loadBook.annotationValue, loadBook.coverValue, loadBook.textValue)}
                         />
                     </section>
                     <SectionBooks books={this.props.myBooks} category="Мои книги"/>

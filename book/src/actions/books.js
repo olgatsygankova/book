@@ -1,16 +1,10 @@
 import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAIL,
-    START, STOP,
     GET_BOOK_TEXT_SUCCESS, GET_BOOK_TEXT_FAIL,
     GET_CATEGORY_FAIL, GET_CATEGORY_SUCCESS,
     GET_BOOK_SUCCESS, GET_BOOK_FAIL,
     SET_ESTIMATE_SUCCESS, SET_ESTIMATE_FAIL,
     PUT_ADD_COMMENT_SUCCESS, PUT_ADD_COMMENT_FAIL,
     CHANGE_COMMENT_SUCCESS,
-    CHANGE_LOAD_BOOK_ANNOTATION_SUCCESS,
-    CHANGE_LOAD_BOOK_AUTHOR_SUCCESS,
-    CHANGE_LOAD_BOOK_GENRE_SUCCESS,
-    CHANGE_LOAD_BOOK_ISBN_SUCCESS,
-    CHANGE_LOAD_BOOK_TITLE_SUCCESS,
     GET_COMMENTS_SUCCESS, GET_COMMENTS_FAIL,
     GET_MY_BOOKS_SUCCESS, GET_MY_BOOKS_FAIL
 } from '../constants/index';
@@ -23,17 +17,18 @@ export function loadGetCategories(searchText) {
         start(dispatch);
         getCategories(searchText)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: GET_CATEGORIES_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: GET_CATEGORIES_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }
@@ -43,17 +38,18 @@ export function loadBookText(bookId) {
         start(dispatch);
         getBookTextById(bookId)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: GET_BOOK_TEXT_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: GET_BOOK_TEXT_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }
@@ -63,17 +59,18 @@ export function loadGetCategory(categoryId, categoryText) {
         start(dispatch);
         getCategoryById(categoryId, categoryText)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: GET_CATEGORY_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: GET_CATEGORY_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }
@@ -83,17 +80,18 @@ export function loadBookDescription(bookId) {
         start(dispatch);
         getBookById(bookId)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: GET_BOOK_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: GET_BOOK_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }
@@ -103,17 +101,18 @@ export function loadCommentsBook(bookId) {
         start(dispatch);
         getCommentsBook(bookId)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: GET_COMMENTS_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: GET_COMMENTS_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }
@@ -123,17 +122,18 @@ export function addNewComment(userid, bookid, comment, date) {
         start(dispatch);
         putAddComment(userid, bookid, comment, date)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: PUT_ADD_COMMENT_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: PUT_ADD_COMMENT_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }
@@ -173,17 +173,18 @@ export function loadMyBooks(userid) {
         start(dispatch);
         getMyBooks(userid)
             .then(responseJson => {
-                stop(dispatch);
                 dispatch({
                     type: GET_MY_BOOKS_SUCCESS,
                     payload: responseJson
-                })
+                });
+                stop(dispatch);
             })
             .catch(err => {
                 dispatch({
                     type: GET_MY_BOOKS_FAIL,
                     payload: err
-                })
+                });
+                stop(dispatch);
             });
     }
 }

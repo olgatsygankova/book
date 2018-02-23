@@ -1,5 +1,5 @@
 export const getCategories = (text) => {
-    if(!text) {
+  //  if(!text) {
         return fetch('/categories')
             .then((response) => response.json())
             .then((responseJson) => {
@@ -8,7 +8,7 @@ export const getCategories = (text) => {
             .catch((error) => {
                 console.error(error);
             });
-    } else {
+  /*  } else {
         return fetch(`/search/${text}`)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -17,11 +17,11 @@ export const getCategories = (text) => {
             .catch((error) => {
                 console.error(error);
             });
-    }
+    }*/
 };
 
 export const getCategoryById = (categoryId, text) => {
-    if(!text) {
+  //  if(!text) {
         return fetch(`/category/${categoryId}`)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -30,7 +30,7 @@ export const getCategoryById = (categoryId, text) => {
             .catch((error) => {
                 console.error(error);
             });
-    } else {
+ /*   } else {
         return fetch(`/${text}/category/${categoryId}`)
             .then((response) => response.json())
             .then((responseJson) => {
@@ -39,7 +39,7 @@ export const getCategoryById = (categoryId, text) => {
             .catch((error) => {
                 console.error(error);
             });
-    }
+    }*/
 };
 
 export const getCategoriesName = () => {

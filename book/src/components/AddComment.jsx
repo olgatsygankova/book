@@ -12,15 +12,12 @@ export default class AddComment extends Component {
         const nowDay = String (nowDate.getDate());
         const nowMonth = String (nowDate.getMonth());
         const dateComment = ((nowDay.length < 2 ? '0' + nowDay: nowDay) + '.' + (nowMonth.length < 2 ? '0' + nowMonth: nowMonth) + '.' + nowDate.getFullYear() + ' ' + nowDate.getHours()+ ':' + nowDate.getMinutes());
-        if (myCommentText === "") {}
+        if (myCommentText && checkAuth()) {
+            addNewComment(userid, bookid, myCommentText, dateComment)}
         else {
-            if (checkAuth()) {
-                addNewComment(userid, bookid, myCommentText, dateComment)
-            } else {
-                let path = e.target.pathname;
-                e.preventDefault();
-                this.props.showModal({showLogin: true, privatePath: path});
-            }
+            let path = e.target.pathname;
+            e.preventDefault();
+            this.props.showModal({showLogin: true, privatePath: path})
         }
     }
 

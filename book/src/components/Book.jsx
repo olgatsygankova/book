@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { BookWrapper } from './BookWrapper';
 import PropTypes from 'prop-types';
 import { totalEstimate } from '../services/BooksService';
+import ReactHtmlParser from "react-html-parser";
 
 export default class Book extends Component {
     static propTypes = {
@@ -16,27 +17,23 @@ export default class Book extends Component {
         })
     };
 
-    static defaultProps = {
-        book: {},
-    };
-
     render() {
-        const {book} = this.props;
+        const coverDefault = '../img/defaultimg.jpg';
+        const {cover, title, estimate, author, annotation, text, id} = this.props.book;
         return (
             <article className="book">
                 <figure className="book__description">
-                    <img className="book__img" src={book.cover ? book.cover : ''} alt={book.bookName} title={book.bookName} />
+                    <img className="book__img" src={cover ? cover : coverDefault} alt={title} title={title} />
                     <figcaption className="book__caption">
-                        <Stars estimate = {totalEstimate(book.estimate)}/>
-                        <BookWrapper header='Название:' text={book.title}/>
-                        <BookWrapper header='Автор:' text={book.author}/>
+                        <Stars estimate = {totalEstimate(estimate)}/>
+                        <BookWrapper header='Название:' text={ReactHtmlParser(title)}/>
+                        <BookWrapper header='Автор:' text={ReactHtmlParser(author)}/>
                         <div className="book__caption-wrapper">
-                            <span className="book__header">Аннотация:</span>
-                            <p className="book__annotation">{book.annotation}</p>
+                            <span className="book__header">{annotation ? 'Аннотация:' : 'Текст:'}</span>
+                            <p className="book__annotation">{annotation ? annotation : ReactHtmlParser(text)}</p>
                         </div>
                         <div className="book__caption-wrapper">
-
-                            <Link to={`/book/${ book.id}`} className="book__info">Подробнее</Link>
+                            <Link to={`/book/${id}`} className="book__info">Подробнее</Link>
                         </div>
                     </figcaption>
                 </figure>
@@ -44,5 +41,3 @@ export default class Book extends Component {
         );
     }
 }
-
-/*  <a href="#" className="book__download" onClick = {book.loadBookText}>Скачать</a>*/

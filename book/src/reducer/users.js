@@ -5,21 +5,11 @@ import {
     GET_USER_BY_ID_SUCCESS, GET_USER_BY_ID_FAIL,
     POST_OFFICE_SUCCESS, POST_OFFICE_FAIL
 } from "../constants/index";
-import {
-    LOGOUT_SUCCESS,
-    POST_LOGIN_SUCCESS, POST_RECOVERY_PASSWORD_FAIL, POST_RECOVERY_PASSWORD_SUCCESS,
-    POST_SINGUP_SUCCESS
-} from "../constants";
-import { getUserlocalStorage } from '../services/UsersService'
-import {history} from "../history";
-
-const userInitialState = getUserlocalStorage();
 
 const initialState = {
     officeUserNameValue: '',
     officePasswordValue: '',
-    officeEmailValue: '',
-   // myBooks: {}
+    officeEmailValue: ''
 };
 
 export default function users(state = initialState, action){

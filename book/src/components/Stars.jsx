@@ -13,8 +13,7 @@ export default class Stars extends Component {
                 return (
                     <div className="stars__star--light" />
                 );
-            }
-            else {
+            } else {
                 return (<div className="stars__star--fat" />)
             }
         };

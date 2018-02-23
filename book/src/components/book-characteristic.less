@@ -2,6 +2,7 @@
 @height-book-characteristic: 25px;
 
 .book-characteristic {
+  position: relative;
   width: 280px;
   margin: 20px auto 0;
   padding-top: 20px;
@@ -25,50 +26,37 @@
       width: 300px;
     }
   }
+  &__header{
+    margin: 10px auto 0;
+    text-align: center;
+  }
   &__annotation {
     font-family: @font-family;
     font-size: @font-size;
     height: 100px;
   }
-  &__cancel, &__load {
+  &__genre {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px auto 0;
+    &--box {
+      margin-right: 10px;
+    }
+}
+  &__load {
     width: 250px;
     height: @height-book-characteristic;
-    margin: 10px auto 0;
+    margin: 10px 15px;
     border: @border-standard @color-green;
     border-radius: 10px;
     outline: none;
-    @media @tablet {
-      width: 300px;
-      margin: 40px 0 10px 75px;
-    }
-  }
-  &__load {
     color: @color-green;
     border-color: @color-green;
     @media @tablet {
-      color: @color-green;
-      border-color: @color-green;
-    }
-  }
-  &__picture, &__file {
-    display: inline-block;
-    width: 210px;
-    margin-right: 5px;
-    margin-left: 15px;
-    @media @tablet {
-      margin-left: 75px;
       width: 300px;
-    }
-  }
-  &__load-picture {
-    display: inline-block;
-    width: 25px;
-    height: @height-book-characteristic;
-    vertical-align: middle;
-    background: url('../img/load.png') no-repeat;
-    background-size: 25px;
-    @media @retina {
-      background-image: url('../img/load@2x.png');
+      margin: 20px 0 10px 75px;
     }
   }
 }
+

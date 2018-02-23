@@ -7,16 +7,11 @@ export default class Comments extends Component {
         comment: PropTypes.array
     };
 
-    static defaultProps = {
-        comment: [{}],
-    };
-
     render() {
         const {comment} = this.props;
         return (
             <div className="comments">
-                {
-                    comment ? comment.map((comment, j) => {
+                { comment ? comment.map((comment, j) => {
                         return <Comment username={comment.username} date={comment.date} comment={comment.comment}key={j} />
                     }) : <Comment key={0} />
                 }

@@ -3,13 +3,13 @@
 .modal-template(){
   position: fixed;
   z-index: 99997;
-  top: 10px;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   display: none;
-  width: 95%;
-  height: 98%;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   pointer-events: none;
   border-radius: @border-radius-standard - 10px;
@@ -26,7 +26,7 @@
   font-size: 18px;
   width: 290px;
   height: 45px;
-  margin: 20px auto 0;
+  margin: 60px auto 0;
   padding-top: 10px;
   text-align: center;
   color: @color-white;
@@ -38,8 +38,8 @@
   font-weight: bold;
   line-height: 25px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -50px;
+  left: 270px;
   width: 24px;
   text-align: center;
   text-decoration: none;
@@ -47,6 +47,9 @@
   border-radius: 12px;
   background: @color-dark-gray;
   box-shadow: 1px 1px 3px @color-black;
+  @media @tablet {
+    left: 330px;
+  }
 }
 
 .login{
@@ -56,7 +59,6 @@
   }
   &--active {
     .modal-target-template ();
-
   }
   &__header {
     .modal-header-template ();

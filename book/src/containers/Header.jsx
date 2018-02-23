@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './header.less'
 import Nav from '../components/Nav';
-import Search from '../components/Search';
+import Search from './Search';
 import Login from '../components/Login';
 import Singup from '../components/Singup';
-import PasswordRecovery from '../components/PasswordRecovery';
 import { checkAuth } from '../services/AuthenticationService';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {showModal, login, singup, logout, recoveryPassword, changeEmailLogin, changeEmailPassRec, changeEmailSingup, changePasswordLogin, changePasswordSingup} from "../actions/auth";
+import {showModal, login, singup, logout, changeEmailLogin, changeEmailPassRec, changeEmailSingup, changePasswordLogin, changePasswordSingup} from "../actions/auth";
 
 class Header extends Component {
     componentWillReceiveProps (nextProps){
@@ -22,10 +21,7 @@ class Header extends Component {
         const passwordValueLogin = this.props.auth.passwordValueLogin;
         const emailValueSingup = this.props.auth.emailValueSingup;
         const passwordValueSingup = this.props.auth.passwordValueSingup;
-        const emailValuePassRec = this.props.auth.emailValuePassRec;
         const authorization = this.props;
-        const userId = this.props.auth.user.id;
-
         return (
             <header className="header" ref={(div)=>{this._header = div}}>
                 <div className="header__logo" />
@@ -51,14 +47,6 @@ class Header extends Component {
                         emailValue = {emailValueSingup}
                         passwordValue = {passwordValueSingup}
                         errorMessage = {authorization.auth.error}/>
-                <PasswordRecovery className={showModalTrue.showPassRecovery ? "password-recovery password-recovery--active" : "password-recovery"}
-                                  onHandleChangeModal={()=> authorization.showModal({showLogin:true})}
-                                  emailValue = {emailValuePassRec}
-                                  changeEmail={(e)=>authorization.changeEmailPassRec(e.target.value)}
-                                  onBtnClickHandlerRecPass = {(e)=> { e.preventDefault();
-                                      authorization.recoveryPassword (emailValuePassRec, showModalTrue.privatePath);}}
-                                  user = {userId}
-                                  errorMessage = {authorization.auth.error}/>
             </header>
         );
     }
@@ -78,7 +66,8 @@ export default connect(
         changeEmailPassRec: bindActionCreators(changeEmailPassRec, dispatch),
         login: bindActionCreators(login, dispatch),
         singup: bindActionCreators(singup, dispatch),
-        recoveryPassword: bindActionCreators(recoveryPassword, dispatch),
+       // recoveryPassword: bindActionCreators(recoveryPassword, dispatch),
         logout: bindActionCreators(logout, dispatch)
     })
 )(Header)
+
