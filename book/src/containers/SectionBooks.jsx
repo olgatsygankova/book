@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {loadGetCategory} from "../actions/books";
-import {loadSearchAuthor, loadSearchFull, loadSearchIsbn, loadSearchTitle} from "../actions/search";
+//import {loadSearchAuthor, loadSearchFull, loadSearchIsbn, loadSearchTitle, changeSearchText} from "../actions/search";
+import * as searchActions from "../actions/search";
 
 class SectionBooks extends Component {
     static propTypes = {
@@ -18,26 +19,29 @@ class SectionBooks extends Component {
         if (this.props.match) {
             let categoryId = this.props.match.params.id;
             let categoryText = this.props.match.params.text;
-            this.props.loadGetCategory(categoryId, categoryText);
+            this.props.loadGetCategory(categoryId);
            if (categoryText) {
-                this.props.loadSearchTitle(categoryText);
-                this.props.loadSearchAuthor(categoryText);
-                this.props.loadSearchIsbn(categoryText);
-               this.props.loadSearchFull(categoryText);
+               const {loadSearchTitle, loadSearchAuthor, loadSearchIsbn, loadSearchFull} = this.props.searchActions;
+                loadSearchTitle(categoryText);
+                loadSearchAuthor(categoryText);
+                loadSearchIsbn(categoryText);
+                loadSearchFull(categoryText);
             }
         }
     }
+
     render() {
+        const {searchTitleResult, searchAuthorResult, searchIsbnResult, searchFullResult} = this.props.searchResult;
         let categoryForSearch, booksForCategory;
         categoryForSearch = (a) => {switch(a)
             {   case 'Название':
-                    return this.props.searchTitleResult;
+                    return searchTitleResult;
                 case 'Автор':
-                    return this.props.searchAuthorResult;
+                    return searchAuthorResult;
                 case 'ISBN':
-                    return this.props.searchIsbnResult;
+                    return searchIsbnResult;
                 case 'Полнотекстовый поиск':
-                    return this.props.searchFullResult;
+                    return searchFullResult;
                 default:
                     return this.props.booksForCategory
             }
@@ -110,19 +114,11 @@ const BooksForOfficePage = ({books, category, id}) => {
 
 export default connect(
     state => ({
-        booksForCategory: state.books.booksForCategory,
-        searchTitleResult: state.search.searchTitleResult,
-        searchAuthorResult: state.search.searchAuthorResult,
-        searchIsbnResult: state.search.searchIsbnResult,
-        searchFullResult: state.search.searchFullResult
-
+        searchResult: state.search,
+        booksForCategory: state.books.booksForCategory
     }),
     dispatch => ({
         loadGetCategory: bindActionCreators(loadGetCategory, dispatch),
-        loadSearchTitle: bindActionCreators(loadSearchTitle, dispatch),
-        loadSearchAuthor: bindActionCreators(loadSearchAuthor, dispatch),
-        loadSearchIsbn: bindActionCreators(loadSearchIsbn, dispatch),
-        loadSearchFull: bindActionCreators(loadSearchFull, dispatch)
+        searchActions: bindActionCreators(searchActions, dispatch)
     })
 )(SectionBooks)
-/*<section className="section-books"/>*/

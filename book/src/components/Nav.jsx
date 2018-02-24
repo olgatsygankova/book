@@ -6,25 +6,29 @@ import { checkAuth } from '../services/AuthenticationService';
 export default class Nav extends Component {
 
     handleOffice (e) {
-        const {handleOnPrivate} = this.props;
+        const {handleOnPrivate, changeMenuDisplay} = this.props;
         let path = e.target.pathname;
         if(checkAuth()) {
-            return handleOnPrivate({privatePath: path})
+            handleOnPrivate({privatePath: path});
         } else {
             e.preventDefault();
             handleOnPrivate({showLogin: true, privatePath: path});
         }
+       changeMenuDisplay (false);
     }
 
     handleChangePage (e) {
+        const {handleOnPrivate, changeMenuDisplay} = this.props;
         let path = e.target.pathname;
-        this.props.handleOnPrivate({privatePath: path});
+        handleOnPrivate({privatePath: path});
+        changeMenuDisplay (false);
     }
 
     render() {
+        const {menuDisplay, changeMenuDisplay} = this.props;
         return (
             <div className="header__nav nav">
-                <input id="toggle" type="checkbox" />
+                <input id="toggle" type="checkbox" checked={menuDisplay} onClick={changeMenuDisplay}/>
                 <label className="toggle-container" htmlFor="toggle">
                     <span className="button button-toggle" />
                 </label>

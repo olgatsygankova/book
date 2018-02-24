@@ -3,16 +3,26 @@ import './search.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import {changeSearchText} from "../actions/search";
+import * as searchActions from "../actions/search";
 
 class Search extends Component {
+
+    handleSearch(searchText) {
+        const {loadSearchTitle, loadSearchAuthor, loadSearchIsbn, loadSearchFull} = this.props.searchActions;
+        loadSearchTitle(searchText);
+        loadSearchAuthor(searchText);
+        loadSearchIsbn(searchText);
+        loadSearchFull(searchText);
+    }
+
     render() {
         const searchText = this.props.searchText;
+        const {changeSearchText} = this.props.searchActions;
         return (
-            <form className="header__search search">
+            <form className="header__search search" >
                 <input className="search__input" type="search" name="search" placeholder="Поиск..." value={searchText}
-                       onChange={(e) => this.props.changeSearchText(e.target.value)} />
-                <Link to={`/search/${searchText}`} className="search__btn"/>
+                       onChange={(e) => changeSearchText(e.target.value)} />
+                <Link to={`/search/${searchText}`} className="search__btn" onClick={() => this.handleSearch(searchText)}/>
             </form>
         );
     };
@@ -23,7 +33,7 @@ export default connect(
         searchText: state.search.searchText
     }),
     dispatch => ({
-        changeSearchText: bindActionCreators(changeSearchText, dispatch)
+        searchActions: bindActionCreators(searchActions, dispatch)
     })
 )(Search)
 

@@ -8,7 +8,7 @@ export default class Estimate extends Component {
         estimate: PropTypes.number
     };
     render() {
-        const {estimate, setEstimate, bookId} = this.props.estimate;
+        const {estimate, setEstimate, bookId} = this.props;
         return (
             <div className="estimate" >
                 <span className="estimate__header">Ваша оценка:</span>

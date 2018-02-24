@@ -61,7 +61,7 @@ export const postRecoveryPassword = (email, privatePath) => {
         .then((responseJson) => {
             return (responseJson)
         })
-        .catch((error) => {
+        .catch(error => {
             return ({
                 errorMessage: 'error'
             })

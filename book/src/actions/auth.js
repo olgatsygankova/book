@@ -6,7 +6,7 @@ import {
     POST_RECOVERY_PASSWORD_SUCCESS, POST_RECOVERY_PASSWORD_FAIL,
     CHANGE_EMAIL_SINGUP_SUCCESS, CHANGE_PASSWORD_LOGIN_SUCCESS,
     CHANGE_PASSWORD_SINGUP_SUCCESS, CHANGE_EMAIL_PASS_REC_SUCCESS,
-    CHANGE_EMAIL_LOGIN_SUCCESS
+    CHANGE_EMAIL_LOGIN_SUCCESS, CHANGE_MENU_DISPLAY
 } from '../constants/index';
 import { start, stop } from './index';
 import { postLogin, postSingup, postRecoveryPassword } from "../services/AuthenticationService";
@@ -148,6 +148,15 @@ export function logout(user) {
         dispatch({
             type: LOGOUT_SUCCESS,
             payload: user
+        })
+    }
+}
+
+export function changeMenuDisplay(menuDisplay) {
+    return (dispatch) => {
+        dispatch({
+            type: CHANGE_MENU_DISPLAY,
+            payload: menuDisplay
         })
     }
 }

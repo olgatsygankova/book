@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from '../store/index';
 import registerServiceWorker from '../registerServiceWorker';
 import Header from './Header';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import {Route, Switch, Router} from 'react-router-dom';
 import SectionBooks from "./SectionBooks";
 import Home from "./Home";

@@ -4,33 +4,38 @@ import './home.less';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {loadGetCategories} from '../actions/books';
-import {loadSearchAuthor, loadSearchFull, loadSearchIsbn, loadSearchTitle} from "../actions/search";
+import * as searchActions from "../actions/search";
 
 class Home extends Component {
 
     componentDidMount() {
-        if (this.props.match) {
+        const {loadSearchTitle, loadSearchAuthor, loadSearchIsbn, loadSearchFull} = this.props.searchActions;
+        const {loadGetCategories} = this.props;
+        if (this.props.match && this.props.match.params.text) {
             let searchText = this.props.match.params.text;
-            if (this.props.match.params.text) {
-                this.props.loadSearchTitle(searchText);
-                this.props.loadSearchAuthor(searchText);
-                this.props.loadSearchIsbn(searchText);
-                this.props.loadSearchFull(searchText);
+                loadSearchTitle(searchText);
+                loadSearchAuthor(searchText);
+                loadSearchIsbn(searchText);
+                loadSearchIsbn(searchText);
             } else {
-                this.props.loadGetCategories()}
+            loadGetCategories()
         }
     }
 
     render() {
-        let books;
-        let result = [];
-        result.push(this.props.searchTitleResult, this.props.searchAuthorResult, this.props.searchIsbnResult, this.props.searchFullResult);
-        this.props.match.params.text ? books = result : books = this.props.books;
+        const {searchTitleResult, searchAuthorResult,searchIsbnResult, searchFullResult} = this.props.searchResult;
+        let books, result = [];
+        let paramsText = this.props.match.params.text;
+        result.push(searchTitleResult,searchAuthorResult, searchIsbnResult, searchFullResult);
+        paramsText ? books = result : books = this.props.books;
         let content = books ? books.map((category, i) => {
+            if (category.books && category.books.length > 0) {
             return (
-                <SectionBooks books={category.books} category={category.category} id={category.id} text = {this.props.match.params.text} key={i}/>
-        )
+                <SectionBooks books={category.books} category={category.category} id={category.id} text = {paramsText} key={i}/>
+            )}
         }) : <SectionBooks key={0}/>;
+        if (content && !content[0] ) {
+            content = <div className='main__content__no-result'>Поиск не дал результатов, попробуйте вести другое слово для поиска</div>}
         return (
             <main>
                 <section className="main__content">
@@ -44,18 +49,20 @@ class Home extends Component {
 export default connect(
     state => ({
         books: state.books.booksInHome,
-        searchTitleResult: state.search.searchTitleResult,
+        searchResult: state.search
+      /*  searchTitleResult: state.search.searchTitleResult,
         searchAuthorResult: state.search.searchAuthorResult,
         searchIsbnResult: state.search.searchIsbnResult,
-        searchFullResult: state.search.searchFullResult
+        searchFullResult: state.search.searchFullResult,
+        searchText: state.search.searchText*/
     }),
     dispatch => ({
         loadGetCategories: bindActionCreators(loadGetCategories, dispatch),
-        loadSearchTitle: bindActionCreators(loadSearchTitle, dispatch),
+        searchActions: bindActionCreators(searchActions, dispatch),
+      /*  loadSearchTitle: bindActionCreators(loadSearchTitle, dispatch),
         loadSearchAuthor: bindActionCreators(loadSearchAuthor, dispatch),
         loadSearchIsbn: bindActionCreators(loadSearchIsbn, dispatch),
-        loadSearchFull: bindActionCreators(loadSearchFull, dispatch)
+        loadSearchFull: bindActionCreators(loadSearchFull, dispatch),
+        changeSearchText: bindActionCreators(changeSearchText, dispatch)*/
     })
 )(Home)
-
-// let result = result && result.length === 0 ? 'Ничего не найдено' : `Results: ${result.length}`;

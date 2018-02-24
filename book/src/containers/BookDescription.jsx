@@ -4,7 +4,7 @@ import './home.less';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {setEstimate, addNewComment, changeComment, loadBookDescription, loadCommentsBook} from "../actions/books";
+import * as bookActions from "../actions/books";
 import {showModal} from "../actions/auth";
 
 class BookDescription extends Component {
@@ -14,24 +14,26 @@ class BookDescription extends Component {
     };
 
     componentDidMount() {
+        const {loadBookDescription, loadCommentsBook} = this.props.bookActions;
         let bookId = this.props.match.params.id;
-        this.props.loadBookDescription(bookId);
-        this.props.loadCommentsBook(bookId);
+        loadBookDescription(bookId);
+        loadCommentsBook(bookId);
     }
 
     render() {
-        const book = this.props.bookDescription;
+        const {bookDescription, myCommentText, bookComments} = this.props.book;
+        const {setEstimate, addNewComment, changeComment} = this.props.bookActions;
         return (
             <main>
                 <section className="main__content">
                     <section className="section-book">
-                        <BookPage book = {book}
-                                  setEstimate = {this.props.setEstimate}
-                                  addNewComment = {this.props.addNewComment}
-                                  myCommentText = {this.props.myCommentText}
-                                  changeComment={(e)=>this.props.changeComment(e.target.value)}
+                        <BookPage book = {bookDescription}
+                                  setEstimate = {setEstimate}
+                                  addNewComment = {addNewComment}
+                                  myCommentText = {myCommentText}
+                                  changeComment={(e)=>changeComment(e.target.value)}
                                   showModal={this.props.showModal}
-                                  comments = {this.props.bookComments}/>
+                                  comments = {bookComments}/>
                     </section>
                 </section>
             </main>
@@ -41,18 +43,11 @@ class BookDescription extends Component {
 
 export default connect(
     state => ({
-        bookDescription: state.books.bookDescription,
-        //estimateValue: state.books.estimateValue,
-        myCommentText: state.books.myCommentText,
-        showModalTrue: state.auth.showModalTrue,
-        bookComments: state.books.bookComments
+        book: state.books,
+        showModalTrue: state.auth.showModalTrue
     }),
     dispatch => ({
-        loadBookDescription: bindActionCreators(loadBookDescription, dispatch),
-        setEstimate: bindActionCreators(setEstimate, dispatch),
-        addNewComment: bindActionCreators(addNewComment, dispatch),
-        changeComment: bindActionCreators(changeComment, dispatch),
-        showModal: bindActionCreators(showModal, dispatch),
-        loadCommentsBook: bindActionCreators(loadCommentsBook, dispatch),
+        bookActions: bindActionCreators(bookActions, dispatch),
+        showModal: bindActionCreators(showModal, dispatch)
     })
 )(BookDescription)

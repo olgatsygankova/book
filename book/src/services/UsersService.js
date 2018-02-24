@@ -39,7 +39,6 @@ export const postUpdateOffice = (userid, username, email, password) => {
         });
 };
 
-
 export const getUserIdlocalStorage = () => {
     let userId = localStorage.getItem('id');
     return userId

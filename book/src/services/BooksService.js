@@ -126,7 +126,6 @@ export const myEstimate = (estimate) => {
     );
 };
 
-//putLoadNewBook(title, author, genre, isbn, annotation, cover, text, userid)
 export const putLoadNewBook = (title, author, genre, isbn, annotation, cover, text) => {
     let userid = getUserIdlocalStorage();
     let body = JSON.stringify({

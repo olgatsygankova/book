@@ -8,21 +8,24 @@ import { bindActionCreators } from 'redux';
 import SectionBooks from '../containers/SectionBooks';
 import LoadBook from '../components/LoadBook';
 import {getUserIdlocalStorage} from "../services/UsersService";
-import {changeOfficeEmail, changeOfficePassword, changeOfficeUserName, loadGetUserById, updateOffice} from "../actions/user";
-import {changeLoadBookTitle, changeLoadBookAuthor, changeLoadBookIsbn, changeLoadBookAnnotation, changeLoadBookGenre, loadCategoriesName, changeLoadBookText, changeLoadBookCover, loadNewBook } from '../actions/loadBook';
+import * as userActions from "../actions/user";
+import * as loadBookActions from '../actions/loadBook';
 import {loadMyBooks} from "../actions/books";
 import { showModal } from "../actions/auth";
 
 class Office extends Component {
 
     componentDidMount() {
-        this.props.loadGetUserById(getUserIdlocalStorage());
-        this.props.loadMyBooks(getUserIdlocalStorage());
-        this.props.loadCategoriesName();
+        const {loadGetUserById} = this.props.userActions;
+        const {loadMyBooks} = this.props;
+        const {loadCategoriesName} = this.props.loadBookActions;
+        loadGetUserById(getUserIdlocalStorage());
+        loadMyBooks(getUserIdlocalStorage());
+        loadCategoriesName();
     }
 
     handleFileBookChange(e) {
-        const {changeLoadBookText} = this.props;
+        const {changeLoadBookText} = this.props.loadBookActions;
         let reader = new FileReader();
         let file = e.target.files[0];
         reader.readAsText(file, 'CP1251');
@@ -34,7 +37,11 @@ class Office extends Component {
     }
 
     render() {
-        const loadBook = this.props.loadBook;
+        const {officeUserNameValue, officeEmailValue, officePasswordValue} = this.props.userOffice;
+        const {changeOfficeUserName, changeOfficeEmail, changeOfficePassword, updateOffice} = this.props.userActions;
+        const {titleValue, authorValue, genreValue, isbnValue, coverValue, annotationValue, textValue} = this.props.loadBook;
+        const {loadNewBook} = this.props.loadBookActions;
+        const {myBooks} = this.props;
         const userid = getUserIdlocalStorage();
         return (
             <main>
@@ -43,38 +50,26 @@ class Office extends Component {
                         <div className="office__header">Личный кабинет</div>
                         <div className="name-user">
                             <label className = 'name-user__header'>Имя</label>
-                            <input className= 'name-user__input' name='userName' value={ this.props.officeUserNameValue } onChange={(e)=> this.props.changeOfficeUserName(e.target.value)}/>
+                            <input className= 'name-user__input' name='userName' value={officeUserNameValue} onChange={(e)=> changeOfficeUserName(e.target.value)}/>
                         </div>
                         <div className="email-user">
                             <label className = 'email-user__header'>E-mail</label>
-                            <input className= 'email-user__input' name='userEmail' type="email" value={ this.props.officeEmailValue } onChange={(e)=> this.props.changeOfficeEmail(e.target.value)}/>
+                            <input className= 'email-user__input' name='userEmail' type="email" value={officeEmailValue} onChange={(e)=> changeOfficeEmail(e.target.value)}/>
                         </div>
                         <div className="password-user">
                             <label className = 'password-user__header'>Пароль</label>
-                            <input className= 'password-user__input' name='userPassword' type="password" value={ this.props.officePasswordValue } onChange={(e)=> this.props.changeOfficePassword(e.target.value) }/>
+                            <input className= 'password-user__input' name='userPassword' type="password" value={ officePasswordValue } onChange={(e)=> changeOfficePassword(e.target.value) }/>
                         </div>
-                            <button className="office__load-book" onClick={()=> this.props.updateOffice(userid, this.props.officeUserNameValue, this.props.officeEmailValue, this.props.officePasswordValue)}>Сохранить изменения</button>
+                            <button className="office__load-book" onClick={()=> updateOffice(userid, officeUserNameValue, officeEmailValue, officePasswordValue)}>Сохранить изменения</button>
                         <div className="office__load-book" onClick= { () => { this.props.showModal({showLoadBook:true})}}>Загрузить книгу</div>
-                        <LoadBook className={this.props.showLoadBook ? "load-book load-book--active" : "load-book"}
-                                  titleValue = {loadBook.titleValue}
-                                  authorValue = {loadBook.authorValue}
-                                  genreValue =  {loadBook.genreValue}
-                                  isbnValue = {loadBook.isbnValue}
-                                  coverValue = {loadBook.coverValue}
-                                  annotationValue = {loadBook.annotationValue}
-                                  changeTitle = {(e) => this.props.changeLoadBookTitle(e.target.value)}
-                                  changeAuthor = {(e) => this.props.changeLoadBookAuthor(e.target.value)}
-                                  changeGenre = {(e) =>  {this.props.changeLoadBookGenre(e)}}
-                                  changeIsbn = {(e) => this.props.changeLoadBookIsbn(e.target.value)}
-                                  changeAnnotation = {(e) => this.props.changeLoadBookAnnotation(e.target.value)}
-                                  changeCover = {(e) => this.props.changeLoadBookCover(e.target.value)}
-                                  showModalClose = { this.props.showModal}
-                                  categoriesName = {loadBook.categoriesName}
-                                  handleFileBookChange = {(e) => this.handleFileBookChange(e)}
-                                  loadNewBook = {() => this.props.loadNewBook(loadBook.titleValue, loadBook.authorValue, loadBook.genreValue, loadBook.isbnValue, loadBook.annotationValue, loadBook.coverValue, loadBook.textValue)}
+                        <LoadBook
+                            className={this.props.showLoadBook ? "load-book load-book--active" : "load-book"}
+                            handleFileBookChange = {(e) => this.handleFileBookChange(e)}
+                            {...this.props}
+                            loadNewBook = {() => loadNewBook(titleValue, authorValue, genreValue, isbnValue, annotationValue, coverValue, textValue)}
                         />
                     </section>
-                    <SectionBooks books={this.props.myBooks} category="Мои книги"/>
+                    <SectionBooks books={myBooks} category="Мои книги"/>
                 </section>
             </main>
         );
@@ -84,29 +79,14 @@ class Office extends Component {
 export default connect(
     state => ({
         showLoadBook: state.auth.showModalTrue.showLoadBook,
-        user: state.users.user,
+        userOffice: state.users,
         myBooks: state.books.myBooks,
-        officeEmailValue: state.users.officeEmailValue,
-        officePasswordValue: state.users.officePasswordValue,
-        officeUserNameValue: state.users.officeUserNameValue,
         loadBook: state.loadBook
     }),
     dispatch => ({
         showModal: bindActionCreators(showModal, dispatch),
-        changeOfficeEmail: bindActionCreators(changeOfficeEmail, dispatch),
-        changeOfficePassword: bindActionCreators(changeOfficePassword, dispatch),
-        changeOfficeUserName: bindActionCreators(changeOfficeUserName, dispatch),
-        loadGetUserById: bindActionCreators(loadGetUserById, dispatch),
-        changeLoadBookTitle: bindActionCreators(changeLoadBookTitle, dispatch),
-        changeLoadBookAuthor: bindActionCreators(changeLoadBookAuthor, dispatch),
-        changeLoadBookIsbn: bindActionCreators(changeLoadBookIsbn, dispatch),
-        changeLoadBookAnnotation: bindActionCreators(changeLoadBookAnnotation, dispatch),
-        changeLoadBookGenre: bindActionCreators(changeLoadBookGenre, dispatch),
-        changeLoadBookText: bindActionCreators(changeLoadBookText, dispatch),
-        changeLoadBookCover: bindActionCreators(changeLoadBookCover, dispatch),
-        updateOffice: bindActionCreators(updateOffice, dispatch),
-        loadMyBooks: bindActionCreators(loadMyBooks, dispatch),
-        loadCategoriesName: bindActionCreators(loadCategoriesName, dispatch),
-        loadNewBook: bindActionCreators(loadNewBook, dispatch)
+        userActions: bindActionCreators(userActions, dispatch),
+        loadBookActions: bindActionCreators(loadBookActions, dispatch),
+        loadMyBooks: bindActionCreators(loadMyBooks, dispatch)
     })
 )(Office)
