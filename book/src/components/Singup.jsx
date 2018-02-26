@@ -5,7 +5,6 @@ import './singup.less'
 export default class Singup extends Component {
 
     render() {
-      //  const {emailValue, passwordValue, className, onBtnClickHandlerSingup, changeEmail, changePassword, errorMessage, handleOpenLogin} = this.props;
         const {className, onBtnClickHandlerSingup} = this.props;
         const {emailValueSingup, passwordValueSingup, error} = this.props.auth;
         const {changeEmailSingup, changePasswordSingup, showModal} = this.props.authActions;

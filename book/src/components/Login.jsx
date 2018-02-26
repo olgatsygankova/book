@@ -4,7 +4,6 @@ import './login.less'
 
 export default class Login extends Component {
     render() {
-        console.log(this.props);
         const {className, onBtnClickHandler} = this.props;
         const {emailValueLogin, passwordValueLogin, error} = this.props.auth;
         const {changeEmailLogin, changePasswordLogin, showModal} = this.props.authActions;

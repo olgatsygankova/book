@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {loadGetCategory} from "../actions/books";
-//import {loadSearchAuthor, loadSearchFull, loadSearchIsbn, loadSearchTitle, changeSearchText} from "../actions/search";
 import * as searchActions from "../actions/search";
 
 class SectionBooks extends Component {

@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var app = express();
 var pgp = require("pg-promise")(/*options*/);
-const db = pgp("postgres://otsygankova:147258369@localhost:5432/book_addict");
+//const db = pgp("postgres://otsygankova:147258369@localhost:5432/book_addict");
+const db = pgp("postgres://postgres:123@localhost:5432/book_addict");
 const uuidv4 = require('uuid/v4');
 var base64 = require('base-64');
 
@@ -228,10 +229,11 @@ app.get('/comments/:id', (req, res) => {
 });
 
 app.get('/search/full/:text', (req, res) => {
+    console.log ("req.params.text", req.params.text);
     const text = req.params.text.replace(/\s+/g, '|');
     let params = {
         options: "StartSel=<mark>, StopSel=</mark>, MaxFragments=2, ShortWord=1, FragmentDelimiter=<p>...</p>," +
-        "MaxWords=35, MinWords=15, HighlightAll=True",
+        "MaxWords=15, MinWords=15, HighlightAll=True",
         text,
         typeText: 'text',
         typeAuthor: 'author',
@@ -265,7 +267,7 @@ app.get('/search/title/:text', (req, res) => {
     const text = req.params.text.replace(/\s+/g, '|');
     let params = {
         options: "StartSel=<mark>, StopSel=</mark>, MaxFragments=2, ShortWord=10, FragmentDelimiter=<p>...</p>," +
-        "MaxWords=35, MinWords=1, HighlightAll=True",
+        "MaxWords=15, MinWords=15, HighlightAll=True",
         text,
         type: 'title'
     };

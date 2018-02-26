@@ -16,7 +16,7 @@ class Home extends Component {
                 loadSearchTitle(searchText);
                 loadSearchAuthor(searchText);
                 loadSearchIsbn(searchText);
-                loadSearchIsbn(searchText);
+                loadSearchFull(searchText);
             } else {
             loadGetCategories()
         }
@@ -34,7 +34,7 @@ class Home extends Component {
                 <SectionBooks books={category.books} category={category.category} id={category.id} text = {paramsText} key={i}/>
             )}
         }) : <SectionBooks key={0}/>;
-        if (content && !content[0] ) {
+        if (content && !content[0] && !content[1] && !content[2] && !content[3]) {
             content = <div className='main__content__no-result'>Поиск не дал результатов, попробуйте вести другое слово для поиска</div>}
         return (
             <main>
@@ -50,19 +50,9 @@ export default connect(
     state => ({
         books: state.books.booksInHome,
         searchResult: state.search
-      /*  searchTitleResult: state.search.searchTitleResult,
-        searchAuthorResult: state.search.searchAuthorResult,
-        searchIsbnResult: state.search.searchIsbnResult,
-        searchFullResult: state.search.searchFullResult,
-        searchText: state.search.searchText*/
     }),
     dispatch => ({
         loadGetCategories: bindActionCreators(loadGetCategories, dispatch),
-        searchActions: bindActionCreators(searchActions, dispatch),
-      /*  loadSearchTitle: bindActionCreators(loadSearchTitle, dispatch),
-        loadSearchAuthor: bindActionCreators(loadSearchAuthor, dispatch),
-        loadSearchIsbn: bindActionCreators(loadSearchIsbn, dispatch),
-        loadSearchFull: bindActionCreators(loadSearchFull, dispatch),
-        changeSearchText: bindActionCreators(changeSearchText, dispatch)*/
+        searchActions: bindActionCreators(searchActions, dispatch)
     })
 )(Home)

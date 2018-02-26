@@ -18,8 +18,8 @@ class Header extends Component {
         }
     }
      render() {
-        const {showModalTrue, emailValueLogin, passwordValueLogin, emailValueSingup, passwordValueSingup, menuDisplay, error} = this.props.auth;
-        const {logout, showModal, changeMenuDisplay, changeEmailLogin, changePasswordLogin, login, singup, changeEmailSingup, changePasswordSingup } = this.props.authActions;
+        const {showModalTrue, emailValueLogin, passwordValueLogin, emailValueSingup, passwordValueSingup, menuDisplay} = this.props.auth;
+        const {logout, showModal, changeMenuDisplay, login, singup } = this.props.authActions;
         return (
             <header className="header" ref={(div)=>{this._header = div}}>
                 <div className="header__logo" />

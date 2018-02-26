@@ -4,13 +4,12 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 export default function configureStore(initialState) {
-    const logger = createLogger();
-  /*  const createStoreWithMiddleware = applyMiddleware(
+    //const logger = createLogger();
+    //const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
+    const createStoreWithMiddleware = applyMiddleware(
         thunk
-    )(createStore);*/
-
- //   const store = createStoreWithMiddleware(rootReducer);
-   const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
+    )(createStore);
+    const store = createStoreWithMiddleware(rootReducer);
     return store;
 }
 

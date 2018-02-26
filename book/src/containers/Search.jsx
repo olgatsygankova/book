@@ -19,11 +19,11 @@ class Search extends Component {
         const searchText = this.props.searchText;
         const {changeSearchText} = this.props.searchActions;
         return (
-            <form className="header__search search" >
+            <div className="header__search search">
                 <input className="search__input" type="search" name="search" placeholder="Поиск..." value={searchText}
                        onChange={(e) => changeSearchText(e.target.value)} />
                 <Link to={`/search/${searchText}`} className="search__btn" onClick={() => this.handleSearch(searchText)}/>
-            </form>
+            </div>
         );
     };
 }
